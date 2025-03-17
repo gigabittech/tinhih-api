@@ -12,53 +12,67 @@ Route::fallback(function (Request $request) {
     ], 404);
 });
 
-
-Route::get('/', function () {
-    return response()->json([
-        'message' => "Api working ..."
-    ]);
-});
-
-// Auth Routes
-Route::prefix('auth')->group(function () {
-    Route::post('/login', [AuthController::class, 'login']);
-    Route::post('/register', [AuthController::class, 'register']);
-});
-
-
-Route::middleware('auth:sanctum')->group(function () {
-    // Auth Route
-    Route::post('/auth/logout', [AuthController::class, 'logout']);
-
-    Route::get('/user', function (Request $request) {
-        return $request->user();
+Route::prefix('v1')->group(function () {
+    Route::get('/', function () {
+        return response()->json([
+            'message' => "Api working ..."
+        ]);
     });
 
-    // Providers routes
-    Route::middleware('role:provider')->prefix('provider')->group(function () {
-        Route::get('/dashboard', function () {
-            return response()->json(['message' => 'provider Dashboard']);
+    // Auth Routes
+    Route::prefix('auth')->group(function () {
+        Route::post('/login', [AuthController::class, 'login']);
+        Route::post('/register', [AuthController::class, 'register']);
+    });
+
+    Route::middleware('auth:sanctum')->group(function () {
+        // Auth Route
+        Route::post('/auth/logout', [AuthController::class, 'logout']);
+
+        Route::get('/user', function (Request $request) {
+            return $request->user();
         });
-    });
 
-    // Clients route 
-    Route::middleware('role:client')->prefix('client')->group(function () {
-        Route::get('/dashboard', function () {
-            return response()->json(['message' => 'Client Dashboard']);
+        // Appointment Booking Routes
+        Route::prefix('locations')->group(function () {
+            Route::get('/', function () {
+                return response()->json(['message' => 'Locations']);
+            });
         });
-    });
 
-    // Admin Routes
-    Route::middleware('role:admin')->prefix('admin')->group(function () {
-        Route::get('/dashboard', function () {
-            return response()->json(['message' => 'Admin Dashboard']);
+        // Appointment Booking Routes
+        Route::prefix('appointment')->group(function () {
+            Route::get('/', function () {
+                return response()->json(['message' => 'Appointments']);
+            });
         });
-    });
 
-    // Super admin routes
-    Route::middleware('role:super_admin')->prefix('super_admin')->group(function () {
-        Route::get('/dashboard', function () {
-            return response()->json(['message' => 'Super Admin Dashboard']);
+        // Providers routes
+        Route::middleware('role:provider')->prefix('provider')->group(function () {
+            Route::get('/dashboard', function () {
+                return response()->json(['message' => 'provider Dashboard']);
+            });
+        });
+
+        // Clients route 
+        Route::middleware('role:client')->prefix('client')->group(function () {
+            Route::get('/dashboard', function () {
+                return response()->json(['message' => 'Client Dashboard']);
+            });
+        });
+
+        // Admin Routes
+        Route::middleware('role:admin')->prefix('admin')->group(function () {
+            Route::get('/dashboard', function () {
+                return response()->json(['message' => 'Admin Dashboard']);
+            });
+        });
+
+        // Super admin routes
+        Route::middleware('role:super_admin')->prefix('super_admin')->group(function () {
+            Route::get('/dashboard', function () {
+                return response()->json(['message' => 'Super Admin Dashboard']);
+            });
         });
     });
 });

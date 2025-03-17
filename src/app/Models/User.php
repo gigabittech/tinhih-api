@@ -55,4 +55,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Profile::class);
     }
+
+    public function services()
+    {
+        return $this->belongsToMany(Service::class, 'service_user');
+    }
 }
