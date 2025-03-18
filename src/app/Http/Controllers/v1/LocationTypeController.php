@@ -13,6 +13,60 @@ class LocationTypeController extends Controller
     public function __construct(private LocationTypeRepository $repository) {}
 
 
+    /**
+     * * @OA\Get(
+     *     path="/api/v1/location_types",
+     *     summary="Get all location types",
+     *     tags={"LocationType"},
+     *     description="This endpoint allows the user to retrieve all location types.",
+     *     security={{ "bearerAuth":{} }},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successfully retrieved location types",
+     *         @OA\JsonContent(
+     *             type="array",
+     *             @OA\Items(
+     *                 type="object",
+     *                 @OA\Property(property="id", type="integer", example=1),
+     *                 @OA\Property(property="name", type="string", example="Warehouse"),
+     *                 @OA\Property(property="description", type="string", example="A type of location for storing products")
+     *             )
+     *         )
+     *     )
+     * )
+     * @OA\Response(
+     *         response=401,
+     *         description="Unauthorized - No valid token provided",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Unauthorized - Token not provided or invalid"),
+     *             @OA\Property(property="success", type="boolean", example=false)
+     *         ),
+     *         @OA\Examples(
+     *             example="unauthorizedResponse",
+     *             summary="Example response for unauthorized access",
+     *             value={
+     *                 "message": "Unauthorized - Token not provided or invalid",
+     *                 "success": false
+     *             }
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Location typeS not found",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Location typeS not found")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Internal server error",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="An unexpected error occurred.")
+     *         )
+     *     )
+     * )
+     */
+
     public function getLocationTypes()
     {
         try {
@@ -33,10 +87,11 @@ class LocationTypeController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/locationtypes/{id}",
+     *     path="/api/v1/location_types/:id",
      *     summary="Get a specific location type",
      *     tags={"LocationType"},
      *     description="This endpoint allows the user to retrieve details of a specific location type.",
+     *     security={{ "bearerAuth":{} }},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -52,6 +107,22 @@ class LocationTypeController extends Controller
      *             @OA\Property(property="id", type="integer", example=1),
      *             @OA\Property(property="name", type="string", example="Warehouse"),
      *             @OA\Property(property="description", type="string", example="A type of location for storing products")
+     *         )
+     *     ),
+     * @OA\Response(
+     *         response=401,
+     *         description="Unauthorized - No valid token provided",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Unauthorized - Token not provided or invalid"),
+     *             @OA\Property(property="success", type="boolean", example=false)
+     *         ),
+     *         @OA\Examples(
+     *             example="unauthorizedResponse",
+     *             summary="Example response for unauthorized access",
+     *             value={
+     *                 "message": "Unauthorized - Token not provided or invalid",
+     *                 "success": false
+     *             }
      *         )
      *     ),
      *     @OA\Response(
@@ -87,10 +158,11 @@ class LocationTypeController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/locationtypes",
+     *     path="/api/v1/location_types",
      *     summary="Create a new location type",
      *     tags={"LocationType"},
      *     description="This endpoint allows the user to create a new location type.",
+     *     security={{ "bearerAuth":{} }},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -109,6 +181,22 @@ class LocationTypeController extends Controller
      *                 @OA\Property(property="name", type="string", example="Warehouse"),
      *                 @OA\Property(property="description", type="string", example="A type of location for storing products")
      *             )
+     *         )
+     *     ),
+     * @OA\Response(
+     *         response=401,
+     *         description="Unauthorized - No valid token provided",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Unauthorized - Token not provided or invalid"),
+     *             @OA\Property(property="success", type="boolean", example=false)
+     *         ),
+     *         @OA\Examples(
+     *             example="unauthorizedResponse",
+     *             summary="Example response for unauthorized access",
+     *             value={
+     *                 "message": "Unauthorized - Token not provided or invalid",
+     *                 "success": false
+     *             }
      *         )
      *     ),
      *     @OA\Response(
@@ -149,10 +237,11 @@ class LocationTypeController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/api/locationtypes/{id}",
+     *     path="/api/v1/location_types/:id",
      *     summary="Update an existing location type",
      *     tags={"LocationType"},
      *     description="This endpoint allows the user to update the details of a specific location type.",
+     *     security={{ "bearerAuth":{} }},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -178,6 +267,22 @@ class LocationTypeController extends Controller
      *                 @OA\Property(property="name", type="string", example="Updated Warehouse"),
      *                 @OA\Property(property="description", type="string", example="Updated description for the location type")
      *             )
+     *         )
+     *     ),
+     * @OA\Response(
+     *         response=401,
+     *         description="Unauthorized - No valid token provided",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Unauthorized - Token not provided or invalid"),
+     *             @OA\Property(property="success", type="boolean", example=false)
+     *         ),
+     *         @OA\Examples(
+     *             example="unauthorizedResponse",
+     *             summary="Example response for unauthorized access",
+     *             value={
+     *                 "message": "Unauthorized - Token not provided or invalid",
+     *                 "success": false
+     *             }
      *         )
      *     ),
      *     @OA\Response(
@@ -214,10 +319,11 @@ class LocationTypeController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/api/locationtypes/{id}",
+     *     path="/api/v1/location_types/{id}",
      *     summary="Delete a location type",
      *     tags={"LocationType"},
      *     description="This endpoint allows the user to delete a specific location type.",
+     *     security={{ "bearerAuth":{} }},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -230,6 +336,22 @@ class LocationTypeController extends Controller
      *         description="Location type deleted successfully",
      *         @OA\JsonContent(
      *             @OA\Property(property="message", type="string", example="Location type deleted successfully")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized - No valid token provided",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Unauthorized - Token not provided or invalid"),
+     *             @OA\Property(property="success", type="boolean", example=false)
+     *         ),
+     *         @OA\Examples(
+     *             example="unauthorizedResponse",
+     *             summary="Example response for unauthorized access",
+     *             value={
+     *                 "message": "Unauthorized - Token not provided or invalid",
+     *                 "success": false
+     *             }
      *         )
      *     ),
      *     @OA\Response(

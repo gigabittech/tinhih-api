@@ -33,7 +33,7 @@ class AuthController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/login",
+     *     path="/api/v1/auth/login",
      *     summary="Login user",
      *     tags={"Auth"},
      *     description="This endpoint allows a user to log in using their email and password. A valid token is returned upon successful authentication.",
@@ -127,7 +127,7 @@ class AuthController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/register",
+     *     path="/api/v1/auth/register",
      *     summary="Register a new user",
      *     tags={"Auth"},
      *     description="This endpoint allows a user to register by providing their name, email, password, and other required details.",
@@ -245,7 +245,7 @@ class AuthController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/logout",
+     *     path="/api/v1/auth/logout",
      *     summary="Logout user",
      *     tags={"Auth"},
      *     security={{ "bearerAuth":{} }},

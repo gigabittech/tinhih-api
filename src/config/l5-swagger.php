@@ -5,7 +5,12 @@ return [
     'documentations' => [
         'default' => [
             'api' => [
-                'title' => 'L5 Swagger UI',
+                'title' => 'API Documentation - TiNHiH.com', // Your API title here
+                'description' => 'API documentation for TiNHiH.com', // Your description
+                'contact' => [
+                    'email' => 'nayem110899@gmail.com', // Your contact email here
+                ],
+                'version' => '1.0.0', // API version
             ],
 
             'routes' => [
@@ -272,7 +277,7 @@ return [
          */
         'ui' => [
             'display' => [
-                'dark_mode' => env('L5_SWAGGER_UI_DARK_MODE', true),
+                'dark_mode' => env('L5_SWAGGER_UI_DARK_MODE', false),
                 /*
                  * Controls the default expansion setting for the operations and tags. It can be :
                  * 'list' (expands only the tags),
