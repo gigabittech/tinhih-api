@@ -7,7 +7,6 @@ use App\Http\Requests\LocationType\StoreRequest;
 use App\Http\Requests\LocationType\UpdateRequest;
 use App\Http\Resources\LocationTypeResource;
 use App\Repository\LocationTypeRepository;
-use Illuminate\Http\Request;
 
 class LocationTypeController extends Controller
 {
@@ -32,6 +31,45 @@ class LocationTypeController extends Controller
         }
     }
 
+    /**
+     * @OA\Get(
+     *     path="/api/locationtypes/{id}",
+     *     summary="Get a specific location type",
+     *     tags={"LocationType"},
+     *     description="This endpoint allows the user to retrieve details of a specific location type.",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID of the location type to retrieve",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successfully retrieved location type",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="id", type="integer", example=1),
+     *             @OA\Property(property="name", type="string", example="Warehouse"),
+     *             @OA\Property(property="description", type="string", example="A type of location for storing products")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Location type not found",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Location type not found")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Internal server error",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="An unexpected error occurred.")
+     *         )
+     *     )
+     * )
+     */
 
     public function getLocationType(int $id)
     {
@@ -46,6 +84,49 @@ class LocationTypeController extends Controller
             'type' => new LocationTypeResource($type)
         ]);
     }
+
+    /**
+     * @OA\Post(
+     *     path="/api/locationtypes",
+     *     summary="Create a new location type",
+     *     tags={"LocationType"},
+     *     description="This endpoint allows the user to create a new location type.",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"name"},
+     *             @OA\Property(property="name", type="string", example="Warehouse"),
+     *             @OA\Property(property="description", type="string", example="A type of location for storing products")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Location type created successfully",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Location type created successfully"),
+     *             @OA\Property(property="location_type", type="object",
+     *                 @OA\Property(property="id", type="integer", example=1),
+     *                 @OA\Property(property="name", type="string", example="Warehouse"),
+     *                 @OA\Property(property="description", type="string", example="A type of location for storing products")
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Bad Request - Missing or invalid data",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Invalid data provided")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Internal server error",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="An unexpected error occurred.")
+     *         )
+     *     )
+     * )
+     */
 
     public function createLocationType(StoreRequest $request)
     {
@@ -66,6 +147,56 @@ class LocationTypeController extends Controller
         }
     }
 
+    /**
+     * @OA\Put(
+     *     path="/api/locationtypes/{id}",
+     *     summary="Update an existing location type",
+     *     tags={"LocationType"},
+     *     description="This endpoint allows the user to update the details of a specific location type.",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID of the location type to update",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"name"},
+     *             @OA\Property(property="name", type="string", example="Updated Warehouse"),
+     *             @OA\Property(property="description", type="string", example="Updated description for the location type")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Location type updated successfully",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Location type updated successfully"),
+     *             @OA\Property(property="location_type", type="object",
+     *                 @OA\Property(property="id", type="integer", example=1),
+     *                 @OA\Property(property="name", type="string", example="Updated Warehouse"),
+     *                 @OA\Property(property="description", type="string", example="Updated description for the location type")
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Location type not found",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Location type not found")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Internal server error",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="An unexpected error occurred.")
+     *         )
+     *     )
+     * )
+     */
+
     public function updateLocationType(UpdateRequest $request, int $id)
     {
         try {
@@ -80,6 +211,43 @@ class LocationTypeController extends Controller
             );
         }
     }
+
+    /**
+     * @OA\Delete(
+     *     path="/api/locationtypes/{id}",
+     *     summary="Delete a location type",
+     *     tags={"LocationType"},
+     *     description="This endpoint allows the user to delete a specific location type.",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID of the location type to delete",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Location type deleted successfully",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Location type deleted successfully")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Location type not found",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Location type not found")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Internal server error",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="An unexpected error occurred.")
+     *         )
+     *     )
+     * )
+     */
 
     public function deleteLocationType(int $id)
     {
