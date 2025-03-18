@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>API Documentation - {{ env('APP_NAME') }}</title>
+    <link rel="shortcut icon" href="https://tinhih.com/assets/media/logos/Logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.19.0/swagger-ui.css"
         integrity="sha512-Fx2bx472ykst5EwyqNnGgXC2pPBxuxRnxHSa5Elf7sVbYA1vj2M/J50eJ0aXDal5hDjdSl3EEaQCaO5y69HmcQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
