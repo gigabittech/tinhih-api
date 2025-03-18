@@ -319,7 +319,7 @@ class LocationTypeController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/api/v1/location_types/{id}",
+     *     path="/api/v1/location_types/:id",
      *     summary="Delete a location type",
      *     tags={"LocationType"},
      *     description="This endpoint allows the user to delete a specific location type.",

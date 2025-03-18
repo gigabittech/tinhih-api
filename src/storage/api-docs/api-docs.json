@@ -728,16 +728,14 @@
                         "bearerAuth": []
                     }
                 ]
-            }
-        },
-        "/api/v1/location_types/{id}": {
+            },
             "delete": {
                 "tags": [
                     "LocationType"
                 ],
                 "summary": "Delete a location type",
                 "description": "This endpoint allows the user to delete a specific location type.",
-                "operationId": "216dce0aaff12240ad1610509e5a7d28",
+                "operationId": "953943564e1e8216d283cd831a4918d4",
                 "parameters": [
                     {
                         "name": "id",
