@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\v1\AuthController;
+use App\Http\Controllers\v1\LocationTypeController;
+use App\Models\LocationType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -73,6 +75,14 @@ Route::prefix('v1')->group(function () {
             Route::get('/dashboard', function () {
                 return response()->json(['message' => 'Super Admin Dashboard']);
             });
+        });
+
+        Route::prefix('location_types')->group(function () {
+            Route::get('/', [LocationTypeController::class, 'getLocationTypes']);
+            Route::get('/{id}', [LocationTypeController::class, 'getLocationType']);
+            Route::post('/', [LocationTypeController::class, 'createLocationType']);
+            Route::put('/{id}', [LocationTypeController::class, 'updateLocationType']);
+            Route::delete('/{id}', [LocationTypeController::class, 'deleteLocationType']);
         });
     });
 });
