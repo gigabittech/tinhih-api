@@ -3,7 +3,9 @@
 namespace App\Http\Requests\Auth;
 
 use App\Traits\AuthAvatarTrait;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class RegisterRequest extends FormRequest
 {
@@ -30,8 +32,11 @@ class RegisterRequest extends FormRequest
         ];
     }
 
-    public function prepareForValidation()
+    protected function failedValidation(Validator $validator)
     {
-        $this->merge([]);
+        throw new HttpResponseException(response()->json([
+            'error' => 'Validation Error',
+            'message' => $validator->errors()
+        ], 422));
     }
 }
