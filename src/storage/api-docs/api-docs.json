@@ -1,10 +1,10 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "API Documentation",
-        "description": "API documentation for your Laravel application",
+        "title": "API Documentation - tinhih.com",
+        "description": "API documentation for tinhih.com",
         "contact": {
-            "email": "support@example.com"
+            "email": "support@gigabit.agency"
         },
         "version": "1.0.0"
     },
@@ -1289,6 +1289,649 @@
                     }
                 ]
             }
+        },
+        "/api/v1/services": {
+            "get": {
+                "tags": [
+                    "Services"
+                ],
+                "summary": "Get all Services",
+                "description": "Retrieve all available services.",
+                "operationId": "ddc13a03a35b36d8516fab8fd3889d0b",
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved services",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "user_id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "service_name": {
+                                                "type": "string",
+                                                "example": "Consultation"
+                                            },
+                                            "display_name": {
+                                                "type": "string",
+                                                "example": "General Consultation"
+                                            },
+                                            "code": {
+                                                "type": "string",
+                                                "example": "CONS001"
+                                            },
+                                            "duration": {
+                                                "type": "integer",
+                                                "example": 30
+                                            },
+                                            "price": {
+                                                "type": "number",
+                                                "format": "float",
+                                                "example": 50
+                                            },
+                                            "description": {
+                                                "type": "string",
+                                                "example": "Basic consultation service"
+                                            },
+                                            "group_event": {
+                                                "type": "boolean",
+                                                "example": false
+                                            },
+                                            "max_attendees": {
+                                                "type": "integer",
+                                                "example": 10
+                                            },
+                                            "taxable": {
+                                                "type": "boolean",
+                                                "example": true
+                                            },
+                                            "bookable_online": {
+                                                "type": "boolean",
+                                                "example": true
+                                            },
+                                            "allow_new_clients": {
+                                                "type": "boolean",
+                                                "example": true
+                                            },
+                                            "team_members": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "integer"
+                                                },
+                                                "example": [
+                                                    1,
+                                                    2,
+                                                    3
+                                                ]
+                                            },
+                                            "locations": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "integer"
+                                                },
+                                                "example": [
+                                                    1,
+                                                    2,
+                                                    3
+                                                ]
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Error"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Server error message"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Services"
+                ],
+                "summary": "Create a new Service",
+                "description": "Create a new service entry in the system.",
+                "operationId": "4185c7db279c658b19c4a88d582f67b4",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "user_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "service_name": {
+                                        "type": "string",
+                                        "example": "Consultation"
+                                    },
+                                    "display_name": {
+                                        "type": "string",
+                                        "example": "General Consultation"
+                                    },
+                                    "code": {
+                                        "type": "string",
+                                        "example": "CONS001"
+                                    },
+                                    "duration": {
+                                        "type": "integer",
+                                        "example": 30
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 50
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Basic consultation service"
+                                    },
+                                    "group_event": {
+                                        "type": "boolean",
+                                        "example": false
+                                    },
+                                    "max_attendees": {
+                                        "type": "integer",
+                                        "example": 10
+                                    },
+                                    "taxable": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "bookable_online": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "allow_new_clients": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "team_members": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        },
+                                        "example": [
+                                            1,
+                                            2,
+                                            3
+                                        ]
+                                    },
+                                    "locations": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        },
+                                        "example": [
+                                            1,
+                                            2,
+                                            3
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Service created successfully"
+                    },
+                    "400": {
+                        "description": "Invalid request data"
+                    },
+                    "401": {
+                        "description": "Unauthorized access"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/services/user": {
+            "get": {
+                "tags": [
+                    "Services"
+                ],
+                "summary": "Get all user Services",
+                "description": "Retrieve all available services.",
+                "operationId": "504f39b321f4a71ae768d496704e4c57",
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved services",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "user_id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "service_name": {
+                                                "type": "string",
+                                                "example": "Consultation"
+                                            },
+                                            "display_name": {
+                                                "type": "string",
+                                                "example": "General Consultation"
+                                            },
+                                            "code": {
+                                                "type": "string",
+                                                "example": "CONS001"
+                                            },
+                                            "duration": {
+                                                "type": "integer",
+                                                "example": 30
+                                            },
+                                            "price": {
+                                                "type": "number",
+                                                "format": "float",
+                                                "example": 50
+                                            },
+                                            "description": {
+                                                "type": "string",
+                                                "example": "Basic consultation service"
+                                            },
+                                            "group_event": {
+                                                "type": "boolean",
+                                                "example": false
+                                            },
+                                            "max_attendees": {
+                                                "type": "integer",
+                                                "example": 10
+                                            },
+                                            "taxable": {
+                                                "type": "boolean",
+                                                "example": true
+                                            },
+                                            "bookable_online": {
+                                                "type": "boolean",
+                                                "example": true
+                                            },
+                                            "allow_new_clients": {
+                                                "type": "boolean",
+                                                "example": true
+                                            },
+                                            "team_members": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "integer"
+                                                },
+                                                "example": [
+                                                    1,
+                                                    2,
+                                                    3
+                                                ]
+                                            },
+                                            "locations": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "integer"
+                                                },
+                                                "example": [
+                                                    1,
+                                                    2,
+                                                    3
+                                                ]
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Error"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Server error message"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/services/:id": {
+            "get": {
+                "tags": [
+                    "Services"
+                ],
+                "summary": "Get a specific Service",
+                "description": "Retrieve details of a single service.",
+                "operationId": "840b91766b03e77022740359751002aa",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Service ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved service",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "user_id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "service_name": {
+                                            "type": "string",
+                                            "example": "Consultation"
+                                        },
+                                        "display_name": {
+                                            "type": "string",
+                                            "example": "General Consultation"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "example": "CONS001"
+                                        },
+                                        "duration": {
+                                            "type": "integer",
+                                            "example": 30
+                                        },
+                                        "price": {
+                                            "type": "number",
+                                            "format": "float",
+                                            "example": 50
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "Basic consultation service"
+                                        },
+                                        "group_event": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "max_attendees": {
+                                            "type": "integer",
+                                            "example": 10
+                                        },
+                                        "taxable": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "bookable_online": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "allow_new_clients": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "team_members": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "integer"
+                                            },
+                                            "example": [
+                                                1,
+                                                2,
+                                                3
+                                            ]
+                                        },
+                                        "locations": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "integer"
+                                            },
+                                            "example": [
+                                                1,
+                                                2,
+                                                3
+                                            ]
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Error"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Server error message"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Services"
+                ],
+                "summary": "Update an existing Service",
+                "description": "Update details of a specific service.",
+                "operationId": "1cdcf81d622fa78cc8a65b34d849d496",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "service_name": {
+                                        "type": "string",
+                                        "example": "Updated Consultation"
+                                    },
+                                    "display_name": {
+                                        "type": "string",
+                                        "example": "Updated General Consultation"
+                                    },
+                                    "code": {
+                                        "type": "string",
+                                        "example": "CONS002"
+                                    },
+                                    "duration": {
+                                        "type": "integer",
+                                        "example": 45
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 60
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Updated description"
+                                    },
+                                    "group_event": {
+                                        "type": "boolean",
+                                        "example": false
+                                    },
+                                    "max_attendees": {
+                                        "type": "integer",
+                                        "example": 15
+                                    },
+                                    "taxable": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "bookable_online": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "allow_new_clients": {
+                                        "type": "boolean",
+                                        "example": false
+                                    },
+                                    "team_members": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        },
+                                        "example": [
+                                            1,
+                                            2,
+                                            3
+                                        ]
+                                    },
+                                    "locations": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        },
+                                        "example": [
+                                            1,
+                                            2,
+                                            3
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Service updated successfully"
+                    },
+                    "400": {
+                        "description": "Invalid request data"
+                    },
+                    "404": {
+                        "description": "Service not found"
+                    },
+                    "401": {
+                        "description": "Unauthorized access"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Services"
+                ],
+                "summary": "Delete a Service",
+                "description": "Remove a service from the system.",
+                "operationId": "6028366b5326311fd283c928e62397d7",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Service deleted successfully"
+                    },
+                    "404": {
+                        "description": "Service not found"
+                    },
+                    "401": {
+                        "description": "Unauthorized access"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -1359,6 +2002,10 @@
         {
             "name": "LocationType",
             "description": "LocationType"
+        },
+        {
+            "name": "Services",
+            "description": "Services"
         }
     ]
 }
