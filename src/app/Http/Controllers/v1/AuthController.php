@@ -316,4 +316,73 @@ class AuthController extends Controller
             ], 500);
         }
     }
+
+
+    /**
+     * @OA\Get(
+     *     path="/api/v1/user",
+     *     summary="Get User Details",
+     *     security={{ "bearerAuth":{} }},
+     *     description="Fetches details of the currently authenticated user.",
+     *     tags={"User"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="User details retrieved successfully",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(
+     *                 property="message",
+     *                 type="string",
+     *                 example="User details"
+     *             ),
+     *             @OA\Property(
+     *                 property="user",
+     *                 type="object",
+     *                 @OA\Property(
+     *                     property="id",
+     *                     type="integer",
+     *                     example=1
+     *                 ),
+     *                 @OA\Property(
+     *                     property="role",
+     *                     type="string",
+     *                     example="client"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="name",
+     *                     type="string",
+     *                     example="Developr"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="email",
+     *                     type="string",
+     *                     example="nayem@gigabit.agency"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="avatar",
+     *                     type="string",
+     *                     format="uri",
+     *                     example="https://ui-avatars.com/api/?name=Developr"
+     *                 )
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized - User not authenticated"
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Internal Server Error"
+     *     )
+     * )
+     */
+
+    public function getUser(Request $request)
+    {
+        return response()->json([
+            'message' => "User details",
+            'user' => new UserResource($request->user())
+        ], 200);
+    }
 }
