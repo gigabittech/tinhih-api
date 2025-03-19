@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "API Documentation - tinhih.com",
+        "title": "API Documentation",
         "description": "API documentation for tinhih.com",
         "contact": {
             "email": "support@gigabit.agency"
@@ -316,6 +316,71 @@
                                 }
                             }
                         }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/user": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get User Details",
+                "description": "Fetches details of the currently authenticated user.",
+                "operationId": "d405a13e62fab5ed95c15d3571f957fb",
+                "responses": {
+                    "200": {
+                        "description": "User details retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "User details"
+                                        },
+                                        "user": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "role": {
+                                                    "type": "string",
+                                                    "example": "client"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Developr"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "nayem@gigabit.agency"
+                                                },
+                                                "avatar": {
+                                                    "type": "string",
+                                                    "format": "uri",
+                                                    "example": "https://ui-avatars.com/api/?name=Developr"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized - User not authenticated"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
                     }
                 },
                 "security": [
@@ -1994,6 +2059,10 @@
         {
             "name": "Auth",
             "description": "Auth"
+        },
+        {
+            "name": "User",
+            "description": "User"
         },
         {
             "name": "Locations",
