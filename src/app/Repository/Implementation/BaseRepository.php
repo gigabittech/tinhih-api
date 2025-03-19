@@ -24,6 +24,11 @@ class BaseRepository implements RepositoryInterface
         return $this->model->find($id);
     }
 
+    public function findOrFail($id)
+    {
+        return $this->model->findOrFail($id);
+    }
+
     public function create(array $data)
     {
         return $this->model->create($data);
@@ -41,11 +46,6 @@ class BaseRepository implements RepositoryInterface
 
     public function delete($id)
     {
-        $model = $this->model->find($id);
-        if ($model) {
-            $model->delete();
-            return true;
-        }
-        return false;
+        return $this->model->find($id)->delete();
     }
 }
