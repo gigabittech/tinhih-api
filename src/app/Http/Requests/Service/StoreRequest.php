@@ -27,6 +27,7 @@ class StoreRequest extends FormRequest
             'user_id' => $this->user()->id
         ]);
         return [
+            'user_id' => ['required', 'exists:users,id'],
             'service_name' => ['required', 'string', 'max:255'],
             'display_name' => ['nullable', 'string', 'max:255'],
             'code' => ['nullable', 'string', 'max:50', 'unique:services,code'],
@@ -41,7 +42,7 @@ class StoreRequest extends FormRequest
             'team_members' => ['nullable', 'array'],
             'team_members.*' => ['exists:users,id'],
             'locations' => ['required', 'array'],
-            'locations.*' => ['exists:location_types,id'],
+            'locations.*' => ['exists:locations,id'],
         ];
     }
 
@@ -79,11 +80,11 @@ class StoreRequest extends FormRequest
             'allow_new_clients.boolean' => 'The allow new clients option must be a boolean value.',
 
             'team_members.array' => 'The team members must be a valid array.',
-            'team_members.*.exists' => 'Each team member must exist in the users table.',
+            'team_members.*.exists' => 'Invalid team member(s).',
 
             'locations.required' => 'At least one location is required.',
             'locations.array' => 'The locations must be a valid array.',
-            'locations.*.exists' => 'Invalid location type selection.',
+            'locations.*.exists' => 'Invalid location(s).',
         ];
     }
 

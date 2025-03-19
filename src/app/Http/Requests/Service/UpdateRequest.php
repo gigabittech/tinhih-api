@@ -39,7 +39,7 @@ class UpdateRequest extends FormRequest
             'team_members' => ['nullable', 'array'],
             'team_members.*' => ['exists:users,id'],
             'locations' => ['required', 'array'],
-            'locations.*' => ['exists:location_types,id'],
+            'locations.*' => ['exists:locations,id'],
         ];
     }
 
@@ -91,7 +91,7 @@ class UpdateRequest extends FormRequest
 
             'locations.required' => 'At least one location is required.',
             'locations.array' => 'The locations must be a valid array.',
-            'locations.*.exists' => 'Invalid location type selection.',
+            'locations.*.exists' => 'Invalid location(s).',
         ];
     }
 

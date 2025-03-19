@@ -39,9 +39,9 @@ class ServiceController extends Controller
      *                 @OA\Property(property="max_attendees", type="integer", example=10),
      *                 @OA\Property(property="taxable", type="boolean", example=true),
      *                 @OA\Property(property="bookable_online", type="boolean", example=true),
-     *                 @OA\Property(property="allow_new_clients", type="boolean", example=true)
-     *                 @OA\Property(property="team_members", type="array", example=[1,2,3])
-     *                 @OA\Property(property="locations", type="array", example=[1,2,3])
+     *                 @OA\Property(property="allow_new_clients", type="boolean", example=true),
+     *                 @OA\Property(property="team_members", type="array",  @OA\Items(type="integer"), example={1,2,3}),
+     *                 @OA\Property(property="locations", type="array",     @OA\Items(type="integer"), example={1,2,3}),
      *             )
      *         )
      *     ),
@@ -72,6 +72,50 @@ class ServiceController extends Controller
             ], 500);
         }
     }
+
+    /**
+     * @OA\Get(
+     *     path="/api/v1/services/user",
+     *     summary="Get all user Services",
+     *     tags={"Services"},
+     *     description="Retrieve all available services.",
+     *     security={{ "bearerAuth":{} }},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successfully retrieved services",
+     *         @OA\JsonContent(
+     *             type="array",
+     *             @OA\Items(
+     *                 type="object",
+     *                 @OA\Property(property="user_id", type="integer", example=1),
+     *                 @OA\Property(property="service_name", type="string", example="Consultation"),
+     *                 @OA\Property(property="display_name", type="string", example="General Consultation"),
+     *                 @OA\Property(property="code", type="string", example="CONS001"),
+     *                 @OA\Property(property="duration", type="integer", example=30),
+     *                 @OA\Property(property="price", type="number", format="float", example=50.00),
+     *                 @OA\Property(property="description", type="string", example="Basic consultation service"),
+     *                 @OA\Property(property="group_event", type="boolean", example=false),
+     *                 @OA\Property(property="max_attendees", type="integer", example=10),
+     *                 @OA\Property(property="taxable", type="boolean", example=true),
+     *                 @OA\Property(property="bookable_online", type="boolean", example=true),
+     *                 @OA\Property(property="allow_new_clients", type="boolean", example=true),
+     *                 @OA\Property(property="team_members", type="array",  @OA\Items(type="integer"), example={1,2,3}),
+     *                 @OA\Property(property="locations", type="array",     @OA\Items(type="integer"), example={1,2,3}),
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Internal server error",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Error"),
+     *             @OA\Property(property="error", type="string", example="Server error message")
+     *         )
+     *     )
+     * )
+     */
+
+
 
     public function getServicesByUser(Request $request)
     {
@@ -118,9 +162,9 @@ class ServiceController extends Controller
      *             @OA\Property(property="max_attendees", type="integer", example=10),
      *             @OA\Property(property="taxable", type="boolean", example=true),
      *             @OA\Property(property="bookable_online", type="boolean", example=true),
-     *             @OA\Property(property="allow_new_clients", type="boolean", example=true)
-     *             @OA\Property(property="team_members", type="array", example=[1,2,4])
-     *             @OA\Property(property="locations", type="array", example=[1,2,4])
+     *             @OA\Property(property="allow_new_clients", type="boolean", example=true),
+     *             @OA\Property(property="team_members", type="array", @OA\Items(type="integer"), example={1,2,3}),
+     *             @OA\Property(property="locations", type="array", @OA\Items(type="integer"), example={1,2,3})
      *         )
      *     ),
      *     @OA\Response(
@@ -137,11 +181,16 @@ class ServiceController extends Controller
     public function getService(int $id)
     {
         try {
-            $service = new ServiceResource($this->repository->find($id));
+            $service = $this->repository->find($id);
+            if ($service) {
+                return response()->json([
+                    'message' => 'Service',
+                    'service' => new ServiceResource($service)
+                ], 200);
+            }
             return response()->json([
-                'message' => 'Service',
-                'service' => $service
-            ], 200);
+                'message' => 'Service not found'
+            ], 404);
         } catch (\Throwable $th) {
             return response()->json([
                 'message' => 'Error',
@@ -171,9 +220,9 @@ class ServiceController extends Controller
      *             @OA\Property(property="max_attendees", type="integer", example=10),
      *             @OA\Property(property="taxable", type="boolean", example=true),
      *             @OA\Property(property="bookable_online", type="boolean", example=true),
-     *             @OA\Property(property="allow_new_clients", type="boolean", example=true)
-     *             @OA\Property(property="team_members", type="array", example=[1,2,4])
-     *             @OA\Property(property="locations", type="array", example=[1,2,4])
+     *             @OA\Property(property="allow_new_clients", type="boolean", example=true),
+     *             @OA\Property(property="team_members", type="array", @OA\Items(type="integer"), example={1,2,3}),
+     *             @OA\Property(property="locations", type="array", @OA\Items(type="integer"), example={1,2,3})
      *         )
      *     ),
      *     @OA\Response(response=201, description="Service created successfully"),
@@ -229,9 +278,9 @@ class ServiceController extends Controller
      *             @OA\Property(property="max_attendees", type="integer", example=15),
      *             @OA\Property(property="taxable", type="boolean", example=true),
      *             @OA\Property(property="bookable_online", type="boolean", example=true),
-     *             @OA\Property(property="allow_new_clients", type="boolean", example=false)
-     *             @OA\Property(property="team_members", type="array", example=[1,2,4])
-     *             @OA\Property(property="locations", type="array", example=[1,2,4])
+     *             @OA\Property(property="allow_new_clients", type="boolean", example=false),
+     *             @OA\Property(property="team_members", type="array", @OA\Items(type="integer"), example={1,2,3}),
+     *             @OA\Property(property="locations", type="array", @OA\Items(type="integer"), example={1,2,3})
      *         )
      *     ),
      *     @OA\Response(response=200, description="Service updated successfully"),
@@ -246,19 +295,24 @@ class ServiceController extends Controller
     {
         try {
             $service = $this->repository->update($id, $request->validated());
-            // Update team members if provided
-            if ($request->has('team_members')) {
-                $service->teamMembers()->sync($request->team_members);
-            }
+            if ($service) {
+                // Update team members if provided
+                if ($request->has('team_members')) {
+                    $service->teamMembers()->sync($request->team_members);
+                }
 
-            // Update locations
-            if ($request->has('locations')) {
-                $service->locations()->sync($request->locations);
+                // Update locations
+                if ($request->has('locations')) {
+                    $service->locations()->sync($request->locations);
+                }
+                return response()->json([
+                    'message' => 'Service updated',
+                    'service' => new ServiceResource($service)
+                ], 200);
             }
             return response()->json([
-                'message' => 'Service updated',
-                'service' => new ServiceResource($service)
-            ], 200);
+                'message' => 'Service not found'
+            ], 404);
         } catch (\Throwable $th) {
             return response()->json([
                 'message' => 'Error',
@@ -285,9 +339,16 @@ class ServiceController extends Controller
     public function deleteService(int $id)
     {
         try {
+            $service = $this->repository->find($id);
+            if (!$service) {
+                return response()->json([
+                    'message' => 'Service not found'
+                ], 404);
+            }
             $this->repository->delete($id);
             return response()->json([
-                'message' => 'Service deleted'
+                'message' => 'Service deleted',
+                'service' => $service
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([

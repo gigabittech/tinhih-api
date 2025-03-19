@@ -4,7 +4,9 @@ use App\Http\Controllers\v1\AuthController;
 use App\Http\Controllers\v1\LocationController;
 use App\Http\Controllers\v1\LocationTypeController;
 use App\Http\Controllers\v1\ServiceController;
+use App\Http\Resources\User\UserResource;
 use App\Models\LocationType;
+use App\Repository\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -34,7 +36,10 @@ Route::prefix('v1')->group(function () {
         Route::post('/auth/logout', [AuthController::class, 'logout']);
 
         Route::get('/user', function (Request $request) {
-            return $request->user();
+            return [
+                'message' => 'User details',
+                'user' => new UserResource($request->user())
+            ];
         });
 
         // Appointment Booking Routes
