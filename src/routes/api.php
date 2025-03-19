@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\v1\AuthController;
+use App\Http\Controllers\v1\LocationController;
 use App\Http\Controllers\v1\LocationTypeController;
+use App\Http\Controllers\v1\ServiceController;
 use App\Models\LocationType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -83,6 +85,22 @@ Route::prefix('v1')->group(function () {
             Route::post('/', [LocationTypeController::class, 'createLocationType']);
             Route::put('/{id}', [LocationTypeController::class, 'updateLocationType']);
             Route::delete('/{id}', [LocationTypeController::class, 'deleteLocationType']);
+        });
+
+        Route::prefix('locations')->group(function () {
+            Route::get('/', [LocationController::class, 'getLocations']);
+            Route::get('/{id}', [LocationController::class, 'getLocation']);
+            Route::post('/', [LocationController::class, 'createLocation']);
+            Route::put('/{id}', [LocationController::class, 'updateLocation']);
+            Route::delete('/{id}', [LocationController::class, 'deleteLocation']);
+        });
+        Route::prefix('services')->group(function () {
+            Route::get('/', [ServiceController::class, 'getservices']);
+            Route::get('/user', [ServiceController::class, 'getServicesByUser']);
+            Route::get('/{id}', [ServiceController::class, 'getservice']);
+            Route::post('/', [ServiceController::class, 'createservice']);
+            Route::put('/{id}', [ServiceController::class, 'updateservice']);
+            Route::delete('/{id}', [ServiceController::class, 'deleteservice']);
         });
     });
 });

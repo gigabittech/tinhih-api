@@ -7,13 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Location extends Model
 {
     protected $fillable = [
-        'appointment_id',
-        'type',
-        'provider',
-        'link',
+        'type_id',
+        'user_id',
         'phone',
-        'name',
         'address',
+        'link',
+        'display_name',
         'city',
         'state',
         'zip_code',
@@ -23,5 +22,15 @@ class Location extends Model
     public function services()
     {
         return $this->belongsToMany(Service::class, 'location_service');
+    }
+
+    public function appointment()
+    {
+        return $this->hasMany(Appointment::class);
+    }
+
+    public function locationType()
+    {
+        return $this->belongsTo(LocationType::class, 'type_id');
     }
 }

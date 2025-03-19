@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Location;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class StoreRequest extends FormRequest
 {
@@ -21,22 +23,43 @@ class StoreRequest extends FormRequest
      */
     public function rules(): array
     {
+        $this->merge([
+            'user_id' => $this->user()->id,
+        ]);
         return [
-            'type' => 'required|in:physical,video',
-            'name' => 'required|string|max:255',
-
-            // Physical Location
-            'address' => 'nullable|required_if:type,physical|string',
-            'city' => 'nullable|required_if:type,physical|string|max:100',
-            'state' => 'nullable|required_if:type,physical|string|max:100',
-            'zip_code' => 'nullable|required_if:type,physical|string|max:20',
-            'country' => 'nullable|required_if:type,physical|string|max:100',
-
-            // Video Platform
-            'provider_name' => 'nullable|required_if:type,video|string|max:255',
-            'logo' => 'nullable|url',
-            'icon' => 'nullable|url',
+            'type_id' => 'required|exists:location_types,id',
+            'user_id' => 'required|exists:users,id',
+            'phone' => 'nullable|string',
+            'address' => 'nullable',
             'link' => 'nullable|url',
+            'display_name' => 'required|string',
+            'city' => 'nullable',
+            'state' => 'nullable',
+            'zip_code' => 'nullable',
+            'country' => 'nullable',
         ];
+    }
+
+
+    public function messages()
+    {
+        return [
+            'type_id.required' => 'The location type is required.',
+            'type_id.exists' => 'The location type must be a valid location type.',
+            'user_id.required' => 'The user is required.',
+            'user_id.exists' => 'The user must be a valid user.',
+            'phone.string' => 'The phone must be a valid string.',
+            'link.url' => 'The link must be a valid URL.',
+            'display_name.required' => 'The display name is required.',
+            'display_name.string' => 'The display name must be a valid string.',
+        ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json([
+            'error' => 'Validation Error',
+            'message' => $validator->errors()
+        ], 422));
     }
 }

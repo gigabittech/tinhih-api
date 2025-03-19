@@ -56,8 +56,13 @@ class User extends Authenticatable
         return $this->hasOne(Profile::class);
     }
 
+    public function service_team_member()
+    {
+        return $this->belongsToMany(Service::class, 'service_team_member');
+    }
+
     public function services()
     {
-        return $this->belongsToMany(Service::class, 'service_user');
+        return $this->hasMany(Service::class);
     }
 }

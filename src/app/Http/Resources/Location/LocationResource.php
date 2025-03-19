@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Location;
 
+use App\Http\Resources\LocationTypeResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -16,17 +17,15 @@ class LocationResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'type' => $this->type,
-            'name' => $this->name,
+            'type' => new LocationTypeResource($this->locationType),
+            'display_name' => $this->display_name,
+            'phone' => $this->phone,
             'address' => $this->address,
+            'link' => $this->link,
             'city' => $this->city,
             'state' => $this->state,
             'zip_code' => $this->zip_code,
             'country' => $this->country,
-            'provider_name' => $this->provider_name,
-            'logo' => $this->logo,
-            'icon' => $this->icon,
-            'link' => $this->link,
         ];
     }
 }

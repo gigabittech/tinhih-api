@@ -1,10 +1,10 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "API Documentation - TiNHiH.com",
-        "description": "API documentation for TiNHiH.com",
+        "title": "API Documentation",
+        "description": "API documentation for your Laravel application",
         "contact": {
-            "email": "support@gigabit.agency"
+            "email": "support@example.com"
         },
         "version": "1.0.0"
     },
@@ -316,6 +316,472 @@
                                 }
                             }
                         }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/locations": {
+            "get": {
+                "tags": [
+                    "Locations"
+                ],
+                "summary": "Get all Locations",
+                "description": "Retrieve all available locations with pagination.",
+                "operationId": "70f5a506f0281a95a4ccf44b0dba53e7",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Number of results per page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 10
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved paginated locations",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "current_page": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "per_page": {
+                                            "type": "integer",
+                                            "example": 10
+                                        },
+                                        "total": {
+                                            "type": "integer",
+                                            "example": 50
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "type_id": {
+                                                        "type": "integer",
+                                                        "example": 5
+                                                    },
+                                                    "user_id": {
+                                                        "type": "integer",
+                                                        "example": 1001
+                                                    },
+                                                    "phone": {
+                                                        "type": "string",
+                                                        "example": "+1234567890"
+                                                    },
+                                                    "address": {
+                                                        "type": "string",
+                                                        "example": "123 Main St"
+                                                    },
+                                                    "link": {
+                                                        "type": "string",
+                                                        "example": "https://provider.com/location"
+                                                    },
+                                                    "display_name": {
+                                                        "type": "string",
+                                                        "example": "Central Clinic"
+                                                    },
+                                                    "city": {
+                                                        "type": "string",
+                                                        "example": "New York"
+                                                    },
+                                                    "state": {
+                                                        "type": "string",
+                                                        "example": "NY"
+                                                    },
+                                                    "zip_code": {
+                                                        "type": "string",
+                                                        "example": "10001"
+                                                    },
+                                                    "country": {
+                                                        "type": "string",
+                                                        "example": "USA"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized - No valid token provided",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthorized - Token not provided or invalid"
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Locations not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No locations found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "An unexpected error occurred."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Locations"
+                ],
+                "summary": "Create a new Location",
+                "description": "Create a new location entry.",
+                "operationId": "3d76a2a5b70a3a57a2a1a4f56b069edf",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "display_name"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "type_id": {
+                                        "type": "integer",
+                                        "example": 5
+                                    },
+                                    "user_id": {
+                                        "type": "integer",
+                                        "example": 1001
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": "+1234567890"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "example": "123 Main St"
+                                    },
+                                    "link": {
+                                        "type": "string",
+                                        "example": "https://provider.com/location"
+                                    },
+                                    "display_name": {
+                                        "type": "string",
+                                        "example": "Central Clinic"
+                                    },
+                                    "city": {
+                                        "type": "string",
+                                        "example": "New York"
+                                    },
+                                    "state": {
+                                        "type": "string",
+                                        "example": "NY"
+                                    },
+                                    "zip_code": {
+                                        "type": "string",
+                                        "example": "10001"
+                                    },
+                                    "country": {
+                                        "type": "string",
+                                        "example": "USA"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Location created successfully"
+                    },
+                    "400": {
+                        "description": "Invalid request data"
+                    },
+                    "401": {
+                        "description": "Unauthorized access"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/locations/:id": {
+            "get": {
+                "tags": [
+                    "Locations"
+                ],
+                "summary": "Get a specific Location",
+                "description": "Retrieve details of a specific location by ID.",
+                "operationId": "dadb9c82412f34c36f0fe0d7dd067f75",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved location details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "type_id": {
+                                            "type": "integer",
+                                            "example": 5
+                                        },
+                                        "user_id": {
+                                            "type": "integer",
+                                            "example": 1001
+                                        },
+                                        "phone": {
+                                            "type": "string",
+                                            "example": "+1234567890"
+                                        },
+                                        "address": {
+                                            "type": "string",
+                                            "example": "123 Main St"
+                                        },
+                                        "link": {
+                                            "type": "string",
+                                            "example": "https://provider.com/location"
+                                        },
+                                        "display_name": {
+                                            "type": "string",
+                                            "example": "Central Clinic"
+                                        },
+                                        "city": {
+                                            "type": "string",
+                                            "example": "New York"
+                                        },
+                                        "state": {
+                                            "type": "string",
+                                            "example": "NY"
+                                        },
+                                        "zip_code": {
+                                            "type": "string",
+                                            "example": "10001"
+                                        },
+                                        "country": {
+                                            "type": "string",
+                                            "example": "USA"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Location not found"
+                    },
+                    "401": {
+                        "description": "Unauthorized access"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Locations"
+                ],
+                "summary": "Update an existing Location",
+                "description": "Update details of a specific location.",
+                "operationId": "25a18849fd31ccabc6f1e19cf8de601d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "type_id": {
+                                        "type": "integer",
+                                        "example": 5
+                                    },
+                                    "user_id": {
+                                        "type": "integer",
+                                        "example": 1001
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": "+1234567890"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "example": "123 Main St"
+                                    },
+                                    "link": {
+                                        "type": "string",
+                                        "example": "https://provider.com/location"
+                                    },
+                                    "display_name": {
+                                        "type": "string",
+                                        "example": "Central Clinic"
+                                    },
+                                    "city": {
+                                        "type": "string",
+                                        "example": "New York"
+                                    },
+                                    "state": {
+                                        "type": "string",
+                                        "example": "NY"
+                                    },
+                                    "zip_code": {
+                                        "type": "string",
+                                        "example": "10001"
+                                    },
+                                    "country": {
+                                        "type": "string",
+                                        "example": "USA"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Location updated successfully"
+                    },
+                    "400": {
+                        "description": "Invalid request data"
+                    },
+                    "404": {
+                        "description": "Location not found"
+                    },
+                    "401": {
+                        "description": "Unauthorized access"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Locations"
+                ],
+                "summary": "Delete a Location",
+                "description": "Remove a location from the system.",
+                "operationId": "c22648cfe8bb320919b4d164482941e3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Location deleted successfully"
+                    },
+                    "404": {
+                        "description": "Location not found"
+                    },
+                    "401": {
+                        "description": "Unauthorized access"
                     }
                 },
                 "security": [
@@ -885,6 +1351,10 @@
         {
             "name": "Auth",
             "description": "Auth"
+        },
+        {
+            "name": "Locations",
+            "description": "Locations"
         },
         {
             "name": "LocationType",
