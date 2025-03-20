@@ -5,6 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>API Documentation - {{ env('APP_NAME') }}</title>
+    <meta property="og:title" content="Tinhih.com API – Fast & Scalable API Solutions">
+    <meta property="og:description"
+        content="Tinhih.com API offers seamless, secure, and scalable integration for developers. Enhance your applications with powerful endpoints and automation.">
+    <meta property="og:image" content="{{ asset('assets/logos/api.jpg') }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tinhih.com">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Tinhih.com API – Fast & Scalable API Solutions">
+    <meta name="twitter:description"
+        content="Tinhih.com API offers seamless, secure, and scalable integration for developers. Enhance your applications with powerful endpoints and automation.">
+    <meta name="twitter:image" content="{{ asset('assets/logos/api.jpg') }}">
+
     <link rel="shortcut icon" href="https://tinhih.com/assets/media/logos/Logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.19.0/swagger-ui.css"
         integrity="sha512-Fx2bx472ykst5EwyqNnGgXC2pPBxuxRnxHSa5Elf7sVbYA1vj2M/J50eJ0aXDal5hDjdSl3EEaQCaO5y69HmcQ=="
