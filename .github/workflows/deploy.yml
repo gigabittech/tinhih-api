@@ -24,10 +24,10 @@ jobs:
             cd /var/www/api.tinhih.com
             git pull origin mainmaster
 
-            cd /var/www/api.tinhih.com/src
-            composer install --no-dev --optimize-autoloader
+            cd /src
+            composer update --no-dev --optimize-autoloader
             php artisan migrate --force
-            npm install && npm run build
+            # npm install && npm run build
             php artisan cache:clear
             php artisan config:cache
             # php artisan queue:restart
