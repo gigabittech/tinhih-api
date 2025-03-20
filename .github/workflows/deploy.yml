@@ -22,7 +22,7 @@ jobs:
           key: ${{ secrets.DEPLOY_KEY }}
           script: |
             cd /var/www/api.tinhih.com
-            git pull origin mainmaster
+            git pull origin master
 
             cd /src
             composer update --no-dev --optimize-autoloader
