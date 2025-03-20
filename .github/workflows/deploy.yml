@@ -16,8 +16,9 @@ jobs:
       - name: Deploy to DigitalOcean
         uses: appleboy/ssh-action@v0.1.10
         with:
-          host: your-server-ip
-          username: your-server-user
+          host: 167.99.228.230
+          username: root
+          port: 22
           key: ${{ secrets.DEPLOY_KEY }}
           script: |
             cd /var/www/api.tinhih.com
@@ -29,5 +30,7 @@ jobs:
             npm install && npm run build
             php artisan cache:clear
             php artisan config:cache
-            php artisan queue:restart
+            # php artisan queue:restart
             # sudo systemctl restart nginx  # Restart server if needed
+
+            echo "✅Deployed successfull!"
