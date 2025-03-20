@@ -104,7 +104,6 @@ class AuthController extends Controller
 
             if (!$user || !Hash::check($data['password'], $user->password)) {
                 return response()->json([
-                    'success' => false,
                     'message' => 'Incorrect credentials are given'
                 ], 404);
             }
@@ -113,7 +112,6 @@ class AuthController extends Controller
 
             return response()->json([
                 'message' => "Logged in successfull",
-                'success' => true,
                 'payload' => ["token" => $token]
             ], 200);
         } catch (\Throwable $th) {
