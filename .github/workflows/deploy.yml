@@ -1,0 +1,33 @@
+name: Deploy to DigitalOcean
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Deploy to DigitalOcean
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: your-server-ip
+          username: your-server-user
+          key: ${{ secrets.DEPLOY_KEY }}
+          script: |
+            cd /var/www/api.tinhih.com
+            git pull origin mainmaster
+
+            cd /var/www/api.tinhih.com/src
+            composer install --no-dev --optimize-autoloader
+            php artisan migrate --force
+            npm install && npm run build
+            php artisan cache:clear
+            php artisan config:cache
+            php artisan queue:restart
+            # sudo systemctl restart nginx  # Restart server if needed
