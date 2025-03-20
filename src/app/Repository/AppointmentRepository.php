@@ -2,21 +2,20 @@
 
 namespace App\Repository;
 
-use App\Models\Location;
+use App\Models\Appointment;
 use App\Repository\Implementation\BaseRepository;
 
-class LocationRepository extends BaseRepository
+class AppointmentRepository extends BaseRepository
 {
     /**
      * Create a new class instance.
      */
-    public function __construct(Location $location)
+    public function __construct(Appointment $appointment)
     {
-        parent::__construct($location);
+        parent::__construct($appointment);
     }
 
-
-    public function getUserLocations(int $userId)
+    public function getUserAppointment($userId)
     {
         return $this->model->where('user_id', $userId)->get();
     }

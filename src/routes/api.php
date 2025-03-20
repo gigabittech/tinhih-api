@@ -86,6 +86,7 @@ Route::prefix('v1')->group(function () {
 
         Route::prefix('locations')->group(function () {
             Route::get('/', [LocationController::class, 'getLocations']);
+            Route::get('/user', [LocationController::class, 'getUserLocations']);
             Route::get('/{id}', [LocationController::class, 'getLocation']);
             Route::post('/', [LocationController::class, 'createLocation']);
             Route::put('/{id}', [LocationController::class, 'updateLocation']);

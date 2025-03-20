@@ -8,6 +8,7 @@ use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -23,9 +24,28 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->render(function (Throwable $e, Request $request) {
+            if ($e instanceof AuthenticationException) {
+                return response()->json([
+                    'message' => 'Unauthorized',
+                ], 401);
+            }
+
+            if ($e instanceof RouteNotFoundException) {
+                return response()->json([
+                    'message' => 'Route Not Found',
+                ], 404);
+            }
+
+            if ($e instanceof ValidationException) {
+                return response()->json([
+                    'message' => 'Validation Error',
+                    'errors' => $e->errors(),
+                ], 422);
+            }
+
             return response()->json([
-                'error' => 'Server Error',
-                'message' => $e->getMessage()
+                'message' => 'Server Error',
+                'error' => $e->getMessage(),
             ], 500);
         });
     })->create();

@@ -7,6 +7,7 @@ use App\Http\Requests\Location\StoreRequest;
 use App\Http\Requests\Location\UpdateRequest;
 use App\Http\Resources\Location\LocationResource;
 use App\Repository\LocationRepository;
+use Illuminate\Http\Request;
 
 class LocationController extends Controller
 {
@@ -89,6 +90,15 @@ class LocationController extends Controller
         return response()->json([
             'message' => 'Locations',
             'locations' => LocationResource::collection($this->repository->all())
+        ]);
+    }
+
+    public function getUserLocations(Request $request)
+    {
+        dd($request->user()->id);
+        return response()->json([
+            'message' => 'User Locations',
+            'locations' => LocationResource::collection($this->repository->getUserLocations($request->user()->id))
         ]);
     }
 
@@ -213,7 +223,7 @@ class LocationController extends Controller
         $location = $this->repository->find($id);
         if (!$location) {
             return response()->json([
-                'message' => 'Location not found'
+                'message' => 'Location not found',
             ], 404);
         }
         $location = $this->repository->update($request->validated(), $id);
