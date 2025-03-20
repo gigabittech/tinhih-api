@@ -29,11 +29,19 @@ class LoginRequest extends FormRequest
         ];
     }
 
+
+    public function messages()
+    {
+        return [
+            'email.exists' => 'The email you entered does not belong to any account'
+        ];
+    }
+
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json([
-            'error' => 'Validation Error',
-            'message' => $validator->errors()
+            'message' => 'Validation Error',
+            'errors' => $validator->errors()
         ], 422));
     }
 }
