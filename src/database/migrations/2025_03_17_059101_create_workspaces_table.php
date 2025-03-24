@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('location_types', function (Blueprint $table) {
+        Schema::create('workspaces', function (Blueprint $table) {
             $table->id();
-            $table->string('logo')->nullable();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('name');
-            $table->enum('type', ['remote', 'person', 'phone'])->nullable();
-            $table->text('description')->nullable();
+            $table->string('country');
+            $table->string('url')->nullable();
+            $table->boolean('active')->default(false);
+            $table->string('profession');
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('location_types');
+        Schema::dropIfExists('workspaces');
     }
 };

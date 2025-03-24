@@ -377,12 +377,12 @@ class LocationTypeController extends Controller
             $deleted = $this->repository->delete($id);
             if (!$deleted) {
                 return response()->json(
-                    ['message' => 'Location type not found', 'id' => $id],
+                    ['message' => 'Location type not found'],
                     404
                 );
             }
             return response()->json(
-                ['message' => 'Location type deleted', 'id' => $id]
+                ['message' => 'Location type deleted']
             );
         } catch (\Throwable $th) {
             return response()->json(

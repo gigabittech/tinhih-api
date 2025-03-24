@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Location extends Model
 {
     protected $fillable = [
+        'workspace_id',
         'type_id',
-        'user_id',
         'phone',
         'address',
         'link',
@@ -18,6 +18,11 @@ class Location extends Model
         'zip_code',
         'country',
     ];
+
+    public function workspace()
+    {
+        return $this->belongsTo(Workspace::class);
+    }
 
     public function services()
     {

@@ -24,11 +24,12 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         $this->merge([
-            'user_id' => $this->user()->id,
+            'workspace_id' => $this->user()->workspaces()->where('active', true)->first()->id,
         ]);
+
         return [
+            'workspace_id' => 'required|exists:workspaces,id',
             'type_id' => 'required|exists:location_types,id',
-            'user_id' => 'required|exists:users,id',
             'phone' => 'nullable|string',
             'address' => 'nullable',
             'link' => 'nullable|url',

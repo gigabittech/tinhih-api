@@ -16,6 +16,7 @@ class LocationTypeResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'type' => $this->type,
             'logo' => $this->logo,
             'name' => $this->name,
             'description' => $this->description,
