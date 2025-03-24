@@ -66,6 +66,7 @@ class ServiceController extends Controller
                 'services' => $services
             ], 200);
         } catch (\Throwable $th) {
+            dd($th);
             return response()->json([
                 'message' => 'Error',
                 'error' => $th->getMessage()
