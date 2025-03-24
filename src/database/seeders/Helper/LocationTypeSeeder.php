@@ -15,7 +15,7 @@ class LocationTypeSeeder extends Seeder
             [
                 'name' => 'In-person meeting',
                 'description' => 'Set a physical address',
-                'type' => 'physical'
+                'type' => 'person'
             ],
             [
                 'name' => 'Phone call',
