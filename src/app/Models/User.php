@@ -51,6 +51,11 @@ class User extends Authenticatable
         ];
     }
 
+
+    public function workspaces()
+    {
+        return $this->hasMany(Workspace::class);
+    }
     public function profile()
     {
         return $this->hasOne(Profile::class);

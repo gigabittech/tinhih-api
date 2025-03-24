@@ -12,4 +12,10 @@ class LocationType extends Model
         'name',
         'description',
     ];
+
+
+    public function locations()
+    {
+        return $this->hasMany(Location::class);
+    }
 }

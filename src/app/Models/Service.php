@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Service extends Model
 {
     protected $fillable = [
-        'user_id',
+        'workspace_id',
         'service_name',
         'display_name',
         'code',
@@ -21,15 +21,15 @@ class Service extends Model
         'allow_new_clients'
     ];
 
-    public function user()
+    public function workspace()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Workspace::class);
     }
 
     // Many-to-Many Relationship with Users (Team Members)
     public function teamMembers()
     {
-        return $this->belongsToMany(User::class, 'service_team_member');
+        return $this->belongsToMany(TeamMember::class, 'service_team_member');
     }
 
     // Many-to-Many Relationship with Locations

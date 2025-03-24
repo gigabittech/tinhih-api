@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Appointment extends Model
 {
     protected $fillable = [
+        'workspace_id',
         'date',
         'time',
         'description'
@@ -15,16 +16,16 @@ class Appointment extends Model
 
     public function locations()
     {
-        return $this->belongsTo(Location::class, 'appointment_location');
+        return $this->belongsToMany(Location::class, 'appointment_location');
     }
 
     public function services()
     {
-        return $this->belongsTo(Service::class, 'appointment_service');
+        return $this->belongsToMany(Service::class, 'appointment_service');
     }
 
     public function attendees()
     {
-        return $this->belongsTo(User::class, 'appointment_attendee');
+        return $this->belongsToMany(User::class, 'appointment_attendee');
     }
 }
