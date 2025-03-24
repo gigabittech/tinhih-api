@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Service;
 
 use App\Http\Resources\Location\LocationResource;
+use App\Http\Resources\TeamMemberResource;
 use App\Http\Resources\User\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -30,7 +31,7 @@ class ServiceResource extends JsonResource
             'bookable_online' => $this->bookable_online,
             'allow_new_clients' => $this->allow_new_clients,
             'locations' => LocationResource::collection($this->locations),
-            'team_members' => UserResource::collection($this->teamMembers),
+            'team_members' => TeamMemberResource::collection($this->teamMembers),
         ];
     }
 }
