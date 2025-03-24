@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('location_types', function (Blueprint $table) {
-            $table->enum('type', ['remote', 'physical', 'phone'])->nullable();
+        Schema::create('service_team_member', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('service_id')->constrained()->onDelete('cascade');
+            $table->foreignId('team_member_id')->constrained()->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('location_types', function (Blueprint $table) {
-            $table->dropColumn('type');
-        });
+        Schema::dropIfExists('service_team_member');
     }
 };

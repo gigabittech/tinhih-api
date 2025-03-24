@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('logo')->nullable();
             $table->string('name');
+            $table->enum('type', ['remote', 'person', 'phone'])->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
         });

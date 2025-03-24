@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_workspace', function (Blueprint $table) {
+        Schema::create('workspace_team_member', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('workspace_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('team_member_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -22,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_workspace');
+        Schema::dropIfExists('workspace_team_member');
     }
 };

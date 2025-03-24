@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('type_id')->nullable();
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreignId('workspace_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('type_id')->constrained('location_types', 'id')->cascadeOnDelete();
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->string('link')->nullable();
