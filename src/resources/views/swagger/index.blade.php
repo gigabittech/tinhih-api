@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="https://tinhih.com/assets/media/logos/Logo.png">
-    <title>API Documentation - {{ env('APP_NAME') }}</title>
-    <meta property="og:title" content="TiNHiH.com API – Fast & Scalable API Solutions">
+    <title>TiNHiH Portal - API Documentation</title>
+    <meta property="og:title" content="TiNHiH Portal API – Fast & Scalable API Solutions">
     <meta property="og:description"
         content="TiNHiH.com API offers seamless, secure, and scalable integration for developers. Enhance your applications with powerful endpoints and automation.">
     <meta property="og:image" content="{{ asset('assets/logos/api.jpg') }}">
