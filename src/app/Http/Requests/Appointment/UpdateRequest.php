@@ -25,7 +25,7 @@ class UpdateRequest extends FormRequest
     {
         return [
             'workspace_id' => ['required', 'exists:workspaces,id'],
-            'date' => ['required', 'date', 'after_or_equal:today'],,
+            'date' => ['required', 'date', 'after_or_equal:today'],
             'time' => ['required', 'date_format:H:i'],
             'description' => ['nullable', 'string'],
         ];

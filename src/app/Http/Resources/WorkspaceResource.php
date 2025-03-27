@@ -5,7 +5,6 @@ namespace App\Http\Resources;
 use App\Http\Resources\Location\LocationResource;
 use App\Http\Resources\Resources\AppointmentResource;
 use App\Http\Resources\Service\ServiceResource;
-use App\Http\Resources\User\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
