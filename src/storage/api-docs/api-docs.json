@@ -1,8 +1,8 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "API Documentation",
-        "description": "API documentation for tinhih.com",
+        "title": "TiNHiH Portal API Documentation",
+        "description": "API documentation for TiNHiH Portal",
         "contact": {
             "email": "support@gigabit.agency"
         },
@@ -10,6 +10,618 @@
     },
     "paths": {
         "/": {},
+        "/api/v1/appointments": {
+            "get": {
+                "tags": [
+                    "Appointments"
+                ],
+                "summary": "Get all appointments",
+                "description": "Retrieves a list of appointments.",
+                "operationId": "7bca4835549b6ad8617b19da1d1bb794",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "Filter appointments by user ID",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Appointments retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Appointments retrieved"
+                                        },
+                                        "appointments": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "date": {
+                                                        "type": "string",
+                                                        "format": "date",
+                                                        "example": "2025-03-27"
+                                                    },
+                                                    "time": {
+                                                        "type": "string",
+                                                        "example": "10:00 AM"
+                                                    },
+                                                    "status": {
+                                                        "type": "string",
+                                                        "example": "confirmed"
+                                                    },
+                                                    "locations": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "example": "New York Office"
+                                                                },
+                                                                "address": {
+                                                                    "type": "string",
+                                                                    "example": "123 Main St, New York, NY"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    },
+                                                    "services": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "properties": {
+                                                                "service_name": {
+                                                                    "type": "string",
+                                                                    "example": "Consultation"
+                                                                },
+                                                                "service_description": {
+                                                                    "type": "string",
+                                                                    "example": "One-hour consultation with a specialist"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    },
+                                                    "attendees": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "string",
+                                                            "example": "John Doe"
+                                                        }
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Something went wrong"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "Error details"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Appointments"
+                ],
+                "summary": "Create a new appointment",
+                "description": "Creates a new appointment with associated locations, services, and attendees.",
+                "operationId": "7c2cc33d51f61ed27c6777d5c4405a1e",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "workspace_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2025-03-27"
+                                    },
+                                    "time": {
+                                        "type": "string",
+                                        "example": "10:00 AM"
+                                    },
+                                    "attendees": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "example": "John Doe"
+                                        }
+                                    },
+                                    "services": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer",
+                                            "example": 1
+                                        }
+                                    },
+                                    "locations": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer",
+                                            "example": 1
+                                        }
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Meeting with the client"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Appointment successfully booked",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Appointment successfully booked"
+                                        },
+                                        "appointment": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "date": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2025-03-27"
+                                                },
+                                                "time": {
+                                                    "type": "string",
+                                                    "example": "10:00 AM"
+                                                },
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "confirmed"
+                                                },
+                                                "locations": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "New York Office"
+                                                    }
+                                                },
+                                                "services": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "Consultation"
+                                                    }
+                                                },
+                                                "attendees": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "John Doe"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Something went wrong"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "Error details"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/appointments/:id": {
+            "get": {
+                "tags": [
+                    "Appointments"
+                ],
+                "summary": "Get a single appointment",
+                "description": "Retrieve details of a single appointment.",
+                "operationId": "9247299e59bba614a8a1de9c7a0821e2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the appointment to retrieve",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Appointment retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Appointment retrieve successful"
+                                        },
+                                        "appointment": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "date": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2025-03-27"
+                                                },
+                                                "time": {
+                                                    "type": "string",
+                                                    "example": "10:00 AM"
+                                                },
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "confirmed"
+                                                },
+                                                "locations": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "New York Office"
+                                                    }
+                                                },
+                                                "services": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "Consultation"
+                                                    }
+                                                },
+                                                "attendees": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "John Doe"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Appointment not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Appointment not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Something went wrong"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "Error details"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Appointments"
+                ],
+                "summary": "Update an existing appointment",
+                "description": "Updates an existing appointment with new details.",
+                "operationId": "9cba0356adbd215e7d1b9f4c7e0c442b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the appointment to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "workspace_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2025-03-27"
+                                    },
+                                    "time": {
+                                        "type": "string",
+                                        "example": "10:00 AM"
+                                    },
+                                    "attendees": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "example": "John Doe"
+                                        }
+                                    },
+                                    "services": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer",
+                                            "example": 1
+                                        }
+                                    },
+                                    "locations": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer",
+                                            "example": 1
+                                        }
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Updated meeting with the client"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Appointment successfully updated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Appointment successfully updated"
+                                        },
+                                        "appointment": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "date": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2025-03-27"
+                                                },
+                                                "time": {
+                                                    "type": "string",
+                                                    "example": "10:00 AM"
+                                                },
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "confirmed"
+                                                },
+                                                "locations": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "New York Office"
+                                                    }
+                                                },
+                                                "services": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "Consultation"
+                                                    }
+                                                },
+                                                "attendees": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "John Doe"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Something went wrong"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "Error details"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Appointments"
+                ],
+                "summary": "Delete an appointment",
+                "description": "Deletes an existing appointment by ID.",
+                "operationId": "d6f64ede7f65d0406ed4fa5285ba7f51",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Appointment ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Appointment deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Appointment deleted"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Server error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/v1/auth/login": {
             "post": {
                 "tags": [
@@ -381,6 +993,680 @@
                     },
                     "500": {
                         "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/clients": {
+            "get": {
+                "tags": [
+                    "Clients"
+                ],
+                "summary": "Get all clients",
+                "description": "Retrieves a list of clients within a workspace.",
+                "operationId": "3d1f2eaf31cccb53b17c54780e873521",
+                "parameters": [
+                    {
+                        "name": "workspace_id",
+                        "in": "query",
+                        "description": "Filter clients by workspace ID",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Clients retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Clients retrieved"
+                                        },
+                                        "clients": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "first_name": {
+                                                        "type": "string",
+                                                        "example": "John"
+                                                    },
+                                                    "last_name": {
+                                                        "type": "string",
+                                                        "example": "Doe"
+                                                    },
+                                                    "status": {
+                                                        "type": "string",
+                                                        "example": "active"
+                                                    },
+                                                    "email": {
+                                                        "type": "string",
+                                                        "example": "john@example.com"
+                                                    },
+                                                    "phone": {
+                                                        "type": "string",
+                                                        "example": "+880 xxxx xxxxxx"
+                                                    },
+                                                    "in": {
+                                                        "type": "string",
+                                                        "example": "12345"
+                                                    },
+                                                    "dob": {
+                                                        "type": "string",
+                                                        "format": "date",
+                                                        "example": "1990-01-01"
+                                                    },
+                                                    "sex": {
+                                                        "type": "string",
+                                                        "example": "male"
+                                                    },
+                                                    "relationship": {
+                                                        "type": "string",
+                                                        "example": "single"
+                                                    },
+                                                    "emp_status": {
+                                                        "type": "string",
+                                                        "example": "employed"
+                                                    },
+                                                    "ethnicity": {
+                                                        "type": "string",
+                                                        "example": "Asian"
+                                                    },
+                                                    "notes": {
+                                                        "type": "string",
+                                                        "example": "Some additional notes"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Something went wrong"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "Error details"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/clients/:id": {
+            "get": {
+                "tags": [
+                    "Clients"
+                ],
+                "summary": "Get a single client",
+                "description": "Retrieve details of a specific client by ID.",
+                "operationId": "887e1951ca8008a71402402b9ae5d105",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the client",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Client retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Client retrieved successfully"
+                                        },
+                                        "client": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "first_name": {
+                                                    "type": "string",
+                                                    "example": "John"
+                                                },
+                                                "last_name": {
+                                                    "type": "string",
+                                                    "example": "Doe"
+                                                },
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "active"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "john@example.com"
+                                                },
+                                                "phone": {
+                                                    "type": "string",
+                                                    "example": "+880 xxxx xxxxxx"
+                                                },
+                                                "in": {
+                                                    "type": "string",
+                                                    "example": "12345"
+                                                },
+                                                "dob": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "1990-01-01"
+                                                },
+                                                "sex": {
+                                                    "type": "string",
+                                                    "example": "male"
+                                                },
+                                                "relationship": {
+                                                    "type": "string",
+                                                    "example": "single"
+                                                },
+                                                "emp_status": {
+                                                    "type": "string",
+                                                    "example": "employed"
+                                                },
+                                                "ethnicity": {
+                                                    "type": "string",
+                                                    "example": "Asian"
+                                                },
+                                                "notes": {
+                                                    "type": "string",
+                                                    "example": "Some additional notes"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Client not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Client not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Something went wrong"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "Error details"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Clients"
+                ],
+                "summary": "Delete a client",
+                "description": "Deletes a client based on the given ID.",
+                "operationId": "b6ef0ecf43e981c7682f75a6f5a7bc29",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the client",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Client deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Client deleted successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Client not found"
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/clients": {
+            "post": {
+                "tags": [
+                    "Clients"
+                ],
+                "summary": "Create a new client",
+                "operationId": "ecc4b68974eb2bd195c301931c6570e8",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "first_name",
+                                    "last_name",
+                                    "email",
+                                    "phone"
+                                ],
+                                "properties": {
+                                    "first_name": {
+                                        "type": "string",
+                                        "example": "John"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "example": "Doe"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "john.doe@example.com"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": "+1234567890"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "active"
+                                    },
+                                    "dob": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "1990-05-15"
+                                    },
+                                    "sex": {
+                                        "type": "string",
+                                        "example": "male"
+                                    },
+                                    "relationship": {
+                                        "type": "string",
+                                        "example": "single"
+                                    },
+                                    "emp_status": {
+                                        "type": "string",
+                                        "example": "employed"
+                                    },
+                                    "ethnicity": {
+                                        "type": "string",
+                                        "example": "Asian"
+                                    },
+                                    "notes": {
+                                        "type": "string",
+                                        "example": "VIP client"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Client created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Client created successfully"
+                                        },
+                                        "client": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "first_name": {
+                                                    "type": "string",
+                                                    "example": "John"
+                                                },
+                                                "last_name": {
+                                                    "type": "string",
+                                                    "example": "Doe"
+                                                },
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "active"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "john@example.com"
+                                                },
+                                                "phone": {
+                                                    "type": "string",
+                                                    "example": "+880 xxxx xxxxxx"
+                                                },
+                                                "in": {
+                                                    "type": "string",
+                                                    "example": "12345"
+                                                },
+                                                "dob": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "1990-01-01"
+                                                },
+                                                "sex": {
+                                                    "type": "string",
+                                                    "example": "male"
+                                                },
+                                                "relationship": {
+                                                    "type": "string",
+                                                    "example": "single"
+                                                },
+                                                "emp_status": {
+                                                    "type": "string",
+                                                    "example": "employed"
+                                                },
+                                                "ethnicity": {
+                                                    "type": "string",
+                                                    "example": "Asian"
+                                                },
+                                                "notes": {
+                                                    "type": "string",
+                                                    "example": "Some additional notes"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Something went wrong"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Database error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/clients/{id}": {
+            "put": {
+                "tags": [
+                    "Clients"
+                ],
+                "summary": "Update an existing client",
+                "operationId": "08e8f98e35d6eb911084ca5347ce09d5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Client ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "first_name",
+                                    "last_name",
+                                    "email",
+                                    "phone"
+                                ],
+                                "properties": {
+                                    "first_name": {
+                                        "type": "string",
+                                        "example": "John"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "example": "Doe"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "john.doe@example.com"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": "+1234567890"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "active"
+                                    },
+                                    "dob": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "1990-05-15"
+                                    },
+                                    "sex": {
+                                        "type": "string",
+                                        "example": "male"
+                                    },
+                                    "relationship": {
+                                        "type": "string",
+                                        "example": "single"
+                                    },
+                                    "emp_status": {
+                                        "type": "string",
+                                        "example": "employed"
+                                    },
+                                    "ethnicity": {
+                                        "type": "string",
+                                        "example": "Asian"
+                                    },
+                                    "notes": {
+                                        "type": "string",
+                                        "example": "VIP client"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Client updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Client updated successfully"
+                                        },
+                                        "client": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "first_name": {
+                                                    "type": "string",
+                                                    "example": "John"
+                                                },
+                                                "last_name": {
+                                                    "type": "string",
+                                                    "example": "Doe"
+                                                },
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "active"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "john@example.com"
+                                                },
+                                                "phone": {
+                                                    "type": "string",
+                                                    "example": "+880 xxxx xxxxxx"
+                                                },
+                                                "in": {
+                                                    "type": "string",
+                                                    "example": "12345"
+                                                },
+                                                "dob": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "1990-01-01"
+                                                },
+                                                "sex": {
+                                                    "type": "string",
+                                                    "example": "male"
+                                                },
+                                                "relationship": {
+                                                    "type": "string",
+                                                    "example": "single"
+                                                },
+                                                "emp_status": {
+                                                    "type": "string",
+                                                    "example": "employed"
+                                                },
+                                                "ethnicity": {
+                                                    "type": "string",
+                                                    "example": "Asian"
+                                                },
+                                                "notes": {
+                                                    "type": "string",
+                                                    "example": "Some additional notes"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Something went wrong"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Database error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -1997,6 +3283,1169 @@
                     }
                 ]
             }
+        },
+        "/api/v1/members": {
+            "get": {
+                "tags": [
+                    "Members"
+                ],
+                "summary": "Get all members",
+                "description": "Retrieve a list of members.",
+                "operationId": "e782494406353f03dfe8153c0f888eca",
+                "responses": {
+                    "200": {
+                        "description": "List of members retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "members retrieved successfully"
+                                        },
+                                        "members": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "first_name": {
+                                                        "type": "string",
+                                                        "example": "Jhon"
+                                                    },
+                                                    "last_name": {
+                                                        "type": "string",
+                                                        "example": "Doe"
+                                                    },
+                                                    "email": {
+                                                        "type": "string",
+                                                        "example": "jhon@example.com"
+                                                    },
+                                                    "phone_number": {
+                                                        "type": "string",
+                                                        "example": "+880 xxxx xxxxxx"
+                                                    },
+                                                    "job_title": {
+                                                        "type": "string",
+                                                        "example": "Mental Health Specialist"
+                                                    },
+                                                    "avatar": {
+                                                        "type": "string",
+                                                        "example": ""
+                                                    },
+                                                    "npi": {
+                                                        "type": "string",
+                                                        "example": ""
+                                                    },
+                                                    "texonomy": {
+                                                        "type": "string",
+                                                        "example": ""
+                                                    },
+                                                    "workspace_id": {
+                                                        "type": "string",
+                                                        "example": "workspace_id"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Internal server error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Members"
+                ],
+                "summary": "Create a new member",
+                "description": "Creates a new team member and associates services.",
+                "operationId": "c23ad79500160a70b9eaec7edcd86a75",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "workspace_id",
+                                    "first_name",
+                                    "last_name",
+                                    "email"
+                                ],
+                                "properties": {
+                                    "workspace_id": {
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "first_name": {
+                                        "type": "string",
+                                        "example": "John"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "example": "Doe"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "john@example.com"
+                                    },
+                                    "phone_number": {
+                                        "type": "string",
+                                        "example": "+880 xxxx xxxxxx"
+                                    },
+                                    "job_title": {
+                                        "type": "string",
+                                        "example": "Mental Health Specialist"
+                                    },
+                                    "npi": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "avatar": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "taxonomy": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "services": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "example": []
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Member created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Team member created successfully"
+                                        },
+                                        "member": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "first_name": {
+                                                    "type": "string",
+                                                    "example": "John"
+                                                },
+                                                "last_name": {
+                                                    "type": "string",
+                                                    "example": "Doe"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "john@example.com"
+                                                },
+                                                "phone_number": {
+                                                    "type": "string",
+                                                    "example": "+880 xxxx xxxxxx"
+                                                },
+                                                "job_title": {
+                                                    "type": "string",
+                                                    "example": "Mental Health Specialist"
+                                                },
+                                                "avatar": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                },
+                                                "npi": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                },
+                                                "taxonomy": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                },
+                                                "workspace_id": {
+                                                    "type": "string",
+                                                    "example": "1"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Internal server error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/members/:id": {
+            "get": {
+                "tags": [
+                    "Members"
+                ],
+                "summary": "Get a member",
+                "description": "Retrieve a  member.",
+                "operationId": "66625137b0b60df6eb80f9c6f6076ed1",
+                "responses": {
+                    "200": {
+                        "description": "Member retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "member retrieved successfully"
+                                        },
+                                        "members": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "first_name": {
+                                                    "type": "string",
+                                                    "example": "Jhon"
+                                                },
+                                                "last_name": {
+                                                    "type": "string",
+                                                    "example": "Doe"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "jhon@example.com"
+                                                },
+                                                "phone_number": {
+                                                    "type": "string",
+                                                    "example": "+880 xxxx xxxxxx"
+                                                },
+                                                "job_title": {
+                                                    "type": "string",
+                                                    "example": "Mental Health Specialist"
+                                                },
+                                                "avatar": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                },
+                                                "npi": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                },
+                                                "texonomy": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                },
+                                                "workspace_id": {
+                                                    "type": "string",
+                                                    "example": "workspace_id"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Internal server error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Members"
+                ],
+                "summary": "Update a member",
+                "description": "Updates an existing team member.",
+                "operationId": "f2b93a87025970a0929c1dae16a533ed",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Member ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "workspace_id",
+                                    "first_name",
+                                    "last_name",
+                                    "email"
+                                ],
+                                "properties": {
+                                    "workspace_id": {
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "first_name": {
+                                        "type": "string",
+                                        "example": "John"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "example": "Doe"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "john@example.com"
+                                    },
+                                    "phone_number": {
+                                        "type": "string",
+                                        "example": "+880 xxxx xxxxxx"
+                                    },
+                                    "job_title": {
+                                        "type": "string",
+                                        "example": "Mental Health Specialist"
+                                    },
+                                    "npi": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "avatar": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "taxonomy": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "services": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "example": []
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Member updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Team member updated successfully"
+                                        },
+                                        "member": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "first_name": {
+                                                    "type": "string",
+                                                    "example": "John"
+                                                },
+                                                "last_name": {
+                                                    "type": "string",
+                                                    "example": "Doe"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "john@example.com"
+                                                },
+                                                "phone_number": {
+                                                    "type": "string",
+                                                    "example": "+880 xxxx xxxxxx"
+                                                },
+                                                "job_title": {
+                                                    "type": "string",
+                                                    "example": "Mental Health Specialist"
+                                                },
+                                                "avatar": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                },
+                                                "npi": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                },
+                                                "taxonomy": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                },
+                                                "workspace_id": {
+                                                    "type": "string",
+                                                    "example": "1"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Internal server error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Members"
+                ],
+                "summary": "Delete a member",
+                "description": "Deletes a specific team member.",
+                "operationId": "e205a816601bc7a770a2806256b7a790",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Member ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Member deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Team member deleted successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Internal server error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/workspaces": {
+            "get": {
+                "tags": [
+                    "Workspaces"
+                ],
+                "summary": "Get all workspaces",
+                "description": "Retrieve a list of workspaces.",
+                "operationId": "7ec577df9a4514b038e7d4213add5e12",
+                "responses": {
+                    "200": {
+                        "description": "List of workspaces retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Workspaces retrieved successfully"
+                                        },
+                                        "workspaces": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Tech Hub"
+                                                    },
+                                                    "active": {
+                                                        "type": "boolean",
+                                                        "example": true
+                                                    },
+                                                    "country": {
+                                                        "type": "string",
+                                                        "example": "Bangladesh"
+                                                    },
+                                                    "profession": {
+                                                        "type": "string",
+                                                        "example": "Software Engineer"
+                                                    },
+                                                    "url": {
+                                                        "type": "string",
+                                                        "example": "https://workspace.example.com"
+                                                    },
+                                                    "locations": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "string",
+                                                            "example": "Dhaka, Bangladesh"
+                                                        }
+                                                    },
+                                                    "members": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "string",
+                                                            "example": "John Doe"
+                                                        }
+                                                    },
+                                                    "services": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "string",
+                                                            "example": "Web Development"
+                                                        }
+                                                    },
+                                                    "appointments": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "string",
+                                                            "example": "2024-03-25 10:00 AM"
+                                                        }
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Internal server error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Workspaces"
+                ],
+                "summary": "Create a workspace",
+                "operationId": "17b0945f96c1673c55a2d3e7d1c302ae",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "country"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "My Workspace"
+                                    },
+                                    "country": {
+                                        "type": "string",
+                                        "example": "Bangladesh"
+                                    },
+                                    "profession": {
+                                        "type": "string",
+                                        "example": "Software Engineer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Workspace created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Workspace create successful"
+                                        },
+                                        "workspace": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "My Workspace"
+                                                },
+                                                "country": {
+                                                    "type": "string",
+                                                    "example": "Bangladesh"
+                                                },
+                                                "profession": {
+                                                    "type": "string",
+                                                    "example": "Software Engineer"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/workspaces/user": {
+            "get": {
+                "tags": [
+                    "Workspaces"
+                ],
+                "summary": "Get all workspaces",
+                "description": "Retrieve a list of workspaces.",
+                "operationId": "ce2ef25fc4c57c326517917cda7fa3fd",
+                "responses": {
+                    "200": {
+                        "description": "List of user workspaces retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Workspaces retrieved successfully"
+                                        },
+                                        "workspaces": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Tech Hub"
+                                                    },
+                                                    "active": {
+                                                        "type": "boolean",
+                                                        "example": true
+                                                    },
+                                                    "country": {
+                                                        "type": "string",
+                                                        "example": "Bangladesh"
+                                                    },
+                                                    "profession": {
+                                                        "type": "string",
+                                                        "example": "Software Engineer"
+                                                    },
+                                                    "url": {
+                                                        "type": "string",
+                                                        "example": "https://workspace.example.com"
+                                                    },
+                                                    "locations": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "string",
+                                                            "example": "Dhaka, Bangladesh"
+                                                        }
+                                                    },
+                                                    "members": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "string",
+                                                            "example": "John Doe"
+                                                        }
+                                                    },
+                                                    "services": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "string",
+                                                            "example": "Web Development"
+                                                        }
+                                                    },
+                                                    "appointments": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "string",
+                                                            "example": "2024-03-25 10:00 AM"
+                                                        }
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Internal server error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/workspaces/{id}": {
+            "get": {
+                "tags": [
+                    "Workspaces"
+                ],
+                "summary": "Get a workspace by ID",
+                "description": "Retrieve details of a single workspace by its ID.",
+                "operationId": "99ead8785ef3d595cc4451cdea76f8f7",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Workspace ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Workspace retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Tech Hub"
+                                        },
+                                        "active": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "url": {
+                                            "type": "string",
+                                            "example": "https://workspace.example.com"
+                                        },
+                                        "members": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "example": "John Doe"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Workspace not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Workspace not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Workspaces"
+                ],
+                "summary": "Update an existing workspace",
+                "description": "Update a workspace",
+                "operationId": "dc9556e3214351f11259849bf7bd8151",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "status"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Updated Workspace Name"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "active"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Workspace updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Workspace update successful"
+                                        },
+                                        "workspace": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Updated Workspace Name"
+                                                },
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "active"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Workspaces"
+                ],
+                "summary": "Delete a workspace",
+                "description": "Remove a workspace by ID.",
+                "operationId": "91d15715e3550984776987b37d7bdb96",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Workspace ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Workspace deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Workspace deleted successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Workspace not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Workspace not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/workspaces/toggle": {
+            "post": {
+                "tags": [
+                    "Workspaces"
+                ],
+                "summary": "Toggle workspace status",
+                "description": "Toggle a workspace (Activate/Deactivate)",
+                "operationId": "4243a384f31f2471103a5d88fb97668c",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "description": "ID of the workspace to toggle",
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Workspace toggle successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Workspace toggle successful"
+                                        },
+                                        "workspace": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Workspace Name"
+                                                },
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "active"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -2057,12 +4506,20 @@
     },
     "tags": [
         {
+            "name": "Appointments",
+            "description": "Appointments"
+        },
+        {
             "name": "Auth",
             "description": "Auth"
         },
         {
             "name": "User",
             "description": "User"
+        },
+        {
+            "name": "Clients",
+            "description": "Clients"
         },
         {
             "name": "Locations",
@@ -2075,6 +4532,14 @@
         {
             "name": "Services",
             "description": "Services"
+        },
+        {
+            "name": "Members",
+            "description": "Members"
+        },
+        {
+            "name": "Workspaces",
+            "description": "Workspaces"
         }
     ]
 }
