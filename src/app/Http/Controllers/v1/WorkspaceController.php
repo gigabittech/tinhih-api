@@ -223,6 +223,7 @@ class WorkspaceController extends Controller
      *     path="/api/v1/workspaces",
      *     summary="Create a workspace",
      *     tags={"Workspaces"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
