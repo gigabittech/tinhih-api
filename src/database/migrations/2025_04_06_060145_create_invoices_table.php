@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('title');
             $table->string('serial_number')->nullable()->autoIncrement();
             $table->string('po_so_number')->nullable();
-            $table->string('tax_id')->nullable();
             $table->date('issue_date')->defult(now());
             $table->date('due_date')->nullable();
             $table->text('description')->nullable();
