@@ -45,4 +45,14 @@ class Workspace extends Model
     {
         return $this->hasMany(Client::class);
     }
+
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class);
+    }
+
+    public function taxs()
+    {
+        return $this->hasMany(Tax::class);
+    }
 }

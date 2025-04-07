@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "TiNHiH Portal API Documentation",
+        "title": "API Documentation",
         "description": "API documentation for TiNHiH Portal",
         "contact": {
             "email": "support@gigabit.agency"
@@ -9,7 +9,6 @@
         "version": "1.0.0"
     },
     "paths": {
-        "/": {},
         "/api/v1/appointments": {
             "get": {
                 "tags": [
@@ -1490,13 +1489,13 @@
                 ]
             }
         },
-        "/api/clients/{id}": {
+        "/api/clients/:id": {
             "put": {
                 "tags": [
                     "Clients"
                 ],
                 "summary": "Update an existing client",
-                "operationId": "08e8f98e35d6eb911084ca5347ce09d5",
+                "operationId": "cb9ca1c432083655ccf77cd3428effbd",
                 "parameters": [
                     {
                         "name": "id",
@@ -1661,6 +1660,1036 @@
                                         "error": {
                                             "type": "string",
                                             "example": "Database error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/invoices": {
+            "get": {
+                "tags": [
+                    "Invoices"
+                ],
+                "summary": "Get all invoices for the current workspace",
+                "description": "Fetches all invoices associated with the currently authenticated user's active workspace.",
+                "operationId": "0c771e248b01dcb6fca1f55a0cb58dc3",
+                "responses": {
+                    "200": {
+                        "description": "Invoices retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Invoices retrieved successfully"
+                                        },
+                                        "invoices": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 101
+                                                    },
+                                                    "client": {
+                                                        "type": "object",
+                                                        "example": {
+                                                            "id": 1,
+                                                            "name": "Client A"
+                                                        }
+                                                    },
+                                                    "biller": {
+                                                        "type": "object",
+                                                        "example": {
+                                                            "id": 2,
+                                                            "name": "Biller X"
+                                                        }
+                                                    },
+                                                    "title": {
+                                                        "type": "string",
+                                                        "example": "Website Development Invoice"
+                                                    },
+                                                    "serial_number": {
+                                                        "type": "string",
+                                                        "example": "INV-2024-0001"
+                                                    },
+                                                    "po_so_number": {
+                                                        "type": "string",
+                                                        "example": "PO-1001"
+                                                    },
+                                                    "tax_id": {
+                                                        "type": "integer",
+                                                        "example": 3
+                                                    },
+                                                    "issue_date": {
+                                                        "type": "string",
+                                                        "format": "date",
+                                                        "example": "2024-04-01"
+                                                    },
+                                                    "due_date": {
+                                                        "type": "string",
+                                                        "format": "date",
+                                                        "example": "2024-04-15"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "example": "Full website development service."
+                                                    },
+                                                    "subtotal": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": 1000
+                                                    },
+                                                    "payable_amount": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": 1150
+                                                    },
+                                                    "is_paid": {
+                                                        "type": "boolean",
+                                                        "example": false
+                                                    },
+                                                    "services": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "integer",
+                                                                    "example": 1
+                                                                },
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "example": "Frontend Development"
+                                                                },
+                                                                "quantity": {
+                                                                    "type": "integer",
+                                                                    "example": 1
+                                                                },
+                                                                "price": {
+                                                                    "type": "number",
+                                                                    "format": "float",
+                                                                    "example": 500
+                                                                },
+                                                                "total": {
+                                                                    "type": "number",
+                                                                    "format": "float",
+                                                                    "example": 500
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    },
+                                                    "summary": {
+                                                        "type": "object",
+                                                        "example": {
+                                                            "total_services": 2,
+                                                            "taxes_applied": 15,
+                                                            "grand_total": 1150
+                                                        },
+                                                        "nullable": true
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error retrieving invoices",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Error retrieving invoices"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Invoices"
+                ],
+                "summary": "Create a new invoice",
+                "description": "Creates a new invoice with services, calculates the subtotal and payable amount including taxes.",
+                "operationId": "717eb8bbf0482266fffb7aa14949da0f",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "client_id",
+                                    "biller_id",
+                                    "services"
+                                ],
+                                "properties": {
+                                    "client_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "biller_id": {
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Website Development Invoice"
+                                    },
+                                    "serial_number": {
+                                        "type": "string",
+                                        "example": "INV-2024-0001"
+                                    },
+                                    "po_so_number": {
+                                        "type": "string",
+                                        "example": "PO-1001"
+                                    },
+                                    "tax_id": {
+                                        "type": "integer",
+                                        "example": 3
+                                    },
+                                    "issue_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2024-04-01"
+                                    },
+                                    "due_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2024-04-15"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Full website development service."
+                                    },
+                                    "services": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "price": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 500
+                                                },
+                                                "unit": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "date": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2024-04-01"
+                                                },
+                                                "taxes": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    }
+                                                },
+                                                "code": {
+                                                    "type": "string",
+                                                    "example": "WEBDEV-001"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Invoice created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Invoice created successfully"
+                                        },
+                                        "invoice": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 101
+                                                },
+                                                "client_id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "biller_id": {
+                                                    "type": "integer",
+                                                    "example": 2
+                                                },
+                                                "title": {
+                                                    "type": "string",
+                                                    "example": "Website Development Invoice"
+                                                },
+                                                "serial_number": {
+                                                    "type": "string",
+                                                    "example": "INV-2024-0001"
+                                                },
+                                                "po_so_number": {
+                                                    "type": "string",
+                                                    "example": "PO-1001"
+                                                },
+                                                "tax_id": {
+                                                    "type": "integer",
+                                                    "example": 3
+                                                },
+                                                "issue_date": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2024-04-01"
+                                                },
+                                                "due_date": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2024-04-15"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Full website development service."
+                                                },
+                                                "subtotal": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 1000
+                                                },
+                                                "payable_amount": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 1150
+                                                },
+                                                "is_paid": {
+                                                    "type": "boolean",
+                                                    "example": false
+                                                },
+                                                "services": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Frontend Development"
+                                                            },
+                                                            "quantity": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "price": {
+                                                                "type": "number",
+                                                                "format": "float",
+                                                                "example": 500
+                                                            },
+                                                            "total": {
+                                                                "type": "number",
+                                                                "format": "float",
+                                                                "example": 500
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "summary": {
+                                                    "type": "object",
+                                                    "example": {
+                                                        "total_services": 2,
+                                                        "taxes_applied": 15,
+                                                        "grand_total": 1150
+                                                    },
+                                                    "nullable": true
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error creating invoice",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Error creating invoice"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/invoices/:id": {
+            "get": {
+                "tags": [
+                    "Invoices"
+                ],
+                "summary": "Get a specific invoice by ID",
+                "description": "Retrieves a single invoice by ID, scoped to the current user's workspace. Includes a tax summary if available.",
+                "operationId": "3c1d86993cd97c86aa23de291e4ca644",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Invoice ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 101
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Invoice retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Invoice retrieved successfully"
+                                        },
+                                        "invoice": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 101
+                                                },
+                                                "client": {
+                                                    "type": "object",
+                                                    "example": {
+                                                        "id": 1,
+                                                        "name": "Client A"
+                                                    }
+                                                },
+                                                "biller": {
+                                                    "type": "object",
+                                                    "example": {
+                                                        "id": 2,
+                                                        "name": "Biller X"
+                                                    }
+                                                },
+                                                "title": {
+                                                    "type": "string",
+                                                    "example": "Website Development Invoice"
+                                                },
+                                                "serial_number": {
+                                                    "type": "string",
+                                                    "example": "INV-2024-0001"
+                                                },
+                                                "po_so_number": {
+                                                    "type": "string",
+                                                    "example": "PO-1001"
+                                                },
+                                                "tax_id": {
+                                                    "type": "integer",
+                                                    "example": 3
+                                                },
+                                                "issue_date": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2024-04-01"
+                                                },
+                                                "due_date": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2024-04-15"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Full website development service."
+                                                },
+                                                "subtotal": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 1000
+                                                },
+                                                "payable_amount": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 1150
+                                                },
+                                                "is_paid": {
+                                                    "type": "boolean",
+                                                    "example": false
+                                                },
+                                                "services": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Frontend Development"
+                                                            },
+                                                            "quantity": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "price": {
+                                                                "type": "number",
+                                                                "format": "float",
+                                                                "example": 500
+                                                            },
+                                                            "total": {
+                                                                "type": "number",
+                                                                "format": "float",
+                                                                "example": 500
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "summary": {
+                                                    "type": "object",
+                                                    "example": {
+                                                        "total_services": 2,
+                                                        "taxes_applied": 15,
+                                                        "grand_total": 1150
+                                                    },
+                                                    "nullable": true
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error retrieving invoice",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Error retrieving invoice"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Invoices"
+                ],
+                "summary": "Update an existing invoice",
+                "description": "Updates an existing invoice with new service details and recalculates the subtotal and payable amount.",
+                "operationId": "bb5c51ebd5741c2dc72d091d551392e7",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 101
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "services"
+                                ],
+                                "properties": {
+                                    "services": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "price": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 500
+                                                },
+                                                "unit": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "date": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2024-04-01"
+                                                },
+                                                "taxes": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    }
+                                                },
+                                                "code": {
+                                                    "type": "string",
+                                                    "example": "WEBDEV-001"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "is_paid": {
+                                        "type": "boolean",
+                                        "example": false
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Invoice updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Invoice updated successfully"
+                                        },
+                                        "invoice": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 101
+                                                },
+                                                "client_id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "biller_id": {
+                                                    "type": "integer",
+                                                    "example": 2
+                                                },
+                                                "title": {
+                                                    "type": "string",
+                                                    "example": "Website Development Invoice"
+                                                },
+                                                "serial_number": {
+                                                    "type": "string",
+                                                    "example": "INV-2024-0001"
+                                                },
+                                                "po_so_number": {
+                                                    "type": "string",
+                                                    "example": "PO-1001"
+                                                },
+                                                "tax_id": {
+                                                    "type": "integer",
+                                                    "example": 3
+                                                },
+                                                "issue_date": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2024-04-01"
+                                                },
+                                                "due_date": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2024-04-15"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Full website development service."
+                                                },
+                                                "subtotal": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 1000
+                                                },
+                                                "payable_amount": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 1150
+                                                },
+                                                "is_paid": {
+                                                    "type": "boolean",
+                                                    "example": false
+                                                },
+                                                "services": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Frontend Development"
+                                                            },
+                                                            "quantity": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "price": {
+                                                                "type": "number",
+                                                                "format": "float",
+                                                                "example": 500
+                                                            },
+                                                            "total": {
+                                                                "type": "number",
+                                                                "format": "float",
+                                                                "example": 500
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "summary": {
+                                                    "type": "object",
+                                                    "example": {
+                                                        "total_services": 2,
+                                                        "taxes_applied": 15,
+                                                        "grand_total": 1150
+                                                    },
+                                                    "nullable": true
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error updating invoice",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Error updating invoice"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Invoices"
+                ],
+                "summary": "Delete an invoice",
+                "description": "Deletes the specified invoice by its ID. If the invoice doesn't exist, a 404 response will be returned.",
+                "operationId": "7e974ee8e85ffea03529816eab858667",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the invoice to be deleted",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 101
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Invoice deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Invoice deleted successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Invoice not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Invoice not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error deleting invoice",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Error deleting invoice"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/invoices/:id/mark-as-paid": {
+            "patch": {
+                "tags": [
+                    "Invoices"
+                ],
+                "summary": "Mark an invoice as paid",
+                "description": "Marks the specified invoice as paid by updating its `is_paid` field. If the invoice doesn't exist, a 404 response will be returned.",
+                "operationId": "b4188dd8251e1c9fa2dc92fb0a4f2939",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the invoice to mark as paid",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 101
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Invoice marked as paid successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Payment successful"
+                                        },
+                                        "invoice": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 101
+                                                },
+                                                "client_id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "biller_id": {
+                                                    "type": "integer",
+                                                    "example": 2
+                                                },
+                                                "title": {
+                                                    "type": "string",
+                                                    "example": "Updated Website Development Invoice"
+                                                },
+                                                "serial_number": {
+                                                    "type": "string",
+                                                    "example": "INV-2024-0002"
+                                                },
+                                                "po_so_number": {
+                                                    "type": "string",
+                                                    "example": "PO-1002"
+                                                },
+                                                "tax_id": {
+                                                    "type": "integer",
+                                                    "example": 3
+                                                },
+                                                "issue_date": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2024-04-10"
+                                                },
+                                                "due_date": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2024-04-25"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Updated service description"
+                                                },
+                                                "subtotal": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 1200
+                                                },
+                                                "payable_amount": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 1380
+                                                },
+                                                "is_paid": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                },
+                                                "services": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Frontend Development"
+                                                            },
+                                                            "quantity": {
+                                                                "type": "integer",
+                                                                "example": 2
+                                                            },
+                                                            "price": {
+                                                                "type": "number",
+                                                                "format": "float",
+                                                                "example": 600
+                                                            },
+                                                            "total": {
+                                                                "type": "number",
+                                                                "format": "float",
+                                                                "example": 1200
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "summary": {
+                                                    "type": "object",
+                                                    "example": {
+                                                        "total_services": 2,
+                                                        "taxes_applied": 15,
+                                                        "grand_total": 1380
+                                                    },
+                                                    "nullable": true
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Invoice not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Invoice not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error marking invoice as paid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Error marking invoice as paid"
                                         }
                                     },
                                     "type": "object"
@@ -3284,6 +4313,339 @@
                 ]
             }
         },
+        "/api/v1/taxes": {
+            "get": {
+                "tags": [
+                    "Taxes"
+                ],
+                "summary": "Get all taxes",
+                "operationId": "ccbd11886d2c7dbcd78cdef46857bce6",
+                "responses": {
+                    "200": {
+                        "description": "Taxes retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Taxes retrieved successfully"
+                                        },
+                                        "taxes": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "VAT"
+                                                    },
+                                                    "percentage": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": 15
+                                                    },
+                                                    "is_active": {
+                                                        "type": "boolean",
+                                                        "example": true
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Taxes"
+                ],
+                "summary": "Create a new tax",
+                "operationId": "534e07676ea538bd8ac5309b5e579e6e",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "percentage"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Service Tax"
+                                    },
+                                    "percentage": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 5
+                                    },
+                                    "is_active": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Tax created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Tax created successfully"
+                                        },
+                                        "tax": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Service Tax"
+                                                },
+                                                "percentage": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 5
+                                                },
+                                                "is_active": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/taxes/:id": {
+            "get": {
+                "tags": [
+                    "Taxes"
+                ],
+                "summary": "Get a specific tax by ID",
+                "operationId": "4f3bafdab6c6c09e3195906161615928",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Tax retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Tax retrieved successfully"
+                                        },
+                                        "tax": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "VAT"
+                                                },
+                                                "percentage": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 15
+                                                },
+                                                "is_active": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Taxes"
+                ],
+                "summary": "Update an existing tax",
+                "operationId": "a178bb594db9e6fe28127e9ce875e1b4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Updated Tax Name"
+                                    },
+                                    "rate": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 10
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "example": "fixed"
+                                    },
+                                    "is_active": {
+                                        "type": "boolean",
+                                        "example": false
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Tax updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Tax updated successfully"
+                                        },
+                                        "tax": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Updated Tax Name"
+                                                },
+                                                "percentage": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 10
+                                                },
+                                                "is_active": {
+                                                    "type": "boolean",
+                                                    "example": false
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Taxes"
+                ],
+                "summary": "Delete a tax",
+                "operationId": "b1be7d2abc7cedd0eee0b739119b1e2b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Tax deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Tax deleted successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/v1/members": {
             "get": {
                 "tags": [
@@ -4152,14 +5514,14 @@
                 ]
             }
         },
-        "/api/v1/workspaces/{id}": {
+        "/api/v1/workspaces/:id": {
             "get": {
                 "tags": [
                     "Workspaces"
                 ],
                 "summary": "Get a workspace by ID",
                 "description": "Retrieve details of a single workspace by its ID.",
-                "operationId": "99ead8785ef3d595cc4451cdea76f8f7",
+                "operationId": "1ec7f60ec24c73f832cb7b98ee006b52",
                 "parameters": [
                     {
                         "name": "id",
@@ -4236,7 +5598,7 @@
                 ],
                 "summary": "Update an existing workspace",
                 "description": "Update a workspace",
-                "operationId": "dc9556e3214351f11259849bf7bd8151",
+                "operationId": "f254c66280bb25d27bff9efeb9bb2014",
                 "parameters": [
                     {
                         "name": "id",
@@ -4321,7 +5683,7 @@
                 ],
                 "summary": "Delete a workspace",
                 "description": "Remove a workspace by ID.",
-                "operationId": "91d15715e3550984776987b37d7bdb96",
+                "operationId": "8afacee653a7beeaa41721832ddd8da5",
                 "parameters": [
                     {
                         "name": "id",
@@ -4522,6 +5884,10 @@
             "description": "Clients"
         },
         {
+            "name": "Invoices",
+            "description": "Invoices"
+        },
+        {
             "name": "Locations",
             "description": "Locations"
         },
@@ -4532,6 +5898,10 @@
         {
             "name": "Services",
             "description": "Services"
+        },
+        {
+            "name": "Taxes",
+            "description": "Taxes"
         },
         {
             "name": "Members",

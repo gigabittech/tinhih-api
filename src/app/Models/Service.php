@@ -37,4 +37,9 @@ class Service extends Model
     {
         return $this->belongsToMany(Location::class, 'service_location');
     }
+
+    public function taxes()
+    {
+        return $this->belongsToMany(Tax::class);
+    }
 }

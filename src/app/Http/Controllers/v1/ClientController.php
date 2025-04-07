@@ -11,9 +11,7 @@ use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
-    public function __construct(private ClientRepository $repository)
-    {
-    }
+    public function __construct(private ClientRepository $repository) {}
 
     /**
      * @OA\Get(
@@ -237,7 +235,7 @@ class ClientController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/api/clients/{id}",
+     *     path="/api/clients/:id",
      *     summary="Update an existing client",
      *     tags={"Clients"},
      *     security={{"bearerAuth": {}}},
