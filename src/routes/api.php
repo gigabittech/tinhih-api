@@ -3,6 +3,7 @@
 use App\Http\Controllers\v1\AppointmentController;
 use App\Http\Controllers\v1\AuthController;
 use App\Http\Controllers\v1\ClientController;
+use App\Http\Controllers\v1\InvoiceController;
 use App\Http\Controllers\v1\LocationController;
 use App\Http\Controllers\v1\LocationTypeController;
 use App\Http\Controllers\v1\ServiceController;
@@ -147,6 +148,15 @@ Route::prefix('v1')->group(function () {
             Route::post('/', [TaxController::class, 'createTax']);
             Route::put('/{id}', [TaxController::class, 'updateTax']);
             Route::delete('/{id}', [TaxController::class, 'deleteTax']);
+        });
+
+        Route::prefix('invoices')->group(function () {
+            Route::get('/', [InvoiceController::class, 'getInvoices']);
+            Route::get('/{id}', [InvoiceController::class, 'getInvoice']);
+            Route::post('/', [InvoiceController::class, 'createInvoice']);
+            Route::put('/{id}', [InvoiceController::class, 'updateInvoice']);
+            Route::delete('/{id}', [InvoiceController::class, 'deleteInvoice']);
+            Route::patch('/{id}/mark-as-paid', [InvoiceController::class, 'markAsPaid']);
         });
     });
 });

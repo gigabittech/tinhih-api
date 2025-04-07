@@ -21,8 +21,14 @@ class InvoiceService extends Model
     {
         return $this->belongsTo(Invoice::class);
     }
+
     public function service()
     {
         return $this->belongsTo(Service::class);
+    }
+
+    public function taxes()
+    {
+        return $this->belongsToMany(Tax::class, 'invoice_service_tax', 'service_id', 'tax_id');
     }
 }

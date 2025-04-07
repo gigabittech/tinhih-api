@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('invoice_services', function (Blueprint $table) {
             $table->id();
             $table->foreignId('invoice_id')->constrained('invoices')->onDelete('cascade');
-            $table->date('date');
+            $table->date('date')->nullable();
             $table->foreignId('service_id')->constrained('services')->onDelete('cascade');
-            $table->integer('tax')->default(0);
-            $table->string('code')->nullable();
-            $table->integer('unit')->default(1);
-            $table->decimal('amount', 15, 2)->default(0);
-            $table->decimal('price', 15, 2)->default(0);
+            $table->integer('tax')->nullable()->default(0);
+            $table->string('code')->nullable()->default('');
+            $table->integer('unit')->nullable()->default(1);
+            $table->decimal('amount', 15, 2)->nullable()->default(0);
+            $table->decimal('price', 15, 2)->nullable()->default(0);
             $table->timestamps();
         });
     }

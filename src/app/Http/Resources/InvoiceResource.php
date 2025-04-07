@@ -14,7 +14,7 @@ class InvoiceResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return [
+        return array_merge([
             'id' => $this->id,
             'client' => $this->client,
             'biller' => $this->biller,
@@ -25,9 +25,10 @@ class InvoiceResource extends JsonResource
             'issue_date' => $this->issue_date,
             'due_date' => $this->due_date,
             'description' => $this->description,
+            'subtotal' => $this->subtotal,
             'payable_amount' => $this->payable_amount,
             'is_paid' => $this->is_paid,
             'services' => InvoiceServiceResource::collection($this->services),
-        ];
+        ], $this->summary ? ['summary' => $this->summary] : []);
     }
 }
