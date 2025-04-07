@@ -70,4 +70,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Service::class);
     }
+
+    public function scopeCurrentWorkspace()
+    {
+        return $this->workspaces()->where('active', 1)->first();
+    }
 }
