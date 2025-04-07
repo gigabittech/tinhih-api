@@ -1,10 +1,10 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "TiNHiH Portal API Documentation",
-        "description": "API documentation for TiNHiH Portal",
+        "title": "API Documentation",
+        "description": "API documentation for your Laravel application",
         "contact": {
-            "email": "support@gigabit.agency"
+            "email": "support@example.com"
         },
         "version": "1.0.0"
     },
@@ -3284,6 +3284,339 @@
                 ]
             }
         },
+        "/api/v1/taxes": {
+            "get": {
+                "tags": [
+                    "Taxes"
+                ],
+                "summary": "Get all taxes",
+                "operationId": "ccbd11886d2c7dbcd78cdef46857bce6",
+                "responses": {
+                    "200": {
+                        "description": "Taxes retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Taxes retrieved successfully"
+                                        },
+                                        "taxes": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "VAT"
+                                                    },
+                                                    "percentage": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": 15
+                                                    },
+                                                    "is_active": {
+                                                        "type": "boolean",
+                                                        "example": true
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Taxes"
+                ],
+                "summary": "Create a new tax",
+                "operationId": "534e07676ea538bd8ac5309b5e579e6e",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "percentage"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Service Tax"
+                                    },
+                                    "percentage": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 5
+                                    },
+                                    "is_active": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Tax created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Tax created successfully"
+                                        },
+                                        "tax": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Service Tax"
+                                                },
+                                                "percentage": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 5
+                                                },
+                                                "is_active": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/taxes/:id": {
+            "get": {
+                "tags": [
+                    "Taxes"
+                ],
+                "summary": "Get a specific tax by ID",
+                "operationId": "4f3bafdab6c6c09e3195906161615928",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Tax retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Tax retrieved successfully"
+                                        },
+                                        "tax": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "VAT"
+                                                },
+                                                "percentage": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 15
+                                                },
+                                                "is_active": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Taxes"
+                ],
+                "summary": "Update an existing tax",
+                "operationId": "a178bb594db9e6fe28127e9ce875e1b4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Updated Tax Name"
+                                    },
+                                    "rate": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 10
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "example": "fixed"
+                                    },
+                                    "is_active": {
+                                        "type": "boolean",
+                                        "example": false
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Tax updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Tax updated successfully"
+                                        },
+                                        "tax": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Updated Tax Name"
+                                                },
+                                                "percentage": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 10
+                                                },
+                                                "is_active": {
+                                                    "type": "boolean",
+                                                    "example": false
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Taxes"
+                ],
+                "summary": "Delete a tax",
+                "operationId": "b1be7d2abc7cedd0eee0b739119b1e2b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Tax deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Tax deleted successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/v1/members": {
             "get": {
                 "tags": [
@@ -4532,6 +4865,10 @@
         {
             "name": "Services",
             "description": "Services"
+        },
+        {
+            "name": "Taxes",
+            "description": "Taxes"
         },
         {
             "name": "Members",
