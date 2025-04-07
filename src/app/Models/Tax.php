@@ -13,6 +13,18 @@ class Tax extends Model
         'workspace_id',
     ];
 
+
+    public function invoices()
+    {
+        return $this->belongsToMany(Invoice::class, 'invoice_tax', 'tax_id', 'invoice_id');
+    }
+
+    public function invoiceServices()
+    {
+        return $this->belongsToMany(InvoiceService::class, 'invoice_service_tax', 'tax_id', 'service_id');
+    }
+
+
     public function workspace()
     {
         return $this->belongsTo(Workspace::class);
