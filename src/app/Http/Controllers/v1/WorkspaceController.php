@@ -165,7 +165,7 @@ class WorkspaceController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/v1/workspaces/{id}",
+     *     path="/api/v1/workspaces/:id",
      *     summary="Get a workspace by ID",
      *     description="Retrieve details of a single workspace by its ID.",
      *     tags={"Workspaces"},
@@ -270,7 +270,7 @@ class WorkspaceController extends Controller
      * Update a workspace
      *
      * @OA\Put(
-     *     path="/api/v1/workspaces/{id}",
+     *     path="/api/v1/workspaces/:id",
      *     summary="Update an existing workspace",
      *     tags={"Workspaces"},
      *     security={{"bearerAuth":{}}},
@@ -321,7 +321,7 @@ class WorkspaceController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/api/v1/workspaces/{id}",
+     *     path="/api/v1/workspaces/:id",
      *     summary="Delete a workspace",
      *     description="Remove a workspace by ID.",
      *     tags={"Workspaces"},
@@ -402,11 +402,7 @@ class WorkspaceController extends Controller
             $workspace = $this->repository->toggle($request->user(), $request->id);
             return response()->json([
                 'message' => "Workspace toggle successful",
-                'workspace' => [
-                    'id' => $workspace->id,
-                    'name' => $workspace->name,
-                    'status' => $workspace->status,  // Adjust based on your actual model properties
-                ]
+                'workspace' => new WorkspaceResource($workspace)
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
