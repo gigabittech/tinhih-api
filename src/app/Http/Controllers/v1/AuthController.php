@@ -14,18 +14,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use OpenApi\Annotations as OA;
 
-/**
- * @OA\Info(
- *      version="1.0.0",
- *      title="API Documentation",
- *      description="API documentation for your Laravel application",
- *      @OA\Contact(
- *          email="support@example.com"
- *      ),
- * )
- *
- * @OA\PathItem(path="/")
- */
 class AuthController extends Controller
 {
     use AuthAvatarTrait;
