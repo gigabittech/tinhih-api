@@ -14,4 +14,14 @@ class TaxRepository extends BaseRepository
     {
         parent::__construct($tax);
     }
+
+    public function getWorkspaceTaxes($workspaceId)
+    {
+        return $this->model->byWorkspace($workspaceId)->get();
+    }
+
+    public function getWorkspaceTax($workspaceId, $taxId)
+    {
+        return $this->model->byWorkspace($workspaceId)->findOrFail($taxId);
+    }
 }

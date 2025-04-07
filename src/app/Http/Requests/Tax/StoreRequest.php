@@ -11,7 +11,7 @@ class StoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,15 @@ class StoreRequest extends FormRequest
      */
     public function rules(): array
     {
+        $this->merge([
+            'workspace_id' => $this->user()->currentWorkspace()->id,
+        ]);
+
         return [
-            //
+            'workspace_id' => 'required|exists:workspaces,id',
+            'name' => 'required|string|max:255',
+            'percentage' => 'required|numeric|min:0|max:100',
+            'is_default' => 'boolean',
         ];
     }
 }

@@ -19,7 +19,6 @@ class TaxResource extends JsonResource
             'name' => $this->name,
             'percentage' => $this->percentage,
             'is_default' => $this->is_default,
-            'workspace_id' => $this->workspace_id,
         ];
     }
 }
