@@ -25,18 +25,18 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required'],
             'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required'],
-            'role' => ['nullable']
         ];
     }
 
-    protected function failedValidation(Validator $validator)
+    public function messages(): array
     {
-        throw new HttpResponseException(response()->json([
-            'message' => 'Validation Error',
-            'errors' => $validator->errors()
-        ], 422));
+        return [
+            'email.required' => 'Email is required',
+            'email.email' => 'Email must be a valid email address',
+            'email.unique' => 'Email already exists',
+            'password.required' => 'Password is required',
+        ];
     }
 }

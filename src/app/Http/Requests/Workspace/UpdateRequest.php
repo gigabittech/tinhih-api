@@ -29,9 +29,10 @@ class UpdateRequest extends FormRequest
 
         return [
             'user_id' => ['required', 'exists:users,id'],
-            'name' => ['required', 'string', 'max:255'],
-            'country' => ['required', 'string', 'max:255'],
+            'businessName' => ['required', 'string', 'max:255'],
+            'countryCode' => ['required', 'string', 'max:255'],
             'profession' => ['required', 'string', 'max:255'],
+            'active' => ['required', 'boolean'],
         ];
     }
 
@@ -41,8 +42,8 @@ class UpdateRequest extends FormRequest
         return [
             'user_id.required' => 'User is required',
             'user_id.exists' => 'User does not exist',
-            'name.required' => 'Name is required',
-            'country.required' => 'Country is required',
+            'businessName.required' => 'Business name is required',
+            'countryCode.required' => 'Country is required',
             'profession.required' => 'Profession is required',
         ];
     }
