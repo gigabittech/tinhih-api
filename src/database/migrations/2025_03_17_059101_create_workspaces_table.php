@@ -14,11 +14,14 @@ return new class extends Migration
         Schema::create('workspaces', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('name');
-            $table->string('country');
-            $table->string('url')->nullable();
-            $table->boolean('active')->default(false);
-            $table->string('profession');
+            $table->string('billingAddress')->nullable();
+            $table->string('businessName')->nullable();
+            $table->string('countryCode')->nullable();
+            $table->string('profession')->nullable();
+            $table->enum('teamSize', ['justMe', 'inTen', 'moreThanTen'])->nullable();
+            $table->string('website')->nullable();
+            $table->string('timeZone')->nullable();
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }
