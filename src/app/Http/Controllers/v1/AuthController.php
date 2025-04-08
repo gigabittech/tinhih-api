@@ -11,8 +11,6 @@ use App\Traits\AuthAvatarTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
-use OpenApi\Annotations as OA;
 
 class AuthController extends Controller
 {
@@ -96,7 +94,7 @@ class AuthController extends Controller
                 ], 404);
             }
 
-            $token = $user->createToken($user->name)->plainTextToken;
+            $token = $user->createToken($user->email)->plainTextToken;
 
             return response()->json([
                 'message' => "Logged in successfull",
@@ -121,10 +119,8 @@ class AuthController extends Controller
      *         required=true,
      *         @OA\JsonContent(
      *             required={"name", "email", "password"},
-     *             @OA\Property(property="name", type="string", example="John Doe"),
      *             @OA\Property(property="email", type="string", format="email", example="johndoe@example.com"),
      *             @OA\Property(property="password", type="string", example="password123"),
-     *             @OA\Property(property="password_confirmation", type="string", example="password123")
      *         )
      *     ),
      *     @OA\Response(
@@ -137,11 +133,6 @@ class AuthController extends Controller
      *                 property="payload",
      *                 type="object",
      *                 @OA\Property(property="token", type="string", example="your-generated-token"),
-     *                 @OA\Property(property="user", type="object",
-     *                     @OA\Property(property="id", type="integer", example=1),
-     *                     @OA\Property(property="name", type="string", example="John Doe"),
-     *                     @OA\Property(property="email", type="string", example="johndoe@example.com")
-     *                 )
      *             )
      *         ),
      *         @OA\Examples(
@@ -152,11 +143,6 @@ class AuthController extends Controller
      *                 "success": true,
      *                 "payload": {
      *                     "token": "your-generated-token",
-     *                     "user": {
-     *                         "id": 1,
-     *                         "name": "John Doe",
-     *                         "email": "johndoe@example.com"
-     *                     }
      *                 }
      *             }
      *         )
@@ -208,19 +194,10 @@ class AuthController extends Controller
         try {
             DB::beginTransaction();
             $data = $request->validated();
-            $data['avatar'] = $this->avatar($data['name']);
-
+            $data['role'] = $request->input('isPovider') && $request->isPovider ? 'provider' : 'client';
             $user = $this->repository->create($data);
             $userResource = new UserResource($user);
-            $token = $userResource->createToken($userResource->name)->plainTextToken;
-
-            $name = explode(" ", $data['name']);
-
-            $user->profile()->create([
-                'first_name' => $name[0],
-                'last_name' => $name[1] ?? null,
-                'avatar' => $data['avatar'],
-            ]);
+            $token = $userResource->createToken($userResource->email)->plainTextToken;
 
             DB::commit();
             return response()->json([
