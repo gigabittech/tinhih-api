@@ -21,7 +21,7 @@ class AuthController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/v1/auth/login",
+     *     path="v1/auth/login",
      *     summary="Login user",
      *     tags={"Auth"},
      *     description="This endpoint allows a user to log in using their email and password. A valid token is returned upon successful authentication.",
@@ -113,7 +113,7 @@ class AuthController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/v1/auth/register",
+     *     path="v1/auth/register",
      *     summary="Register a new user",
      *     tags={"Auth"},
      *     description="This endpoint allows a user to register by providing their name, email, password, and other required details.",
@@ -203,7 +203,6 @@ class AuthController extends Controller
      *     )
      * )
      */
-
     public function register(RegisterRequest $request)
     {
         try {
@@ -211,8 +210,17 @@ class AuthController extends Controller
             $data = $request->validated();
             $data['avatar'] = $this->avatar($data['name']);
 
-            $user = new UserResource($this->repository->create($data));
-            $token = $user->createToken($user->name)->plainTextToken;
+            $user = $this->repository->create($data);
+            $userResource = new UserResource($user);
+            $token = $userResource->createToken($userResource->name)->plainTextToken;
+
+            $name = explode(" ", $data['name']);
+
+            $user->profile()->create([
+                'first_name' => $name[0],
+                'last_name' => $name[1] ?? null,
+                'avatar' => $data['avatar'],
+            ]);
 
             DB::commit();
             return response()->json([
@@ -231,7 +239,7 @@ class AuthController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/v1/auth/logout",
+     *     path="v1/auth/logout",
      *     summary="Logout user",
      *     tags={"Auth"},
      *     security={{ "bearerAuth":{} }},
@@ -306,7 +314,7 @@ class AuthController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/v1/user",
+     *     path="v1/user",
      *     summary="Get User Details",
      *     security={{ "bearerAuth":{} }},
      *     description="Fetches details of the currently authenticated user.",
