@@ -13,23 +13,20 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-
-            // Social Login Fields
-            $table->string('provider_name')->nullable(); // e.g., 'google', 'facebook'
-            $table->string('provider_id')->nullable(); // Unique ID from provider
-
-            // User Info
-            $table->string('name');
-            $table->string('email')->unique()->nullable(); // Some providers don't return an email
+            $table->string('email')->nullable()->unique();
+            $table->string('password')->nullable();
+            $table->enum('role', ['super_admin', 'admin', 'provider', 'client', 'community_member']);
+            $table->boolean('is_active')->default(true);
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password')->nullable(); // Nullable for social login users
-            $table->string('avatar')->nullable(); // Profile picture URL
-
-            // User Roles
-            $table->enum('role', ['super_admin', 'admin', 'provider', 'client', 'community_member'])->default('client');
-
+            $table->timestamp('last_login_at')->nullable();
+            $table->ipAddress('last_login_ip')->nullable();
             $table->rememberToken();
+            // Social login integration
+            $table->string('google_id')->nullable()->unique();
+            $table->string('apple_id')->nullable()->unique();
+            $table->enum('social_provider', ['google', 'apple'])->nullable(); // Indicates the login provider
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

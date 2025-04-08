@@ -9,10 +9,14 @@ class Workspace extends Model
     protected $fillable = [
         'user_id',
         'name',
-        'country',
+        'countryCode',
+        'website',
+        'billingAddress',
+        'businessName',
+        'teamSize',
+        'timeZone',
+        'active',
         'profession',
-        'url',
-        'active'
     ];
 
     public function user()
@@ -40,7 +44,10 @@ class Workspace extends Model
         return $this->hasMany(Location::class);
     }
 
-    public function contacts() {}
+    // public function contacts()
+    // {
+    //     return $this->hasMany(Contact::class);
+    // }
     public function clients()
     {
         return $this->hasMany(Client::class);

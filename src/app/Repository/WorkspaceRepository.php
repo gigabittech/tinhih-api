@@ -26,4 +26,11 @@ class WorkspaceRepository extends BaseRepository
         $workspace->save();
         return $workspace;
     }
+
+    public function setup($user, $data)
+    {
+        $workspace = $user->workspaces()->create($data);
+
+        return $workspace;
+    }
 }

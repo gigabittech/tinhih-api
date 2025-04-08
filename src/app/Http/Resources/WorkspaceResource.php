@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\Client\ClientResource;
 use App\Http\Resources\Location\LocationResource;
 use App\Http\Resources\Resources\AppointmentResource;
 use App\Http\Resources\Service\ServiceResource;
@@ -20,14 +21,16 @@ class WorkspaceResource extends JsonResource
         return [
             'id' => $this->id,
             "active" => $this->active,
-            "name" => $this->name,
-            "country" => $this->country,
-            "profession" => $this->profession,
-            'url' => $this->url,
+            "businessName" => $this->businessName,
+            "countryCode" => $this->countryCode,
+            'website' => $this->website,
             "locations" => LocationResource::collection($this->locations),
             "members" => TeamMemberResource::collection($this->teamMembers),
             "services" => ServiceResource::collection($this->services),
             "appointments" => AppointmentResource::collection($this->appointments),
+            'invoices' => InvoiceResource::collection($this->invoices),
+            'taxes' => TaxResource::collection($this->taxs),
+            'clients' => ClientResource::collection($this->clients),
         ];
     }
 }
