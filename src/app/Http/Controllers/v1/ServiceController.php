@@ -16,7 +16,7 @@ class ServiceController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/v1/services",
+     *     path="v1/services",
      *     summary="Get all Services",
      *     tags={"Services"},
      *     description="Retrieve all available services.",
@@ -76,7 +76,7 @@ class ServiceController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/v1/services/user",
+     *     path="v1/services/user",
      *     summary="Get all user Services",
      *     tags={"Services"},
      *     description="Retrieve all available services.",
@@ -136,7 +136,7 @@ class ServiceController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/v1/services/:id",
+     *     path="v1/services/:id",
      *     summary="Get a specific Service",
      *     tags={"Services"},
      *     description="Retrieve details of a single service.",
@@ -202,7 +202,7 @@ class ServiceController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/v1/services",
+     *     path="v1/services",
      *     summary="Create a new Service",
      *     tags={"Services"},
      *     description="Create a new service entry in the system.",
@@ -260,7 +260,7 @@ class ServiceController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/api/v1/services/:id",
+     *     path="v1/services/:id",
      *     summary="Update an existing Service",
      *     tags={"Services"},
      *     description="Update details of a specific service.",
@@ -324,7 +324,7 @@ class ServiceController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/api/v1/services/:id",
+     *     path="v1/services/:id",
      *     summary="Delete a Service",
      *     tags={"Services"},
      *     description="Remove a service from the system.",

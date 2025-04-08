@@ -19,12 +19,8 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'avatar',
-        'name',
         'email',
         'password',
-        'provider_name',
-        'provider_id',
         'role'
     ];
 
@@ -74,5 +70,10 @@ class User extends Authenticatable
     public function scopeCurrentWorkspace()
     {
         return $this->workspaces()->where('active', 1)->first();
+    }
+
+    public function scopeNutralWorkspaces()
+    {
+        $this->workspaces()->where('active', 1)->update(['active' => 0]);
     }
 }

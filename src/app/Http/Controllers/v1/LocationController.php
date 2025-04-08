@@ -15,7 +15,7 @@ class LocationController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/v1/locations",
+     *     path="v1/locations",
      *     summary="Get all Locations",
      *     tags={"Locations"},
      *     description="Retrieve all available locations with pagination.",
@@ -106,7 +106,7 @@ class LocationController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/v1/locations/:id",
+     *     path="v1/locations/:id",
      *     summary="Get a specific Location",
      *     tags={"Locations"},
      *     description="Retrieve details of a specific location by ID.",
@@ -152,7 +152,7 @@ class LocationController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/v1/locations",
+     *     path="v1/locations",
      *     summary="Create a new Location",
      *     tags={"Locations"},
      *     description="Create a new location entry.",
@@ -190,7 +190,7 @@ class LocationController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/api/v1/locations/:id",
+     *     path="v1/locations/:id",
      *     summary="Update an existing Location",
      *     tags={"Locations"},
      *     description="Update details of a specific location.",
@@ -235,7 +235,7 @@ class LocationController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/api/v1/locations/:id",
+     *     path="v1/locations/:id",
      *     summary="Delete a Location",
      *     tags={"Locations"},
      *     description="Remove a location from the system.",

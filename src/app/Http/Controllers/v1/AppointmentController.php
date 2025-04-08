@@ -11,13 +11,11 @@ use Illuminate\Http\Request;
 
 class AppointmentController extends Controller
 {
-    public function __construct(protected AppointmentRepository $repository)
-    {
-    }
+    public function __construct(protected AppointmentRepository $repository) {}
 
     /**
      * @OA\Get(
-     *     path="/api/v1/appointments",
+     *     path="v1/appointments",
      *     summary="Get all appointments",
      *     description="Retrieves a list of appointments.",
      *     tags={"Appointments"},
@@ -96,7 +94,7 @@ class AppointmentController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/v1/appointments",
+     *     path="v1/appointments",
      *     summary="Create a new appointment",
      *     description="Creates a new appointment with associated locations, services, and attendees.",
      *     tags={"Appointments"},
@@ -163,7 +161,7 @@ class AppointmentController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/api/v1/appointments/:id",
+     *     path="v1/appointments/:id",
      *     summary="Update an existing appointment",
      *     description="Updates an existing appointment with new details.",
      *     tags={"Appointments"},
@@ -234,7 +232,7 @@ class AppointmentController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/v1/appointments/:id",
+     *     path="v1/appointments/:id",
      *     summary="Get a single appointment",
      *     description="Retrieve details of a single appointment.",
      *     tags={"Appointments"},
@@ -309,7 +307,7 @@ class AppointmentController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/api/v1/appointments/:id",
+     *     path="v1/appointments/:id",
      *     summary="Delete an appointment",
      *     description="Deletes an existing appointment by ID.",
      *     tags={"Appointments"},

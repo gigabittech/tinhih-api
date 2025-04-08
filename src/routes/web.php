@@ -11,7 +11,7 @@ Route::fallback(function (Request $request) {
     ], 404);
 });
 
-Route::get('/api/documentation', function () {
+Route::get('/documentation', function () {
     return view('swagger.index');  // Your Swagger UI view
 });
 

@@ -13,9 +13,13 @@ return new class extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id'); // Assuming user_id is a foreign key referencing the users table
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('first_name')->nullable();
+            $table->string('preferred_name')->nullable();
+            $table->string('full_name')->nullable();
+            $table->string('middle_name')->nullable();
             $table->string('last_name')->nullable();
+            $table->string('gender')->nullable();
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->date('dob')->nullable();

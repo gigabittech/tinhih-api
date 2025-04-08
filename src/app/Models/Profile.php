@@ -12,9 +12,13 @@ class Profile extends Model
         'avatar',
         'dob',
         'first_name',
+        'full_name',
         'last_name',
-        'note',
+        'middle_name',
+        'preferred_name',
         'phone',
+        'gender',
+        'note',
     ];
 
 

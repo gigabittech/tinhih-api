@@ -15,7 +15,7 @@ class ClientController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/v1/clients",
+     *     path="v1/clients",
      *     summary="Get all clients",
      *     description="Retrieves a list of clients within a workspace.",
      *     tags={"Clients"},
@@ -83,7 +83,7 @@ class ClientController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/v1/clients/:id",
+     *     path="v1/clients/:id",
      *     summary="Get a single client",
      *     description="Retrieve details of a specific client by ID.",
      *     tags={"Clients"},
@@ -315,7 +315,7 @@ class ClientController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/api/v1/clients/:id",
+     *     path="v1/clients/:id",
      *     summary="Delete a client",
      *     description="Deletes a client based on the given ID.",
      *     tags={"Clients"},

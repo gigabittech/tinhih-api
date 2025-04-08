@@ -6,10 +6,12 @@ use App\Http\Controllers\v1\ClientController;
 use App\Http\Controllers\v1\InvoiceController;
 use App\Http\Controllers\v1\LocationController;
 use App\Http\Controllers\v1\LocationTypeController;
+use App\Http\Controllers\v1\ProfileController;
 use App\Http\Controllers\v1\ServiceController;
 use App\Http\Controllers\v1\TaxController;
 use App\Http\Controllers\v1\TeamMemberController;
 use App\Http\Controllers\v1\WorkspaceController;
+use App\Models\Workspace;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -158,5 +160,8 @@ Route::prefix('v1')->group(function () {
             Route::delete('/{id}', [InvoiceController::class, 'deleteInvoice']);
             Route::patch('/{id}/mark-as-paid', [InvoiceController::class, 'markAsPaid']);
         });
+
+        Route::post('/setup', [WorkspaceController::class, 'setupWorkspace'])->middleware('verifyWorkspaceSetup');
+        Route::put('/profile', [ProfileController::class, 'updateProfile']);
     });
 });

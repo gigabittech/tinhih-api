@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Workspace\SetupRequest;
 use App\Http\Requests\Workspace\StoreRequest;
 use App\Http\Requests\Workspace\UpdateRequest;
 use App\Http\Resources\WorkspaceResource;
 use App\Repository\WorkspaceRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class WorkspaceController extends Controller
 {
@@ -15,7 +17,7 @@ class WorkspaceController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/v1/workspaces",
+     *     path="v1/workspaces",
      *     summary="Get all workspaces",
      *     description="Retrieve a list of workspaces.",
      *     tags={"Workspaces"},
@@ -91,7 +93,7 @@ class WorkspaceController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/v1/workspaces/user",
+     *     path="v1/workspaces/user",
      *     summary="Get all workspaces",
      *     description="Retrieve a list of workspaces.",
      *     tags={"Workspaces"},
@@ -165,7 +167,7 @@ class WorkspaceController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/v1/workspaces/:id",
+     *     path="v1/workspaces/:id",
      *     summary="Get a workspace by ID",
      *     description="Retrieve details of a single workspace by its ID.",
      *     tags={"Workspaces"},
@@ -209,6 +211,9 @@ class WorkspaceController extends Controller
     {
         try {
             $workspace = $this->repository->find($id);
+            if (!$workspace) {
+                return response()->json(['message' => "Workspace not found"], 404);
+            }
             return response()->json(['message' => "Workspace retrieve successfull", 'workspace' =>  new WorkspaceResource($workspace)], 200);
         } catch (\Throwable $th) {
             //throw $th;
@@ -220,7 +225,7 @@ class WorkspaceController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/v1/workspaces",
+     *     path="v1/workspaces",
      *     summary="Create a workspace",
      *     tags={"Workspaces"},
      *     security={{"bearerAuth":{}}},
@@ -270,7 +275,7 @@ class WorkspaceController extends Controller
      * Update a workspace
      *
      * @OA\Put(
-     *     path="/api/v1/workspaces/:id",
+     *     path="v1/workspaces/:id",
      *     summary="Update an existing workspace",
      *     tags={"Workspaces"},
      *     security={{"bearerAuth":{}}},
@@ -321,7 +326,7 @@ class WorkspaceController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/api/v1/workspaces/:id",
+     *     path="v1/workspaces/:id",
      *     summary="Delete a workspace",
      *     description="Remove a workspace by ID.",
      *     tags={"Workspaces"},
@@ -369,7 +374,7 @@ class WorkspaceController extends Controller
      * Toggle a workspace (Activate/Deactivate)
      *
      * @OA\Post(
-     *     path="/api/v1/workspaces/toggle",
+     *     path="v1/workspaces/toggle",
      *     summary="Toggle workspace status",
      *     tags={"Workspaces"},
      *     security={{"bearerAuth":{}}},
@@ -405,6 +410,78 @@ class WorkspaceController extends Controller
                 'workspace' => new WorkspaceResource($workspace)
             ], 200);
         } catch (\Throwable $th) {
+            return response()->json([
+                'message' => $th->getMessage(),
+            ], 500);
+        }
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/v1/setup",
+     *     summary="Setup workspace for the user",
+     *     description="This endpoint sets up a new workspace for the user along with their profile information.",
+     *     tags={"Auth Setup"},
+     *     security={{ "bearerAuth":{} }},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"first_name", "last_name", "profession", "countryCode", "teamSize", "businessName", "full_name", "preferred_name", "active"},
+     *             @OA\Property(property="first_name", type="string", example="John"),
+     *             @OA\Property(property="last_name", type="string", example="Doe"),
+     *             @OA\Property(property="profession", type="string", example="Developer"),
+     *             @OA\Property(property="countryCode", type="string", example="US"),
+     *             @OA\Property(property="teamSize", type="string", example="justMe", enum={"justMe", "inTen", "moreThanTen"}),
+     *             @OA\Property(property="timeZone", type="string", example="GMT+1"),
+     *             @OA\Property(property="businessName", type="string", example="Tech Innovations"),
+     *             @OA\Property(property="full_name", type="string", example="John Doe"),
+     *             @OA\Property(property="preferred_name", type="string", example="John"),
+     *             @OA\Property(property="active", type="boolean", example=true)
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Workspace setup successful",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Workspace setup successful"),
+     *             @OA\Property(property="workspace", type="object",
+     *                 @OA\Property(property="id", type="integer", example=1),
+     *                 @OA\Property(property="active", type="boolean", example=true),
+     *                 @OA\Property(property="businessName", type="string", example="Tech Innovations"),
+     *                 @OA\Property(property="countryCode", type="string", example="US"),
+     *                 @OA\Property(property="website", type="string", example=""),
+     *                @OA\Property(property="locations", type="array", @OA\Items(type="object")),
+     * @OA\Property(property="members", type="array", @OA\Items(type="object")),
+     * @OA\Property(property="services", type="array", @OA\Items(type="object")),
+     * @OA\Property(property="appointments", type="array", @OA\Items(type="object")),
+     * @OA\Property(property="invoices", type="array", @OA\Items(type="object")),
+     * @OA\Property(property="taxes", type="array", @OA\Items(type="object")),
+     * @OA\Property(property="clients", type="array", @OA\Items(type="object")),
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Error setting up workspace",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Error message from the exception")
+     *         )
+     *     )
+     * )
+     */
+    public function setupWorkspace(SetupRequest $request)
+    {
+        try {
+            DB::beginTransaction();
+            $profile = $request->user()->profile()->create($request->validated());
+            $workspace = $this->repository->setup($request->user(), $request->validated());
+            DB::commit();
+            return response()->json([
+                'message' => "Workspace setup successful",
+                'workspace' => new WorkspaceResource($workspace)
+            ], 200);
+        } catch (\Throwable $th) {
+            DB::rollBack();
             return response()->json([
                 'message' => $th->getMessage(),
             ], 500);
