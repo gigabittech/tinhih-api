@@ -11,13 +11,11 @@ use Illuminate\Http\Request;
 
 class TeamMemberController extends Controller
 {
-    public function __construct(private TeamMemberRepository $repository)
-    {
-    }
+    public function __construct(private TeamMemberRepository $repository) {}
 
     /**
      * @OA\Get(
-     *     path="/api/v1/members",
+     *     path="v1/members",
      *     summary="Get all members",
      *     description="Retrieve a list of members.",
      *     tags={"Members"},
@@ -73,7 +71,7 @@ class TeamMemberController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/v1/members/:id",
+     *     path="v1/members/:id",
      *     summary="Get a member",
      *     description="Retrieve a  member.",
      *     tags={"Members"},
@@ -127,7 +125,7 @@ class TeamMemberController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/v1/members",
+     *     path="v1/members",
      *     summary="Create a new member",
      *     description="Creates a new team member and associates services.",
      *     tags={"Members"},
@@ -198,7 +196,7 @@ class TeamMemberController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/api/v1/members/:id",
+     *     path="v1/members/:id",
      *     summary="Update a member",
      *     description="Updates an existing team member.",
      *     tags={"Members"},
@@ -273,7 +271,7 @@ class TeamMemberController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/api/v1/members/:id",
+     *     path="v1/members/:id",
      *     summary="Delete a member",
      *     description="Deletes a specific team member.",
      *     tags={"Members"},

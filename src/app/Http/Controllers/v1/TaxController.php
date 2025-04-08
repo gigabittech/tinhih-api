@@ -15,7 +15,7 @@ class TaxController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/v1/taxes",
+     *     path="v1/taxes",
      *     summary="Get all taxes",
      *     tags={"Taxes"},
      *     security={{"bearerAuth":{}}},
@@ -47,7 +47,7 @@ class TaxController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/v1/taxes/:id",
+     *     path="v1/taxes/:id",
      *     summary="Get a specific tax by ID",
      *     tags={"Taxes"},
      *     security={{"bearerAuth":{}}},
@@ -91,7 +91,7 @@ class TaxController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/v1/taxes",
+     *     path="v1/taxes",
      *     summary="Create a new tax",
      *     tags={"Taxes"},
      *     security={{"bearerAuth":{}}},
@@ -139,7 +139,7 @@ class TaxController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/api/v1/taxes/:id",
+     *     path="v1/taxes/:id",
      *     summary="Update an existing tax",
      *     tags={"Taxes"},
      *     security={{"bearerAuth":{}}},
@@ -185,7 +185,7 @@ class TaxController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/api/v1/taxes/:id",
+     *     path="v1/taxes/:id",
      *     summary="Delete a tax",
      *     tags={"Taxes"},
      *     security={{"bearerAuth":{}}},
