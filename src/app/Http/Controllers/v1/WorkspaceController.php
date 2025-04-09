@@ -17,7 +17,7 @@ class WorkspaceController extends Controller
 
     /**
      * @OA\Get(
-     *     path="v1/workspaces",
+     *     path="/workspaces",
      *     summary="Get all workspaces",
      *     description="Retrieve a list of workspaces.",
      *     tags={"Workspaces"},
@@ -93,7 +93,7 @@ class WorkspaceController extends Controller
 
     /**
      * @OA\Get(
-     *     path="v1/workspaces/user",
+     *     path="/workspaces/user",
      *     summary="Get all workspaces",
      *     description="Retrieve a list of workspaces.",
      *     tags={"Workspaces"},
@@ -167,7 +167,7 @@ class WorkspaceController extends Controller
 
     /**
      * @OA\Get(
-     *     path="v1/workspaces/:id",
+     *     path="/workspaces/:id",
      *     summary="Get a workspace by ID",
      *     description="Retrieve details of a single workspace by its ID.",
      *     tags={"Workspaces"},
@@ -225,7 +225,7 @@ class WorkspaceController extends Controller
 
     /**
      * @OA\Post(
-     *     path="v1/workspaces",
+     *     path="/workspaces",
      *     summary="Create a workspace",
      *     tags={"Workspaces"},
      *     security={{"bearerAuth":{}}},
@@ -275,7 +275,7 @@ class WorkspaceController extends Controller
      * Update a workspace
      *
      * @OA\Put(
-     *     path="v1/workspaces/:id",
+     *     path="/workspaces/:id",
      *     summary="Update an existing workspace",
      *     tags={"Workspaces"},
      *     security={{"bearerAuth":{}}},
@@ -326,7 +326,7 @@ class WorkspaceController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="v1/workspaces/:id",
+     *     path="/workspaces/:id",
      *     summary="Delete a workspace",
      *     description="Remove a workspace by ID.",
      *     tags={"Workspaces"},
@@ -374,7 +374,7 @@ class WorkspaceController extends Controller
      * Toggle a workspace (Activate/Deactivate)
      *
      * @OA\Post(
-     *     path="v1/workspaces/toggle",
+     *     path="/workspaces/toggle",
      *     summary="Toggle workspace status",
      *     tags={"Workspaces"},
      *     security={{"bearerAuth":{}}},
@@ -418,7 +418,7 @@ class WorkspaceController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/v1/setup",
+     *     path="/api//setup",
      *     summary="Setup workspace for the user",
      *     description="This endpoint sets up a new workspace for the user along with their profile information.",
      *     tags={"Auth Setup"},

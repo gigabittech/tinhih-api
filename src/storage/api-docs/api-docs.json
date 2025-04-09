@@ -8,15 +8,21 @@
         },
         "version": "1.0.0"
     },
+    "servers": [
+        {
+            "url": "https://api.tinhih.com/v1",
+            "description": "Live server"
+        }
+    ],
     "paths": {
-        "v1/appointments": {
+        "/appointments": {
             "get": {
                 "tags": [
                     "Appointments"
                 ],
                 "summary": "Get all appointments",
                 "description": "Retrieves a list of appointments.",
-                "operationId": "e15bcb0c781c27ab7473199db513989e",
+                "operationId": "f0565debba72068ea83898b118805261",
                 "parameters": [
                     {
                         "name": "user_id",
@@ -143,7 +149,7 @@
                 ],
                 "summary": "Create a new appointment",
                 "description": "Creates a new appointment with associated locations, services, and attendees.",
-                "operationId": "2b55741b163aec795e003fa73866d271",
+                "operationId": "a6f077bb32d04d14048e0a71e74517f9",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -282,14 +288,14 @@
                 ]
             }
         },
-        "v1/appointments/:id": {
+        "/appointments/:id": {
             "get": {
                 "tags": [
                     "Appointments"
                 ],
                 "summary": "Get a single appointment",
                 "description": "Retrieve details of a single appointment.",
-                "operationId": "d92d7ee203e6792ced75f7318329be0e",
+                "operationId": "284212452426d266e7b9c31c36ca1584",
                 "parameters": [
                     {
                         "name": "id",
@@ -411,7 +417,7 @@
                 ],
                 "summary": "Update an existing appointment",
                 "description": "Updates an existing appointment with new details.",
-                "operationId": "e235d0fde82d32f5cc978270272ea4f4",
+                "operationId": "49795a05997b6afca36affd4b77e5189",
                 "parameters": [
                     {
                         "name": "id",
@@ -567,7 +573,7 @@
                 ],
                 "summary": "Delete an appointment",
                 "description": "Deletes an existing appointment by ID.",
-                "operationId": "5018c43c510baee92d05627938d0927a",
+                "operationId": "6e0b1ccbc71d2bd4b7410f2d10ca5e0a",
                 "parameters": [
                     {
                         "name": "id",
@@ -621,14 +627,14 @@
                 ]
             }
         },
-        "v1/auth/login": {
+        "/auth/login": {
             "post": {
                 "tags": [
                     "Auth"
                 ],
                 "summary": "Login user",
                 "description": "This endpoint allows a user to log in using their email and password. A valid token is returned upon successful authentication.",
-                "operationId": "989324b6fb406c7f995069d92022a872",
+                "operationId": "a475896307c82f1b04475bc5f05fff0c",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -719,14 +725,14 @@
                 }
             }
         },
-        "v1/auth/register": {
+        "/auth/register": {
             "post": {
                 "tags": [
                     "Auth"
                 ],
                 "summary": "Register a new user",
                 "description": "This endpoint allows a user to register by providing their name, email, password, and other required details.",
-                "operationId": "0e1b7ee1dc0b025724fbdc55cb2f5fb9",
+                "operationId": "2cf6c054e3d2d4500ca4a5fa8d0020d6",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -834,14 +840,14 @@
                 }
             }
         },
-        "v1/auth/logout": {
+        "/auth/logout": {
             "post": {
                 "tags": [
                     "Auth"
                 ],
                 "summary": "Logout user",
                 "description": "This endpoint allows an authenticated user to log out by revoking their issued tokens.",
-                "operationId": "ca17b2e7199835e8bdefa971f71cf6d7",
+                "operationId": "dbcac977aef7cd05b27beadbb3825f81",
                 "responses": {
                     "200": {
                         "description": "User logged out successfully",
@@ -911,14 +917,14 @@
                 ]
             }
         },
-        "v1/user": {
+        "/user": {
             "get": {
                 "tags": [
                     "User"
                 ],
                 "summary": "Get User Details",
                 "description": "Fetches details of the currently authenticated user.",
-                "operationId": "b0f1e47103fa02c9a830c72e06f0017c",
+                "operationId": "7da9b06af8bb315a164c93c6d5c7e379",
                 "responses": {
                     "200": {
                         "description": "User details retrieved successfully",
@@ -976,14 +982,14 @@
                 ]
             }
         },
-        "v1/clients": {
+        "/clients": {
             "get": {
                 "tags": [
                     "Clients"
                 ],
                 "summary": "Get all clients",
                 "description": "Retrieves a list of clients within a workspace.",
-                "operationId": "523465057a67aac620f5d852f26e205f",
+                "operationId": "31f7f055be09f1d6787aed27c2eb5574",
                 "parameters": [
                     {
                         "name": "workspace_id",
@@ -1102,14 +1108,14 @@
                 ]
             }
         },
-        "v1/clients/:id": {
+        "/clients/:id": {
             "get": {
                 "tags": [
                     "Clients"
                 ],
                 "summary": "Get a single client",
                 "description": "Retrieve details of a specific client by ID.",
-                "operationId": "8b3bbab43527bbe3ecbf604f5da33ccb",
+                "operationId": "d5e9c8b2a8bd0e6e8da41e0e9fc3392c",
                 "parameters": [
                     {
                         "name": "id",
@@ -1246,7 +1252,7 @@
                 ],
                 "summary": "Delete a client",
                 "description": "Deletes a client based on the given ID.",
-                "operationId": "0674100b0ff8321e57f61d05dace7122",
+                "operationId": "ab11a96c241b44029217345439257140",
                 "parameters": [
                     {
                         "name": "id",
@@ -1650,14 +1656,14 @@
                 ]
             }
         },
-        "v1/invoices": {
+        "/invoices": {
             "get": {
                 "tags": [
                     "Invoices"
                 ],
                 "summary": "Get all invoices for the current workspace",
                 "description": "Fetches all invoices associated with the currently authenticated user's active workspace.",
-                "operationId": "22461b828a9bd46e4ae45aeeb45bf392",
+                "operationId": "943fbaa21983610425073591218540ad",
                 "responses": {
                     "200": {
                         "description": "Invoices retrieved successfully",
@@ -1813,7 +1819,7 @@
                 ],
                 "summary": "Create a new invoice",
                 "description": "Creates a new invoice with services, calculates the subtotal and payable amount including taxes.",
-                "operationId": "67d9d62cca554f6941f63761a2095002",
+                "operationId": "2656340a449abf1eb4419a53f8b13a80",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -2047,14 +2053,14 @@
                 ]
             }
         },
-        "v1/invoices/:id": {
+        "/invoices/:id": {
             "get": {
                 "tags": [
                     "Invoices"
                 ],
                 "summary": "Get a specific invoice by ID",
                 "description": "Retrieves a single invoice by ID, scoped to the current user's workspace. Includes a tax summary if available.",
-                "operationId": "0512b3acbbb09adf6bfa0ad9516a3661",
+                "operationId": "301924d15ca30a460c87c4207bb53b84",
                 "parameters": [
                     {
                         "name": "id",
@@ -2219,7 +2225,7 @@
                 ],
                 "summary": "Update an existing invoice",
                 "description": "Updates an existing invoice with new service details and recalculates the subtotal and payable amount.",
-                "operationId": "9a5a84a1743de0bbacffd5ace8f1872e",
+                "operationId": "8a45b2b8bb8823296e3c0eac90e9e32a",
                 "parameters": [
                     {
                         "name": "id",
@@ -2433,7 +2439,7 @@
                 ],
                 "summary": "Delete an invoice",
                 "description": "Deletes the specified invoice by its ID. If the invoice doesn't exist, a 404 response will be returned.",
-                "operationId": "68866f09e6393cfe46df0be806dc46b1",
+                "operationId": "178560fa52d2ba184f7743c7470c19e4",
                 "parameters": [
                     {
                         "name": "id",
@@ -2503,14 +2509,14 @@
                 ]
             }
         },
-        "v1/invoices/:id/mark-as-paid": {
+        "/invoices/:id/mark-as-paid": {
             "patch": {
                 "tags": [
                     "Invoices"
                 ],
                 "summary": "Mark an invoice as paid",
                 "description": "Marks the specified invoice as paid by updating its `is_paid` field. If the invoice doesn't exist, a 404 response will be returned.",
-                "operationId": "c4d40713ff5b1c1a661c5a6fbb2400e2",
+                "operationId": "4a1788c8bdb11d902e009427c3ce5c03",
                 "parameters": [
                     {
                         "name": "id",
@@ -2680,14 +2686,14 @@
                 ]
             }
         },
-        "v1/locations": {
+        "/locations": {
             "get": {
                 "tags": [
                     "Locations"
                 ],
                 "summary": "Get all Locations",
                 "description": "Retrieve all available locations with pagination.",
-                "operationId": "c00b815ad69106070ab7b89dc7fcc5ef",
+                "operationId": "3aecde97536a52d78b76c873e420dd9e",
                 "parameters": [
                     {
                         "name": "page",
@@ -2852,7 +2858,7 @@
                 ],
                 "summary": "Create a new Location",
                 "description": "Create a new location entry.",
-                "operationId": "5724454fd67a85649a779262f7fbb567",
+                "operationId": "38424e3122068bc6be61d4fe7dd7e663",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -2930,14 +2936,14 @@
                 ]
             }
         },
-        "v1/locations/:id": {
+        "/locations/:id": {
             "get": {
                 "tags": [
                     "Locations"
                 ],
                 "summary": "Get a specific Location",
                 "description": "Retrieve details of a specific location by ID.",
-                "operationId": "c0cd9e15437dedfe7dabe87a17a60753",
+                "operationId": "0bcdedcc00afbad6e7360cf7b3dabe82",
                 "parameters": [
                     {
                         "name": "id",
@@ -3024,7 +3030,7 @@
                 ],
                 "summary": "Update an existing Location",
                 "description": "Update details of a specific location.",
-                "operationId": "9fca6b11d081ff128a6593acec7f490b",
+                "operationId": "2d72d857db2b926eaffc22341f8bb0fc",
                 "parameters": [
                     {
                         "name": "id",
@@ -3117,7 +3123,7 @@
                 ],
                 "summary": "Delete a Location",
                 "description": "Remove a location from the system.",
-                "operationId": "ac8acdbfc4a1986310f921806e0df2db",
+                "operationId": "112ad6da41afcb2864fa9b0485227f14",
                 "parameters": [
                     {
                         "name": "id",
@@ -3146,14 +3152,14 @@
                 ]
             }
         },
-        "v1/location_types": {
+        "/location_types": {
             "get": {
                 "tags": [
                     "LocationType"
                 ],
                 "summary": "Get all location types",
                 "description": "This endpoint allows the user to retrieve all location types.",
-                "operationId": "10bd97a705747280d3ae767f65448f23",
+                "operationId": "23992e0b3404b931441bbcb698a22c29",
                 "responses": {
                     "200": {
                         "description": "Successfully retrieved location types",
@@ -3195,7 +3201,7 @@
                 ],
                 "summary": "Create a new location type",
                 "description": "This endpoint allows the user to create a new location type.",
-                "operationId": "1442e5369ae45ec263e7174a44f96846",
+                "operationId": "0d2d54db2d5fc6fbe0a739e02e171f4a",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -3313,14 +3319,14 @@
                 ]
             }
         },
-        "v1/location_types/:id": {
+        "/location_types/:id": {
             "get": {
                 "tags": [
                     "LocationType"
                 ],
                 "summary": "Get a specific location type",
                 "description": "This endpoint allows the user to retrieve details of a specific location type.",
-                "operationId": "14c5bb3e9406d2745d2bf7644154220f",
+                "operationId": "4f8476a59efe7d96ad4d411bbf957692",
                 "parameters": [
                     {
                         "name": "id",
@@ -3422,7 +3428,7 @@
                 ],
                 "summary": "Update an existing location type",
                 "description": "This endpoint allows the user to update the details of a specific location type.",
-                "operationId": "6a7f7ffc69a7cdb0ca5fa6d549819bf7",
+                "operationId": "e20e958529c931badc9483992078b224",
                 "parameters": [
                     {
                         "name": "id",
@@ -3556,7 +3562,7 @@
                 ],
                 "summary": "Delete a location type",
                 "description": "This endpoint allows the user to delete a specific location type.",
-                "operationId": "d875c0a2f2688f0791fb2a54b883c16b",
+                "operationId": "874e959ad8d29fb4b1ba9e2dda3a1b76",
                 "parameters": [
                     {
                         "name": "id",
@@ -3645,14 +3651,14 @@
                 ]
             }
         },
-        "v1/services": {
+        "/services": {
             "get": {
                 "tags": [
                     "Services"
                 ],
                 "summary": "Get all Services",
                 "description": "Retrieve all available services.",
-                "operationId": "8bd4ad2978fdb838af5f33be643437d7",
+                "operationId": "d1f83e139e8991b86b4e2ea6ea7fe024",
                 "responses": {
                     "200": {
                         "description": "Successfully retrieved services",
@@ -3773,7 +3779,7 @@
                 ],
                 "summary": "Create a new Service",
                 "description": "Create a new service entry in the system.",
-                "operationId": "69672bc20784accd58079d729dd1f269",
+                "operationId": "88e2de8201a9a367b7866fa439ffabbd",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -3878,14 +3884,14 @@
                 ]
             }
         },
-        "v1/services/user": {
+        "/services/user": {
             "get": {
                 "tags": [
                     "Services"
                 ],
                 "summary": "Get all user Services",
                 "description": "Retrieve all available services.",
-                "operationId": "85b63e7f9678d84d99f4bffb70d5e694",
+                "operationId": "fc5aa5f3366df12aa196de0fe8ecabcd",
                 "responses": {
                     "200": {
                         "description": "Successfully retrieved services",
@@ -4001,14 +4007,14 @@
                 ]
             }
         },
-        "v1/services/:id": {
+        "/services/:id": {
             "get": {
                 "tags": [
                     "Services"
                 ],
                 "summary": "Get a specific Service",
                 "description": "Retrieve details of a single service.",
-                "operationId": "d24aa8edbba208076b31ed85e5eb630d",
+                "operationId": "9618f01b842892a49d931bd533b0cb94",
                 "parameters": [
                     {
                         "name": "id",
@@ -4137,7 +4143,7 @@
                 ],
                 "summary": "Update an existing Service",
                 "description": "Update details of a specific service.",
-                "operationId": "e837edbc9d4e46c0aff2922d3556d287",
+                "operationId": "4675352bdf5073b6f0fc6af30c775072",
                 "parameters": [
                     {
                         "name": "id",
@@ -4256,7 +4262,7 @@
                 ],
                 "summary": "Delete a Service",
                 "description": "Remove a service from the system.",
-                "operationId": "cae3e52740525143d8142dd5edc5c73a",
+                "operationId": "a63a8a407d5292fa508f7474782e42ee",
                 "parameters": [
                     {
                         "name": "id",
@@ -4288,13 +4294,13 @@
                 ]
             }
         },
-        "v1/taxes": {
+        "/taxes": {
             "get": {
                 "tags": [
                     "Taxes"
                 ],
                 "summary": "Get all taxes",
-                "operationId": "f9dd073a941685846b50f59cf77fb682",
+                "operationId": "002d1be375b2747d1c532d2347eeb75a",
                 "responses": {
                     "200": {
                         "description": "Taxes retrieved successfully",
@@ -4349,7 +4355,7 @@
                     "Taxes"
                 ],
                 "summary": "Create a new tax",
-                "operationId": "d5a575d09142fe3dd9217e1d4183710e",
+                "operationId": "93738d203af29a3d569b94ce71557072",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -4426,13 +4432,13 @@
                 ]
             }
         },
-        "v1/taxes/:id": {
+        "/taxes/:id": {
             "get": {
                 "tags": [
                     "Taxes"
                 ],
                 "summary": "Get a specific tax by ID",
-                "operationId": "08d5d46e46f81b50584f6ea09bbae4f9",
+                "operationId": "9b4e4c82a06f40a5fbf86729b5fb7aee",
                 "parameters": [
                     {
                         "name": "id",
@@ -4494,7 +4500,7 @@
                     "Taxes"
                 ],
                 "summary": "Update an existing tax",
-                "operationId": "33712c37afaa862771714844dd909e0c",
+                "operationId": "2c6bcf275549f9b6267f9ba20b35c836",
                 "parameters": [
                     {
                         "name": "id",
@@ -4585,7 +4591,7 @@
                     "Taxes"
                 ],
                 "summary": "Delete a tax",
-                "operationId": "9412ae7ab9da3eb9166a39791895cd98",
+                "operationId": "72babcc179a40508033e1a7307d0a304",
                 "parameters": [
                     {
                         "name": "id",
@@ -4621,14 +4627,14 @@
                 ]
             }
         },
-        "v1/members": {
+        "/members": {
             "get": {
                 "tags": [
                     "Members"
                 ],
                 "summary": "Get all members",
                 "description": "Retrieve a list of members.",
-                "operationId": "36af3150fca8cdaef2778da484aebcad",
+                "operationId": "caedee48b73ca3dfa32f42e38d96fd70",
                 "responses": {
                     "200": {
                         "description": "List of members retrieved successfully",
@@ -4723,7 +4729,7 @@
                 ],
                 "summary": "Create a new member",
                 "description": "Creates a new team member and associates services.",
-                "operationId": "28ae3ab1225297c052c95e030e7ab0c3",
+                "operationId": "4cf2bb18ffb53f073d934b4f3eea4fd0",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -4871,14 +4877,14 @@
                 ]
             }
         },
-        "v1/members/:id": {
+        "/members/:id": {
             "get": {
                 "tags": [
                     "Members"
                 ],
                 "summary": "Get a member",
                 "description": "Retrieve a  member.",
-                "operationId": "473199d33f87bfae7ff46cc9cbd231cb",
+                "operationId": "35f6f9117b5194a677f6072910c35c3d",
                 "responses": {
                     "200": {
                         "description": "Member retrieved successfully",
@@ -4970,7 +4976,7 @@
                 ],
                 "summary": "Update a member",
                 "description": "Updates an existing team member.",
-                "operationId": "a73543042718f2a7e303ccb5f7af1fad",
+                "operationId": "02852a8a3a2a6758a798fc76a5fbbd57",
                 "parameters": [
                     {
                         "name": "id",
@@ -5135,7 +5141,7 @@
                 ],
                 "summary": "Delete a member",
                 "description": "Deletes a specific team member.",
-                "operationId": "b5587a733f9fbbab7022f6751a40546c",
+                "operationId": "24087607d54a7140211440b5921cca2e",
                 "parameters": [
                     {
                         "name": "id",
@@ -5189,14 +5195,14 @@
                 ]
             }
         },
-        "v1/workspaces": {
+        "/workspaces": {
             "get": {
                 "tags": [
                     "Workspaces"
                 ],
                 "summary": "Get all workspaces",
                 "description": "Retrieve a list of workspaces.",
-                "operationId": "09b7cf39d37b55481942ac9563f743f3",
+                "operationId": "91a40c4819d86e80ec0af8513e606acd",
                 "responses": {
                     "200": {
                         "description": "List of workspaces retrieved successfully",
@@ -5302,7 +5308,7 @@
                     "Workspaces"
                 ],
                 "summary": "Create a workspace",
-                "operationId": "da09ba0ee7ac29f819814d40b563a2bb",
+                "operationId": "169fc29db8157a8f656168d75bfd2548",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -5380,14 +5386,14 @@
                 ]
             }
         },
-        "v1/workspaces/user": {
+        "/workspaces/user": {
             "get": {
                 "tags": [
                     "Workspaces"
                 ],
                 "summary": "Get all workspaces",
                 "description": "Retrieve a list of workspaces.",
-                "operationId": "9b9f755d84c5dc75724b98a13c9d75d7",
+                "operationId": "ccf9e1f2a42752b45522bb77c6d90642",
                 "responses": {
                     "200": {
                         "description": "List of user workspaces retrieved successfully",
@@ -5489,14 +5495,14 @@
                 ]
             }
         },
-        "v1/workspaces/:id": {
+        "/workspaces/:id": {
             "get": {
                 "tags": [
                     "Workspaces"
                 ],
                 "summary": "Get a workspace by ID",
                 "description": "Retrieve details of a single workspace by its ID.",
-                "operationId": "70a300ca775432454c147327bb5bb8c7",
+                "operationId": "4f2f01df18d1602b6d2d3a3c8057e6e1",
                 "parameters": [
                     {
                         "name": "id",
@@ -5573,7 +5579,7 @@
                 ],
                 "summary": "Update an existing workspace",
                 "description": "Update a workspace",
-                "operationId": "074ed9a0cb4e0ce2b9ebc39c3281b6cc",
+                "operationId": "254b9937143b9b976de4c632e8b95c85",
                 "parameters": [
                     {
                         "name": "id",
@@ -5658,7 +5664,7 @@
                 ],
                 "summary": "Delete a workspace",
                 "description": "Remove a workspace by ID.",
-                "operationId": "7ab9f9c7825a092b9731f8363ffdeb2d",
+                "operationId": "67a880dd872e5ff2623ac5bc7552be1e",
                 "parameters": [
                     {
                         "name": "id",
@@ -5711,14 +5717,14 @@
                 ]
             }
         },
-        "v1/workspaces/toggle": {
+        "/workspaces/toggle": {
             "post": {
                 "tags": [
                     "Workspaces"
                 ],
                 "summary": "Toggle workspace status",
                 "description": "Toggle a workspace (Activate/Deactivate)",
-                "operationId": "d274465b038be04bef93c810736ee028",
+                "operationId": "2d3e155ad66d6e4b49bb0681326288c7",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -5784,14 +5790,14 @@
                 ]
             }
         },
-        "/api/v1/setup": {
+        "/api//setup": {
             "post": {
                 "tags": [
                     "Auth Setup"
                 ],
                 "summary": "Setup workspace for the user",
                 "description": "This endpoint sets up a new workspace for the user along with their profile information.",
-                "operationId": "7620ba01945c6cb8bce3896f01fa66d1",
+                "operationId": "ad9fcc5f99f778899560dad25f1e85cf",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -6027,16 +6033,16 @@
     },
     "tags": [
         {
+            "name": "Appointments",
+            "description": "Appointments"
+        },
+        {
             "name": "Auth",
             "description": "Auth"
         },
         {
-            "name": "Auth Setup",
-            "description": "Auth Setup"
-        },
-        {
-            "name": "Appointments",
-            "description": "Appointments"
+            "name": "User",
+            "description": "User"
         },
         {
             "name": "Clients",
@@ -6055,10 +6061,6 @@
             "description": "LocationType"
         },
         {
-            "name": "Members",
-            "description": "Members"
-        },
-        {
             "name": "Services",
             "description": "Services"
         },
@@ -6067,12 +6069,16 @@
             "description": "Taxes"
         },
         {
-            "name": "User",
-            "description": "User"
+            "name": "Members",
+            "description": "Members"
         },
         {
             "name": "Workspaces",
             "description": "Workspaces"
+        },
+        {
+            "name": "Auth Setup",
+            "description": "Auth Setup"
         }
     ]
 }
