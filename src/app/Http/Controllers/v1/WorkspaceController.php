@@ -323,6 +323,59 @@ class WorkspaceController extends Controller
         }
     }
 
+    /**
+     * Update a workspace
+     *
+     * @OA\Put(
+     *     path="/workspaces/settings",
+     *     summary="Workspace Settings",
+     *     tags={"Workspaces"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"businessName", "countryCode"},
+     *             @OA\Property(property="businessName", type="string", example="TiNHiH California"),
+     *             @OA\Property(property="countryCode", type="string", example="us"),
+     *             @OA\Property(property="profession", type="string", example="Mental Health Orgnization"),
+     *             @OA\Property(property="website", type="string", example="https://tinhih.org"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Workspace updated successfully",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="message", type="string", example="Workspace update successful"),
+     *             @OA\Property(property="workspace", type="object",
+     *                  @OA\Property(property="id", type="integer", example=1),
+     *                  @OA\Property(property="businessName", type="string", example="TiNHiH California"),
+     *                  @OA\Property(property="countryCode", type="string", example="us"),
+     *                  @OA\Property(property="profession", type="string", example="Mental Health Orgnization"),
+     *                  @OA\Property(property="website", type="string", example="https://tinhih.org")
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response=500, description="Internal Server Error")
+     * )
+     */
+    public function updateCurrentWorkspace(UpdateRequest $request)
+    {
+        try {
+            // dd($request->user());
+            $workspace = $request->user()->workspaces()->where('active', 1)->first();
+            $workspace = $workspace->update($request->validated());
+            $workspace = $request->user()->workspaces()->where('active', 1)->first();
+            return response()->json([
+                'message' => "Workspace update successful",
+                'workspace' => new WorkspaceResource($workspace)
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => $th->getMessage(),
+            ], 500);
+        }
+    }
 
     /**
      * @OA\Delete(

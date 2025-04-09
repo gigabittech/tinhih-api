@@ -2,10 +2,12 @@
 
 namespace App\Http\Requests\Workspace;
 
+use App\Traits\AuthAvatarTrait;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SetupRequest extends FormRequest
 {
+    use AuthAvatarTrait;
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -21,10 +23,12 @@ class SetupRequest extends FormRequest
      */
     public function rules(): array
     {
+        $fullname = $this->first_name . ' ' . $this->last_name;
         $this->merge([
             'preferred_name' => $this->first_name,
-            'full_name' => $this->first_name . ' ' . $this->last_name,
+            'full_name' => $fullname,
             'active' => true,
+            'avatar' => $this->avatar($fullname)
         ]);
         return [
             'first_name' => 'required|string|max:255',
