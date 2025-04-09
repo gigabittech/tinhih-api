@@ -5790,14 +5790,14 @@
                 ]
             }
         },
-        "/api//setup": {
+        "/setup": {
             "post": {
                 "tags": [
                     "Auth Setup"
                 ],
                 "summary": "Setup workspace for the user",
-                "description": "This endpoint sets up a new workspace for the user along with their profile information.",
-                "operationId": "ad9fcc5f99f778899560dad25f1e85cf",
+                "description": "Then initial step after successfully create an account. This endpoint sets up a new workspace for the user along with their profile information.",
+                "operationId": "ddc994b72350b8fd47de02e4a8798a2e",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -6033,16 +6033,16 @@
     },
     "tags": [
         {
-            "name": "Appointments",
-            "description": "Appointments"
-        },
-        {
             "name": "Auth",
             "description": "Auth"
         },
         {
-            "name": "User",
-            "description": "User"
+            "name": "Auth Setup",
+            "description": "Auth Setup"
+        },
+        {
+            "name": "Appointments",
+            "description": "Appointments"
         },
         {
             "name": "Clients",
@@ -6061,6 +6061,10 @@
             "description": "LocationType"
         },
         {
+            "name": "Members",
+            "description": "Members"
+        },
+        {
             "name": "Services",
             "description": "Services"
         },
@@ -6069,16 +6073,12 @@
             "description": "Taxes"
         },
         {
-            "name": "Members",
-            "description": "Members"
+            "name": "User",
+            "description": "User"
         },
         {
             "name": "Workspaces",
             "description": "Workspaces"
-        },
-        {
-            "name": "Auth Setup",
-            "description": "Auth Setup"
         }
     ]
 }
