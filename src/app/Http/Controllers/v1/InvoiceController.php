@@ -18,7 +18,7 @@ class InvoiceController extends Controller
 
     /**
      * @OA\Get(
-     *     path="v1/invoices",
+     *     path="/invoices",
      *     summary="Get all invoices for the current workspace",
      *     description="Fetches all invoices associated with the currently authenticated user's active workspace.",
      *     tags={"Invoices"},
@@ -85,7 +85,7 @@ class InvoiceController extends Controller
 
     /**
      * @OA\Get(
-     *     path="v1/invoices/:id",
+     *     path="/invoices/:id",
      *     summary="Get a specific invoice by ID",
      *     description="Retrieves a single invoice by ID, scoped to the current user's workspace. Includes a tax summary if available.",
      *     tags={"Invoices"},
@@ -161,7 +161,7 @@ class InvoiceController extends Controller
 
     /**
      * @OA\Post(
-     *     path="v1/invoices",
+     *     path="/invoices",
      *     summary="Create a new invoice",
      *     tags={"Invoices"},
      *     description="Creates a new invoice with services, calculates the subtotal and payable amount including taxes.",
@@ -306,7 +306,7 @@ class InvoiceController extends Controller
 
     /**
      * @OA\Put(
-     *     path="v1/invoices/:id",
+     *     path="/invoices/:id",
      *     summary="Update an existing invoice",
      *     tags={"Invoices"},
      *     description="Updates an existing invoice with new service details and recalculates the subtotal and payable amount.",
@@ -459,7 +459,7 @@ class InvoiceController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="v1/invoices/:id",
+     *     path="/invoices/:id",
      *     summary="Delete an invoice",
      *     description="Deletes the specified invoice by its ID. If the invoice doesn't exist, a 404 response will be returned.",
      *     tags={"Invoices"},
@@ -520,7 +520,7 @@ class InvoiceController extends Controller
 
     /**
      * @OA\Patch(
-     *     path="v1/invoices/:id/mark-as-paid",
+     *     path="/invoices/:id/mark-as-paid",
      *     summary="Mark an invoice as paid",
      *     description="Marks the specified invoice as paid by updating its `is_paid` field. If the invoice doesn't exist, a 404 response will be returned.",
      *     tags={"Invoices"},

@@ -15,7 +15,7 @@ class LocationTypeController extends Controller
 
     /**
      * * @OA\Get(
-     *     path="v1/location_types",
+     *     path="/location_types",
      *     summary="Get all location types",
      *     tags={"LocationType"},
      *     description="This endpoint allows the user to retrieve all location types.",
@@ -87,7 +87,7 @@ class LocationTypeController extends Controller
 
     /**
      * @OA\Get(
-     *     path="v1/location_types/:id",
+     *     path="/location_types/:id",
      *     summary="Get a specific location type",
      *     tags={"LocationType"},
      *     description="This endpoint allows the user to retrieve details of a specific location type.",
@@ -158,7 +158,7 @@ class LocationTypeController extends Controller
 
     /**
      * @OA\Post(
-     *     path="v1/location_types",
+     *     path="/location_types",
      *     summary="Create a new location type",
      *     tags={"LocationType"},
      *     description="This endpoint allows the user to create a new location type.",
@@ -237,7 +237,7 @@ class LocationTypeController extends Controller
 
     /**
      * @OA\Put(
-     *     path="v1/location_types/:id",
+     *     path="/location_types/:id",
      *     summary="Update an existing location type",
      *     tags={"LocationType"},
      *     description="This endpoint allows the user to update the details of a specific location type.",
@@ -319,7 +319,7 @@ class LocationTypeController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="v1/location_types/:id",
+     *     path="/location_types/:id",
      *     summary="Delete a location type",
      *     tags={"LocationType"},
      *     description="This endpoint allows the user to delete a specific location type.",

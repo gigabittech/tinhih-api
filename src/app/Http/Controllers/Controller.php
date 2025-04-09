@@ -11,5 +11,9 @@ namespace App\Http\Controllers;
  *         email="support@gigabit.agency"
  *     )
  * )
+ *  * @OA\Server(
+ *     url="https://api.tinhih.com/v1",
+ *     description="Live server"
+ * )
  */
 abstract class Controller {}

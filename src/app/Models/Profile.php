@@ -19,6 +19,8 @@ class Profile extends Model
         'phone',
         'gender',
         'note',
+        'locale',
+        'time_zone'
     ];
 
 

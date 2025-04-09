@@ -31,8 +31,9 @@ class UpdateRequest extends FormRequest
             'user_id' => ['required', 'exists:users,id'],
             'businessName' => ['required', 'string', 'max:255'],
             'countryCode' => ['required', 'string', 'max:255'],
-            'profession' => ['required', 'string', 'max:255'],
-            'active' => ['required', 'boolean'],
+            'profession' => ['nullable', 'string', 'max:255'],
+            'website' => ['nullable', 'string', 'max:255'],
+            'active' => ['nullable', 'boolean'],
         ];
     }
 
