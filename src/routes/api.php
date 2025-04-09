@@ -11,7 +11,6 @@ use App\Http\Controllers\v1\ServiceController;
 use App\Http\Controllers\v1\TaxController;
 use App\Http\Controllers\v1\TeamMemberController;
 use App\Http\Controllers\v1\WorkspaceController;
-use App\Models\Workspace;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -121,6 +120,7 @@ Route::prefix('v1')->group(function () {
         Route::prefix('workspaces')->group(function () {
             Route::get('/', [WorkspaceController::class, 'getWorkspaces']);
             Route::get('/user', [WorkspaceController::class, 'getUserWorkspaces']);
+            Route::put('/settings', [WorkspaceController::class, 'updateCurrentWorkspace']);
             Route::get('/{id}', [WorkspaceController::class, 'getWorkspace']);
             Route::post('/', [WorkspaceController::class, 'createWorkspace']);
             Route::post('/toggle', [WorkspaceController::class, 'toggleWorkspace']);
@@ -162,6 +162,6 @@ Route::prefix('v1')->group(function () {
         });
 
         Route::post('/setup', [WorkspaceController::class, 'setupWorkspace'])->middleware('verifyWorkspaceSetup');
-        Route::put('/profile', [ProfileController::class, 'updateProfile']);
+        Route::put('/profile/settings', [ProfileController::class, 'updateProfile']);
     });
 });
