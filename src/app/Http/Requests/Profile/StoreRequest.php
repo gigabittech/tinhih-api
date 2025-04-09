@@ -21,14 +21,20 @@ class StoreRequest extends FormRequest
      */
     public function rules(): array
     {
+        $this->merge([
+            'preferred_name' => $this->first_name,
+            'full_name' => $this->first_name . ' ' . $this->last_name,
+        ]);
         return [
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
+            'first_name' => 'nullable|required_with:last_name|string|max:255',
+            'last_name' => 'nullable|required_with:first_name|string|max:255',
             'phone' => 'nullable|string|max:255',
             'address' => 'nullable|string|max:255',
             'dob' => 'nullable|string|max:255',
             'note' => 'nullable|string|max:255',
             'avatar' => 'nullable|string|max:255',
+            'locale' => 'nullable|string',
+            'time_zone' => 'nullable'
         ];
     }
 }
