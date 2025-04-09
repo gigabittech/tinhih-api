@@ -3651,6 +3651,103 @@
                 ]
             }
         },
+        "/profile/settings": {
+            "put": {
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "Update authenticated user's profile",
+                "description": "Updates the profile of the currently authenticated user.",
+                "operationId": "updateProfile",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "first_name",
+                                    "last_name"
+                                ],
+                                "properties": {
+                                    "first_name": {
+                                        "type": "string",
+                                        "example": "John"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "example": "Doe"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": "xxxxx"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "example": "US"
+                                    },
+                                    "dob": {
+                                        "type": "string",
+                                        "example": "2025-04-09"
+                                    },
+                                    "time_zone": {
+                                        "type": "string",
+                                        "example": "America/New_York"
+                                    },
+                                    "locale": {
+                                        "type": "string",
+                                        "example": "en-US"
+                                    },
+                                    "avatar": {
+                                        "type": "string",
+                                        "example": "profile image link"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Profile updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Profile updated successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failed to update profile",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Failed to update profile"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
         "/services": {
             "get": {
                 "tags": [
@@ -5717,6 +5814,99 @@
                 ]
             }
         },
+        "/workspaces/settings": {
+            "put": {
+                "tags": [
+                    "Workspaces"
+                ],
+                "summary": "Workspace Settings",
+                "description": "Update a workspace",
+                "operationId": "4f67f275c592ea0dcc7526617fd3b35a",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "businessName",
+                                    "countryCode"
+                                ],
+                                "properties": {
+                                    "businessName": {
+                                        "type": "string",
+                                        "example": "TiNHiH California"
+                                    },
+                                    "countryCode": {
+                                        "type": "string",
+                                        "example": "us"
+                                    },
+                                    "profession": {
+                                        "type": "string",
+                                        "example": "Mental Health Orgnization"
+                                    },
+                                    "website": {
+                                        "type": "string",
+                                        "example": "https://tinhih.org"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Workspace updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Workspace update successful"
+                                        },
+                                        "workspace": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "businessName": {
+                                                    "type": "string",
+                                                    "example": "TiNHiH California"
+                                                },
+                                                "countryCode": {
+                                                    "type": "string",
+                                                    "example": "us"
+                                                },
+                                                "profession": {
+                                                    "type": "string",
+                                                    "example": "Mental Health Orgnization"
+                                                },
+                                                "website": {
+                                                    "type": "string",
+                                                    "example": "https://tinhih.org"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/workspaces/toggle": {
             "post": {
                 "tags": [
@@ -6063,6 +6253,10 @@
         {
             "name": "Members",
             "description": "Members"
+        },
+        {
+            "name": "Profile",
+            "description": "Profile"
         },
         {
             "name": "Services",
