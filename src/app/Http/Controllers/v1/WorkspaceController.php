@@ -418,9 +418,9 @@ class WorkspaceController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api//setup",
+     *     path="/setup",
      *     summary="Setup workspace for the user",
-     *     description="This endpoint sets up a new workspace for the user along with their profile information.",
+     *     description="Then initial step after successfully create an account. This endpoint sets up a new workspace for the user along with their profile information.",
      *     tags={"Auth Setup"},
      *     security={{ "bearerAuth":{} }},
      *     @OA\RequestBody(
