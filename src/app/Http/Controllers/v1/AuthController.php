@@ -108,7 +108,6 @@ class AuthController extends Controller
         }
     }
 
-
     /**
      * @OA\Post(
      *     path="/auth/register",
@@ -194,7 +193,7 @@ class AuthController extends Controller
         try {
             DB::beginTransaction();
             $data = $request->validated();
-            $data['role'] = $request->input('isPovider') && $request->isPovider ? 'provider' : 'client';
+            $data['role'] = $request->isPovider ? 'provider' : 'client';
             $user = $this->repository->create($data);
             $userResource = new UserResource($user);
             $token = $userResource->createToken($userResource->email)->plainTextToken;
