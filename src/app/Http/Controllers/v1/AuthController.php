@@ -193,11 +193,9 @@ class AuthController extends Controller
         try {
             DB::beginTransaction();
             $data = $request->validated();
-            $data['role'] = $request->isProvider ? 'provider' : 'client';
             $user = $this->repository->create($data);
             $userResource = new UserResource($user);
             $token = $userResource->createToken($userResource->email)->plainTextToken;
-
             DB::commit();
             return response()->json([
                 'message' => "Account created successfully",
