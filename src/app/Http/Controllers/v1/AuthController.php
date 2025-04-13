@@ -117,7 +117,7 @@ class AuthController extends Controller
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             required={"name", "email", "password"},
+     *             required={"email", "password"},
      *             @OA\Property(property="email", type="string", format="email", example="johndoe@example.com"),
      *             @OA\Property(property="password", type="string", example="password123"),
      *         )
@@ -193,7 +193,7 @@ class AuthController extends Controller
         try {
             DB::beginTransaction();
             $data = $request->validated();
-            $data['role'] = $request->isPovider ? 'provider' : 'client';
+            $data['role'] = $request->isProvider ? 'provider' : 'client';
             $user = $this->repository->create($data);
             $userResource = new UserResource($user);
             $token = $userResource->createToken($userResource->email)->plainTextToken;
