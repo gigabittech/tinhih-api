@@ -739,7 +739,6 @@
                         "application/json": {
                             "schema": {
                                 "required": [
-                                    "name",
                                     "email",
                                     "password"
                                 ],
@@ -779,6 +778,13 @@
                                                 "token": {
                                                     "type": "string",
                                                     "example": "your-generated-token"
+                                                },
+                                                "password": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "The password field is required."
+                                                    }
                                                 }
                                             },
                                             "type": "object"
@@ -806,6 +812,13 @@
                                                     "items": {
                                                         "type": "string",
                                                         "example": "The email field is required."
+                                                    }
+                                                },
+                                                "password": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "The password field is required."
                                                     }
                                                 }
                                             },

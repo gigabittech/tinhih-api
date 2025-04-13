@@ -20,10 +20,19 @@ class UserResource extends JsonResource
         return [
             'id' => $this->id,
             'role' => $this->role,
-            'name' => $this->name,
-            'email' => $this->email,
             'avatar' => $this->avatar,
-            'workspaces' => WorkspaceResource::collection($this->workspaces),
+            'email' => $this->email,
+            'first_name' => $this->profile?->first_name,
+            'last_name' => $this->profile?->last_name,
+            'full_name' => $this->profile?->full_name,
+            'preferred_name' => $this->profile?->preferred_name,
+            'phone' => $this->profile?->phone,
+            'gender' => $this->profile?->gender,
+            'note' => $this->profile?->note,
+            'locale' => $this->profile?->locale,
+            'time_zone' => $this->profile?->time_zone,
+            'workspaces' => $this->workspaces()->where('active', false)->get(),
+            'currentWorkspace' => new WorkspaceResource($this->currentWorkspace() ?? null)
         ];
     }
 }

@@ -69,7 +69,7 @@ class User extends Authenticatable
 
     public function scopeCurrentWorkspace()
     {
-        return $this->workspaces()->where('active', 1)->first();
+        return $this->workspaces()->with(['services', 'teamMembers', 'appointments', 'locations', 'clients', 'invoices', 'taxes'])->where('active', 1)->first();
     }
 
     public function scopeNutralWorkspaces()
