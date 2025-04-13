@@ -30,7 +30,7 @@ class WorkspaceResource extends JsonResource
             'invoices' => InvoiceResource::collection($this->invoices),
             "members" => TeamMemberResource::collection($this->teamMembers),
             "services" => ServiceResource::collection($this->services),
-            'taxes' => TaxResource::collection($this->taxs),
+            'taxes' => TaxResource::collection($this->taxes),
         ];
     }
 }

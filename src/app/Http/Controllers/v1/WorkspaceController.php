@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Workspace\SetupRequest;
 use App\Http\Requests\Workspace\StoreRequest;
 use App\Http\Requests\Workspace\UpdateRequest;
+use App\Http\Resources\User\UserResource;
 use App\Http\Resources\WorkspaceResource;
 use App\Repository\WorkspaceRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 class WorkspaceController extends Controller
@@ -60,8 +62,6 @@ class WorkspaceController extends Controller
      *     )
      * )
      */
-
-
 
     public function getWorkspaces()
     {
@@ -537,12 +537,32 @@ class WorkspaceController extends Controller
     {
         try {
             DB::beginTransaction();
-            $profile = $request->user()->profile()->create($request->validated());
-            $workspace = $this->repository->setup($request->user(), $request->validated());
+            $validated = $request->validated();
+
+            $profileData = Arr::only($validated, [
+                'first_name',
+                'last_name',
+                'full_name',
+                'preferred_name',
+                'avatar',
+            ]);
+            $profile = $request->user()->profile()->create($profileData);
+
+            $workspaceData = Arr::only($validated, [
+                'businessName',
+                'countryCode',
+                'profession',
+                'teamSize',
+                'timeZone',
+                'active',
+            ]);
+
+            $workspace = $this->repository->setup($request->user(), $workspaceData);
+
             DB::commit();
             return response()->json([
                 'message' => "Workspace setup successful",
-                'workspace' => new WorkspaceResource($workspace)
+                'user' => new UserResource($request->user())
             ], 200);
         } catch (\Throwable $th) {
             DB::rollBack();

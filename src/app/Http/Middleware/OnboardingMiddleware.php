@@ -4,11 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Validation\UnauthorizedException;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
-class WorkspaceSetupMiddleware
+class OnboardingMiddleware
 {
     /**
      * Handle an incoming request.
@@ -17,9 +15,11 @@ class WorkspaceSetupMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->user()->workspaces()->count() === 0) {
+        $user = $request->user();
+        if ($request->user()->profile && $user->workspaces()->exists()) {
             return $next($request);
         }
-        throw new UnauthorizedException('Workspace setup already success. You can create a workspace in workspace section');
+
+        throw new \Exception('Please setup profile and workspace for further actions');
     }
 }

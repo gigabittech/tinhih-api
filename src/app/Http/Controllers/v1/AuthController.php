@@ -41,9 +41,16 @@ class AuthController extends Controller
      *         @OA\Examples(
      *             example="successResponse",
      *             summary="Example response for a successful login",
-     *             value={
+     *            value={
      *                 "message": "Logged in successfully",
-     *                 "token": "your-generated-token"
+     *                 "payload": {
+     *                     "token": "your-generated-token",
+     *                     "user": {
+     *                         "id": 1,
+     *                         "name": "John Doe",
+     *                         "email": "john.doe@example.com"
+     *                     }
+     *                 }
      *             }
      *         )
      *     ),
@@ -98,7 +105,7 @@ class AuthController extends Controller
 
             return response()->json([
                 'message' => "Logged in successfull",
-                'payload' => ["token" => $token]
+                'payload' => ["token" => $token, 'user' => new UserResource($user)]
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
@@ -132,6 +139,9 @@ class AuthController extends Controller
      *                 property="payload",
      *                 type="object",
      *                 @OA\Property(property="token", type="string", example="your-generated-token"),
+     *                  @OA\Property(property="password", type="array",
+     *                     @OA\Items(type="string", example="The password field is required.")
+     *                 )
      *             )
      *         ),
      *         @OA\Examples(
@@ -154,6 +164,9 @@ class AuthController extends Controller
      *             @OA\Property(property="errors", type="object",
      *                 @OA\Property(property="email", type="array",
      *                     @OA\Items(type="string", example="The email field is required.")
+     *                 ),
+     *                 @OA\Property(property="password", type="array",
+     *                     @OA\Items(type="string", example="The password field is required.")
      *                 )
      *             )
      *         ),
@@ -198,9 +211,9 @@ class AuthController extends Controller
             $token = $userResource->createToken($userResource->email)->plainTextToken;
             DB::commit();
             return response()->json([
-                'message' => "Account created successfully",
+                'message' => "Account created successfully. Please setup your workpspace",
                 'success' => true,
-                'payload' => ["token" => $token, "user" => $user]
+                'payload' => ["token" => $token]
             ], 200);
         } catch (\Throwable $th) {
             DB::rollBack();

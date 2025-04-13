@@ -27,6 +27,7 @@ class RegisterRequest extends FormRequest
         return [
             'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required'],
+            'role' => ['required', 'in:provider,client']
         ];
     }
 
@@ -37,6 +38,8 @@ class RegisterRequest extends FormRequest
             'email.email' => 'Email must be a valid email address',
             'email.unique' => 'Email already exists',
             'password.required' => 'Password is required',
+            'role.required' => 'Please select an account type',
+            'role.in' => 'Invalid account type selected'
         ];
     }
 }
