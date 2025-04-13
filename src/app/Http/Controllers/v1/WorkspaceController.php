@@ -39,26 +39,13 @@ class WorkspaceController extends Controller
      *                     @OA\Property(property="country", type="string", example="Bangladesh"),
      *                     @OA\Property(property="profession", type="string", example="Software Engineer"),
      *                     @OA\Property(property="url", type="string", example="https://workspace.example.com"),
-     *                     @OA\Property(
-     *                         property="locations",
-     *                         type="array",
-     *                         @OA\Items(type="string", example="Dhaka, Bangladesh")
-     *                     ),
-     *                     @OA\Property(
-     *                         property="members",
-     *                         type="array",
-     *                         @OA\Items(type="string", example="John Doe")
-     *                     ),
-     *                     @OA\Property(
-     *                         property="services",
-     *                         type="array",
-     *                         @OA\Items(type="string", example="Web Development")
-     *                     ),
-     *                     @OA\Property(
-     *                         property="appointments",
-     *                         type="array",
-     *                         @OA\Items(type="string", example="2024-03-25 10:00 AM")
-     *                     )
+     *                     @OA\Property(property="locations", type="array", @OA\Items(type="object")),
+     *                     @OA\Property(property="members", type="array", @OA\Items(type="object")),
+     *                     @OA\Property(property="services", type="array", @OA\Items(type="object")),
+     *                     @OA\Property(property="appointments", type="array", @OA\Items(type="object")),
+     *                     @OA\Property(property="invoices", type="array", @OA\Items(type="object")),
+     *                     @OA\Property(property="taxes", type="array", @OA\Items(type="object")),
+     *                     @OA\Property(property="clients", type="array", @OA\Items(type="object"))
      *                 )
      *             )
      *         )
@@ -73,6 +60,8 @@ class WorkspaceController extends Controller
      *     )
      * )
      */
+
+
 
     public function getWorkspaces()
     {
@@ -111,30 +100,17 @@ class WorkspaceController extends Controller
      *                     type="object",
      *                     @OA\Property(property="id", type="integer", example=1),
      *                     @OA\Property(property="name", type="string", example="Tech Hub"),
-     *                     @OA\Property(property="active", type="boolean", example=true),
      *                     @OA\Property(property="country", type="string", example="Bangladesh"),
      *                     @OA\Property(property="profession", type="string", example="Software Engineer"),
      *                     @OA\Property(property="url", type="string", example="https://workspace.example.com"),
-     *                     @OA\Property(
-     *                         property="locations",
-     *                         type="array",
-     *                         @OA\Items(type="string", example="Dhaka, Bangladesh")
-     *                     ),
-     *                     @OA\Property(
-     *                         property="members",
-     *                         type="array",
-     *                         @OA\Items(type="string", example="John Doe")
-     *                     ),
-     *                     @OA\Property(
-     *                         property="services",
-     *                         type="array",
-     *                         @OA\Items(type="string", example="Web Development")
-     *                     ),
-     *                     @OA\Property(
-     *                         property="appointments",
-     *                         type="array",
-     *                         @OA\Items(type="string", example="2024-03-25 10:00 AM")
-     *                     )
+     *                     @OA\Property(property="active", type="boolean", example=true),
+     *                     @OA\Property(property="locations", type="array", @OA\Items(type="object")),
+     *                     @OA\Property(property="members", type="array", @OA\Items(type="object")),
+     *                     @OA\Property(property="services", type="array", @OA\Items(type="object")),
+     *                     @OA\Property(property="appointments", type="array", @OA\Items(type="object")),
+     *                     @OA\Property(property="invoices", type="array", @OA\Items(type="object")),
+     *                     @OA\Property(property="taxes", type="array", @OA\Items(type="object")),
+     *                     @OA\Property(property="clients", type="array", @OA\Items(type="object")),
      *                 )
      *             )
      *         )
@@ -167,7 +143,7 @@ class WorkspaceController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/workspaces/:id",
+     *     path="/workspaces/{id}",
      *     summary="Get a workspace by ID",
      *     description="Retrieve details of a single workspace by its ID.",
      *     tags={"Workspaces"},
@@ -185,14 +161,17 @@ class WorkspaceController extends Controller
      *         @OA\JsonContent(
      *             type="object",
      *             @OA\Property(property="id", type="integer", example=1),
-     *             @OA\Property(property="name", type="string", example="Tech Hub"),
+     *             @OA\Property(property="businessName", type="string", example="Tech Hub"),
+     *             @OA\Property(property="countryCode", type="string", example="BD"),
+     *             @OA\Property(property="website", type="string", example="https://tinhih.org"),
      *             @OA\Property(property="active", type="boolean", example=true),
-     *             @OA\Property(property="url", type="string", example="https://workspace.example.com"),
-     *             @OA\Property(
-     *                 property="members",
-     *                 type="array",
-     *                 @OA\Items(type="string", example="John Doe")
-     *             )
+     *             @OA\Property(property="locations", type="array", @OA\Items(type="object")),
+     *             @OA\Property(property="members", type="array", @OA\Items(type="object")),
+     *             @OA\Property(property="services", type="array", @OA\Items(type="object")),
+     *             @OA\Property(property="appointments", type="array", @OA\Items(type="object")),
+     *             @OA\Property(property="invoices", type="array", @OA\Items(type="object")),
+     *             @OA\Property(property="taxes", type="array", @OA\Items(type="object")),
+     *             @OA\Property(property="clients", type="array", @OA\Items(type="object"))
      *         )
      *     ),
      *     @OA\Response(
@@ -232,10 +211,11 @@ class WorkspaceController extends Controller
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             required={"name", "country"},
+     *             required={"businessName", "countryCode", "profession"},
      *             @OA\Property(property="businessName", type="string", example="TiNHiH California"),
      *             @OA\Property(property="countryCode", type="string", example="us"),
-     *             @OA\Property(property="profession", type="string", example="Mental Health Orgnization")
+     *             @OA\Property(property="profession", type="string", example="Mental Health Organization"),
+     *             @OA\Property(property="website", type="string", example="https://tinhih.org")
      *         )
      *     ),
      *     @OA\Response(
@@ -243,19 +223,30 @@ class WorkspaceController extends Controller
      *         description="Workspace created successfully",
      *         @OA\JsonContent(
      *             type="object",
-     *             @OA\Property(property="message", type="string", example="Workspace create successful"),
-     *             @OA\Property(property="workspace", type="object",
-     *             @OA\Property(property="id", type="integer", example=1),
-     *             @OA\Property(property="businessName", type="string", example="TiNHiH California"),
-     *             @OA\Property(property="countryCode", type="string", example="us"),
-     *             @OA\Property(property="profession", type="string", example="Mental Health Orgnization"),
-     *             @OA\Property(property="website", type="string", example="https://tinhih.org"),
+     *             @OA\Property(property="message", type="string", example="Workspace created successfully"),
+     *             @OA\Property(
+     *                 property="workspace",
+     *                 type="object",
+     *                 @OA\Property(property="id", type="integer", example=1),
+     *                 @OA\Property(property="businessName", type="string", example="TiNHiH California"),
+     *                 @OA\Property(property="countryCode", type="string", example="us"),
+     *                 @OA\Property(property="profession", type="string", example="Mental Health Organization"),
+     *                 @OA\Property(property="website", type="string", example="https://tinhih.org"),
+     *                 @OA\Property(property="active", type="boolean", example=true),
+     *                 @OA\Property(property="locations", type="array", @OA\Items(type="object")),
+     *                 @OA\Property(property="members", type="array", @OA\Items(type="object")),
+     *                 @OA\Property(property="services", type="array", @OA\Items(type="object")),
+     *                 @OA\Property(property="appointments", type="array", @OA\Items(type="object")),
+     *                 @OA\Property(property="invoices", type="array", @OA\Items(type="object")),
+     *                 @OA\Property(property="taxes", type="array", @OA\Items(type="object")),
+     *                 @OA\Property(property="clients", type="array", @OA\Items(type="object"))
      *             )
      *         )
      *     ),
      *     @OA\Response(response=500, description="Internal Server Error")
      * )
      */
+
     public function createWorkspace(StoreRequest $request)
     {
         try {
@@ -355,7 +346,15 @@ class WorkspaceController extends Controller
      *                  @OA\Property(property="businessName", type="string", example="TiNHiH California"),
      *                  @OA\Property(property="countryCode", type="string", example="us"),
      *                  @OA\Property(property="profession", type="string", example="Mental Health Orgnization"),
-     *                  @OA\Property(property="website", type="string", example="https://tinhih.org")
+     *                  @OA\Property(property="website", type="string", example="https://tinhih.org"),
+     *                  @OA\Property(property="active", type="boolean", example=true),
+     *                  @OA\Property(property="locations", type="array", @OA\Items(type="object")),
+     *                  @OA\Property(property="members", type="array", @OA\Items(type="object")),
+     *                  @OA\Property(property="services", type="array", @OA\Items(type="object")),
+     *                  @OA\Property(property="appointments", type="array", @OA\Items(type="object")),
+     *                  @OA\Property(property="invoices", type="array", @OA\Items(type="object")),
+     *                  @OA\Property(property="taxes", type="array", @OA\Items(type="object")),
+     *                  @OA\Property(property="clients", type="array", @OA\Items(type="object")),
      *             )
      *         )
      *     ),
@@ -449,8 +448,18 @@ class WorkspaceController extends Controller
      *             @OA\Property(property="message", type="string", example="Workspace toggle successful"),
      *             @OA\Property(property="workspace", type="object",
      *                  @OA\Property(property="id", type="integer", example=1),
-     *                  @OA\Property(property="name", type="string", example="Workspace Name"),
-     *                  @OA\Property(property="status", type="string", example="active"),
+     *                  @OA\Property(property="businessName", type="string", example="Workspace Name"),
+     *                  @OA\Property(property="countryCode", type="string", example="us"),
+     *                  @OA\Property(property="profession", type="string", example="mental health Organization"),
+     *                  @OA\Property(property="website", type="string", example="https://tinhih.org"),
+     *                  @OA\Property(property="active", type="boolean", example=true),
+     *                  @OA\Property(property="locations", type="array", @OA\Items(type="object")),
+     *                  @OA\Property(property="members", type="array", @OA\Items(type="object")),
+     *                  @OA\Property(property="services", type="array", @OA\Items(type="object")),
+     *                  @OA\Property(property="appointments", type="array", @OA\Items(type="object")),
+     *                  @OA\Property(property="invoices", type="array", @OA\Items(type="object")),
+     *                  @OA\Property(property="taxes", type="array", @OA\Items(type="object")),
+     *                  @OA\Property(property="clients", type="array", @OA\Items(type="object")),
      *             )
      *         )
      *     ),
@@ -485,14 +494,13 @@ class WorkspaceController extends Controller
      *             required={"first_name", "last_name", "profession", "countryCode", "teamSize", "businessName", "full_name", "preferred_name", "active"},
      *             @OA\Property(property="first_name", type="string", example="John"),
      *             @OA\Property(property="last_name", type="string", example="Doe"),
-     *             @OA\Property(property="profession", type="string", example="Developer"),
+     *             @OA\Property(property="profession", type="string", example="pofession name"),
      *             @OA\Property(property="countryCode", type="string", example="US"),
      *             @OA\Property(property="teamSize", type="string", example="justMe", enum={"justMe", "inTen", "moreThanTen"}),
      *             @OA\Property(property="timeZone", type="string", example="GMT+1"),
      *             @OA\Property(property="businessName", type="string", example="Tech Innovations"),
      *             @OA\Property(property="full_name", type="string", example="John Doe"),
      *             @OA\Property(property="preferred_name", type="string", example="John"),
-     *             @OA\Property(property="active", type="boolean", example=true)
      *         )
      *     ),
      *     @OA\Response(
@@ -502,17 +510,17 @@ class WorkspaceController extends Controller
      *             @OA\Property(property="message", type="string", example="Workspace setup successful"),
      *             @OA\Property(property="workspace", type="object",
      *                 @OA\Property(property="id", type="integer", example=1),
-     *                 @OA\Property(property="active", type="boolean", example=true),
      *                 @OA\Property(property="businessName", type="string", example="Tech Innovations"),
      *                 @OA\Property(property="countryCode", type="string", example="US"),
      *                 @OA\Property(property="website", type="string", example=""),
-     *                @OA\Property(property="locations", type="array", @OA\Items(type="object")),
-     * @OA\Property(property="members", type="array", @OA\Items(type="object")),
-     * @OA\Property(property="services", type="array", @OA\Items(type="object")),
-     * @OA\Property(property="appointments", type="array", @OA\Items(type="object")),
-     * @OA\Property(property="invoices", type="array", @OA\Items(type="object")),
-     * @OA\Property(property="taxes", type="array", @OA\Items(type="object")),
-     * @OA\Property(property="clients", type="array", @OA\Items(type="object")),
+     *                 @OA\Property(property="active", type="boolean", example=true),
+     *                 @OA\Property(property="locations", type="array", @OA\Items(type="object")),
+     *                 @OA\Property(property="members", type="array", @OA\Items(type="object")),
+     *                 @OA\Property(property="services", type="array", @OA\Items(type="object")),
+     *                 @OA\Property(property="appointments", type="array", @OA\Items(type="object")),
+     *                 @OA\Property(property="invoices", type="array", @OA\Items(type="object")),
+     *                 @OA\Property(property="taxes", type="array", @OA\Items(type="object")),
+     *                 @OA\Property(property="clients", type="array", @OA\Items(type="object")),
      *             )
      *         )
      *     ),

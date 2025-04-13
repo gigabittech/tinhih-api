@@ -5342,29 +5342,43 @@
                                                     "locations": {
                                                         "type": "array",
                                                         "items": {
-                                                            "type": "string",
-                                                            "example": "Dhaka, Bangladesh"
+                                                            "type": "object"
                                                         }
                                                     },
                                                     "members": {
                                                         "type": "array",
                                                         "items": {
-                                                            "type": "string",
-                                                            "example": "John Doe"
+                                                            "type": "object"
                                                         }
                                                     },
                                                     "services": {
                                                         "type": "array",
                                                         "items": {
-                                                            "type": "string",
-                                                            "example": "Web Development"
+                                                            "type": "object"
                                                         }
                                                     },
                                                     "appointments": {
                                                         "type": "array",
                                                         "items": {
-                                                            "type": "string",
-                                                            "example": "2024-03-25 10:00 AM"
+                                                            "type": "object"
+                                                        }
+                                                    },
+                                                    "invoices": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object"
+                                                        }
+                                                    },
+                                                    "taxes": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object"
+                                                        }
+                                                    },
+                                                    "clients": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object"
                                                         }
                                                     }
                                                 },
@@ -5412,8 +5426,9 @@
                         "application/json": {
                             "schema": {
                                 "required": [
-                                    "name",
-                                    "country"
+                                    "businessName",
+                                    "countryCode",
+                                    "profession"
                                 ],
                                 "properties": {
                                     "businessName": {
@@ -5426,7 +5441,11 @@
                                     },
                                     "profession": {
                                         "type": "string",
-                                        "example": "Mental Health Orgnization"
+                                        "example": "Mental Health Organization"
+                                    },
+                                    "website": {
+                                        "type": "string",
+                                        "example": "https://tinhih.org"
                                     }
                                 },
                                 "type": "object"
@@ -5443,7 +5462,7 @@
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Workspace create successful"
+                                            "example": "Workspace created successfully"
                                         },
                                         "workspace": {
                                             "properties": {
@@ -5461,11 +5480,57 @@
                                                 },
                                                 "profession": {
                                                     "type": "string",
-                                                    "example": "Mental Health Orgnization"
+                                                    "example": "Mental Health Organization"
                                                 },
                                                 "website": {
                                                     "type": "string",
                                                     "example": "https://tinhih.org"
+                                                },
+                                                "active": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                },
+                                                "locations": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "members": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "services": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "appointments": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "invoices": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "taxes": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "clients": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object"
+                                                    }
                                                 }
                                             },
                                             "type": "object"
@@ -5518,10 +5583,6 @@
                                                         "type": "string",
                                                         "example": "Tech Hub"
                                                     },
-                                                    "active": {
-                                                        "type": "boolean",
-                                                        "example": true
-                                                    },
                                                     "country": {
                                                         "type": "string",
                                                         "example": "Bangladesh"
@@ -5534,32 +5595,50 @@
                                                         "type": "string",
                                                         "example": "https://workspace.example.com"
                                                     },
+                                                    "active": {
+                                                        "type": "boolean",
+                                                        "example": true
+                                                    },
                                                     "locations": {
                                                         "type": "array",
                                                         "items": {
-                                                            "type": "string",
-                                                            "example": "Dhaka, Bangladesh"
+                                                            "type": "object"
                                                         }
                                                     },
                                                     "members": {
                                                         "type": "array",
                                                         "items": {
-                                                            "type": "string",
-                                                            "example": "John Doe"
+                                                            "type": "object"
                                                         }
                                                     },
                                                     "services": {
                                                         "type": "array",
                                                         "items": {
-                                                            "type": "string",
-                                                            "example": "Web Development"
+                                                            "type": "object"
                                                         }
                                                     },
                                                     "appointments": {
                                                         "type": "array",
                                                         "items": {
-                                                            "type": "string",
-                                                            "example": "2024-03-25 10:00 AM"
+                                                            "type": "object"
+                                                        }
+                                                    },
+                                                    "invoices": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object"
+                                                        }
+                                                    },
+                                                    "taxes": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object"
+                                                        }
+                                                    },
+                                                    "clients": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object"
                                                         }
                                                     }
                                                 },
@@ -5596,14 +5675,14 @@
                 ]
             }
         },
-        "/workspaces/:id": {
+        "/workspaces/{id}": {
             "get": {
                 "tags": [
                     "Workspaces"
                 ],
                 "summary": "Get a workspace by ID",
                 "description": "Retrieve details of a single workspace by its ID.",
-                "operationId": "4f2f01df18d1602b6d2d3a3c8057e6e1",
+                "operationId": "354c1c049bcd318a9d2af0afee9e5aa1",
                 "parameters": [
                     {
                         "name": "id",
@@ -5626,23 +5705,62 @@
                                             "type": "integer",
                                             "example": 1
                                         },
-                                        "name": {
+                                        "businessName": {
                                             "type": "string",
                                             "example": "Tech Hub"
+                                        },
+                                        "countryCode": {
+                                            "type": "string",
+                                            "example": "BD"
+                                        },
+                                        "website": {
+                                            "type": "string",
+                                            "example": "https://tinhih.org"
                                         },
                                         "active": {
                                             "type": "boolean",
                                             "example": true
                                         },
-                                        "url": {
-                                            "type": "string",
-                                            "example": "https://workspace.example.com"
+                                        "locations": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
                                         },
                                         "members": {
                                             "type": "array",
                                             "items": {
-                                                "type": "string",
-                                                "example": "John Doe"
+                                                "type": "object"
+                                            }
+                                        },
+                                        "services": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        },
+                                        "appointments": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        },
+                                        "invoices": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        },
+                                        "taxes": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        },
+                                        "clients": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
                                             }
                                         }
                                     },
@@ -5673,7 +5791,9 @@
                         "bearerAuth": []
                     }
                 ]
-            },
+            }
+        },
+        "/workspaces/:id": {
             "put": {
                 "tags": [
                     "Workspaces"
@@ -5898,6 +6018,52 @@
                                                 "website": {
                                                     "type": "string",
                                                     "example": "https://tinhih.org"
+                                                },
+                                                "active": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                },
+                                                "locations": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "members": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "services": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "appointments": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "invoices": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "taxes": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "clients": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object"
+                                                    }
                                                 }
                                             },
                                             "type": "object"
@@ -5964,13 +6130,67 @@
                                                     "type": "integer",
                                                     "example": 1
                                                 },
-                                                "name": {
+                                                "businessName": {
                                                     "type": "string",
                                                     "example": "Workspace Name"
                                                 },
-                                                "status": {
+                                                "countryCode": {
                                                     "type": "string",
-                                                    "example": "active"
+                                                    "example": "us"
+                                                },
+                                                "profession": {
+                                                    "type": "string",
+                                                    "example": "mental health Organization"
+                                                },
+                                                "website": {
+                                                    "type": "string",
+                                                    "example": "https://tinhih.org"
+                                                },
+                                                "active": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                },
+                                                "locations": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "members": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "services": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "appointments": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "invoices": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "taxes": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "clients": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object"
+                                                    }
                                                 }
                                             },
                                             "type": "object"
@@ -6027,7 +6247,7 @@
                                     },
                                     "profession": {
                                         "type": "string",
-                                        "example": "Developer"
+                                        "example": "pofession name"
                                     },
                                     "countryCode": {
                                         "type": "string",
@@ -6057,10 +6277,6 @@
                                     "preferred_name": {
                                         "type": "string",
                                         "example": "John"
-                                    },
-                                    "active": {
-                                        "type": "boolean",
-                                        "example": true
                                     }
                                 },
                                 "type": "object"
@@ -6085,10 +6301,6 @@
                                                     "type": "integer",
                                                     "example": 1
                                                 },
-                                                "active": {
-                                                    "type": "boolean",
-                                                    "example": true
-                                                },
                                                 "businessName": {
                                                     "type": "string",
                                                     "example": "Tech Innovations"
@@ -6100,6 +6312,10 @@
                                                 "website": {
                                                     "type": "string",
                                                     "example": ""
+                                                },
+                                                "active": {
+                                                    "type": "boolean",
+                                                    "example": true
                                                 },
                                                 "locations": {
                                                     "type": "array",
