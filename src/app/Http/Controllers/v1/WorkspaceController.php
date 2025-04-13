@@ -233,9 +233,9 @@ class WorkspaceController extends Controller
      *         required=true,
      *         @OA\JsonContent(
      *             required={"name", "country"},
-     *             @OA\Property(property="name", type="string", example="My Workspace"),
-     *             @OA\Property(property="country", type="string", example="Bangladesh"),
-     *             @OA\Property(property="profession", type="string", example="Software Engineer")
+     *             @OA\Property(property="businessName", type="string", example="TiNHiH California"),
+     *             @OA\Property(property="countryCode", type="string", example="us"),
+     *             @OA\Property(property="profession", type="string", example="Mental Health Orgnization")
      *         )
      *     ),
      *     @OA\Response(
@@ -245,10 +245,11 @@ class WorkspaceController extends Controller
      *             type="object",
      *             @OA\Property(property="message", type="string", example="Workspace create successful"),
      *             @OA\Property(property="workspace", type="object",
-     *                 @OA\Property(property="id", type="integer", example=1),
-     *                 @OA\Property(property="name", type="string", example="My Workspace"),
-     *                 @OA\Property(property="country", type="string", example="Bangladesh"),
-     *                 @OA\Property(property="profession", type="string", example="Software Engineer")
+     *             @OA\Property(property="id", type="integer", example=1),
+     *             @OA\Property(property="businessName", type="string", example="TiNHiH California"),
+     *             @OA\Property(property="countryCode", type="string", example="us"),
+     *             @OA\Property(property="profession", type="string", example="Mental Health Orgnization"),
+     *             @OA\Property(property="website", type="string", example="https://tinhih.org"),
      *             )
      *         )
      *     ),
@@ -283,9 +284,9 @@ class WorkspaceController extends Controller
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             required={"name", "status"},
-     *             @OA\Property(property="name", type="string", example="Updated Workspace Name"),
-     *             @OA\Property(property="status", type="string", example="active")
+     *             required={"businessName", "countryCode"},
+     *             @OA\Property(property="businessName", type="string", example="TiNHiH California 1"),
+     *             @OA\Property(property="countryCode", type="string", example="us")
      *         )
      *     ),
      *     @OA\Response(
@@ -295,9 +296,11 @@ class WorkspaceController extends Controller
      *             type="object",
      *             @OA\Property(property="message", type="string", example="Workspace update successful"),
      *             @OA\Property(property="workspace", type="object",
-     *                  @OA\Property(property="id", type="integer", example=1),
-     *                  @OA\Property(property="name", type="string", example="Updated Workspace Name"),
-     *                  @OA\Property(property="status", type="string", example="active")
+     *             @OA\Property(property="id", type="integer", example=1),
+     *             @OA\Property(property="businessName", type="string", example="TiNHiH California"),
+     *             @OA\Property(property="countryCode", type="string", example="us"),
+     *             @OA\Property(property="profession", type="string", example="Mental Health Orgnization"),
+     *             @OA\Property(property="website", type="string", example="https://tinhih.org"),
      *             )
      *         )
      *     ),
@@ -474,7 +477,7 @@ class WorkspaceController extends Controller
      *     path="/setup",
      *     summary="Setup workspace for the user",
      *     description="Then initial step after successfully create an account. This endpoint sets up a new workspace for the user along with their profile information.",
-     *     tags={"Auth Setup"},
+     *     tags={"Auth Workspace Setup"},
      *     security={{ "bearerAuth":{} }},
      *     @OA\RequestBody(
      *         required=true,

@@ -5416,17 +5416,17 @@
                                     "country"
                                 ],
                                 "properties": {
-                                    "name": {
+                                    "businessName": {
                                         "type": "string",
-                                        "example": "My Workspace"
+                                        "example": "TiNHiH California"
                                     },
-                                    "country": {
+                                    "countryCode": {
                                         "type": "string",
-                                        "example": "Bangladesh"
+                                        "example": "us"
                                     },
                                     "profession": {
                                         "type": "string",
-                                        "example": "Software Engineer"
+                                        "example": "Mental Health Orgnization"
                                     }
                                 },
                                 "type": "object"
@@ -5451,17 +5451,21 @@
                                                     "type": "integer",
                                                     "example": 1
                                                 },
-                                                "name": {
+                                                "businessName": {
                                                     "type": "string",
-                                                    "example": "My Workspace"
+                                                    "example": "TiNHiH California"
                                                 },
-                                                "country": {
+                                                "countryCode": {
                                                     "type": "string",
-                                                    "example": "Bangladesh"
+                                                    "example": "us"
                                                 },
                                                 "profession": {
                                                     "type": "string",
-                                                    "example": "Software Engineer"
+                                                    "example": "Mental Health Orgnization"
+                                                },
+                                                "website": {
+                                                    "type": "string",
+                                                    "example": "https://tinhih.org"
                                                 }
                                             },
                                             "type": "object"
@@ -5693,17 +5697,17 @@
                         "application/json": {
                             "schema": {
                                 "required": [
-                                    "name",
-                                    "status"
+                                    "businessName",
+                                    "countryCode"
                                 ],
                                 "properties": {
-                                    "name": {
+                                    "businessName": {
                                         "type": "string",
-                                        "example": "Updated Workspace Name"
+                                        "example": "TiNHiH California 1"
                                     },
-                                    "status": {
+                                    "countryCode": {
                                         "type": "string",
-                                        "example": "active"
+                                        "example": "us"
                                     }
                                 },
                                 "type": "object"
@@ -5728,13 +5732,21 @@
                                                     "type": "integer",
                                                     "example": 1
                                                 },
-                                                "name": {
+                                                "businessName": {
                                                     "type": "string",
-                                                    "example": "Updated Workspace Name"
+                                                    "example": "TiNHiH California"
                                                 },
-                                                "status": {
+                                                "countryCode": {
                                                     "type": "string",
-                                                    "example": "active"
+                                                    "example": "us"
+                                                },
+                                                "profession": {
+                                                    "type": "string",
+                                                    "example": "Mental Health Orgnization"
+                                                },
+                                                "website": {
+                                                    "type": "string",
+                                                    "example": "https://tinhih.org"
                                                 }
                                             },
                                             "type": "object"
@@ -5983,7 +5995,7 @@
         "/setup": {
             "post": {
                 "tags": [
-                    "Auth Setup"
+                    "Auth Workspace Setup"
                 ],
                 "summary": "Setup workspace for the user",
                 "description": "Then initial step after successfully create an account. This endpoint sets up a new workspace for the user along with their profile information.",
@@ -6227,8 +6239,8 @@
             "description": "Auth"
         },
         {
-            "name": "Auth Setup",
-            "description": "Auth Setup"
+            "name": "Auth Workspace Setup",
+            "description": "Auth Workspace Setup"
         },
         {
             "name": "Appointments",
