@@ -672,9 +672,18 @@
                                             "type": "string",
                                             "example": "Logged in successfully"
                                         },
-                                        "token": {
-                                            "type": "string",
-                                            "example": "your-generated-token"
+                                        "payload": {
+                                            "properties": {
+                                                "token": {
+                                                    "type": "string",
+                                                    "example": "your-generated-token"
+                                                },
+                                                "user": {
+                                                    "type": "object",
+                                                    "properties": {}
+                                                }
+                                            },
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -778,13 +787,6 @@
                                                 "token": {
                                                     "type": "string",
                                                     "example": "your-generated-token"
-                                                },
-                                                "password": {
-                                                    "type": "array",
-                                                    "items": {
-                                                        "type": "string",
-                                                        "example": "The password field is required."
-                                                    }
                                                 }
                                             },
                                             "type": "object"
@@ -6464,16 +6466,16 @@
     },
     "tags": [
         {
+            "name": "Appointments",
+            "description": "Appointments"
+        },
+        {
             "name": "Auth",
             "description": "Auth"
         },
         {
-            "name": "Auth Workspace Setup",
-            "description": "Auth Workspace Setup"
-        },
-        {
-            "name": "Appointments",
-            "description": "Appointments"
+            "name": "User",
+            "description": "User"
         },
         {
             "name": "Clients",
@@ -6492,10 +6494,6 @@
             "description": "LocationType"
         },
         {
-            "name": "Members",
-            "description": "Members"
-        },
-        {
             "name": "Profile",
             "description": "Profile"
         },
@@ -6508,12 +6506,16 @@
             "description": "Taxes"
         },
         {
-            "name": "User",
-            "description": "User"
+            "name": "Members",
+            "description": "Members"
         },
         {
             "name": "Workspaces",
             "description": "Workspaces"
+        },
+        {
+            "name": "Auth Workspace Setup",
+            "description": "Auth Workspace Setup"
         }
     ]
 }

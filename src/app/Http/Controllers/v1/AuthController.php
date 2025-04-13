@@ -48,7 +48,7 @@ class AuthController extends Controller
      *                     "user": {
      *                         "id": 1,
      *                         "name": "John Doe",
-     *                         "email": "john.doe@example.com"
+     *                         "email": "john.doe@example.com",
      *                     }
      *                 }
      *             }
@@ -105,7 +105,10 @@ class AuthController extends Controller
 
             return response()->json([
                 'message' => "Logged in successfull",
-                'payload' => ["token" => $token, 'user' => new UserResource($user)]
+                'payload' => [
+                    "token" => $token,
+                    'user' => new UserResource($user)
+                ]
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
@@ -139,9 +142,6 @@ class AuthController extends Controller
      *                 property="payload",
      *                 type="object",
      *                 @OA\Property(property="token", type="string", example="your-generated-token"),
-     *                  @OA\Property(property="password", type="array",
-     *                     @OA\Items(type="string", example="The password field is required.")
-     *                 )
      *             )
      *         ),
      *         @OA\Examples(
