@@ -25,12 +25,12 @@ class WorkspaceResource extends JsonResource
             "countryCode" => $this->countryCode,
             'website' => $this->website,
             "locations" => LocationResource::collection($this->locations),
+            "appointments" => AppointmentResource::collection($this->appointments),
+            'clients' => ClientResource::collection($this->clients),
+            'invoices' => InvoiceResource::collection($this->invoices),
             "members" => TeamMemberResource::collection($this->teamMembers),
             "services" => ServiceResource::collection($this->services),
-            "appointments" => AppointmentResource::collection($this->appointments),
-            'invoices' => InvoiceResource::collection($this->invoices),
             'taxes' => TaxResource::collection($this->taxs),
-            'clients' => ClientResource::collection($this->clients),
         ];
     }
 }
