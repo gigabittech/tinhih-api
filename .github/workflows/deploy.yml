@@ -21,16 +21,28 @@ jobs:
           port: 22
           key: ${{ secrets.DEPLOY_KEY }}
           script: |
+            echo "🔄 Starting deployment..."
+
             cd /var/www/api.tinhih.com
+
+            echo "📦 Resetting local changes (if any)..."
+            git reset --hard HEAD
+            git clean -fd
+
+            echo "📥 Pulling latest code from master..."
             git pull origin master
 
+            echo "📁 Moving to Laravel app..."
             cd /var/www/api.tinhih.com/src
+
+            echo "🎼 Installing dependencies..."
             composer install --no-dev --optimize-autoloader
+
+            echo "⚙️ Running migrations..."
             php artisan migrate --force
-            # npm install && npm run build
+
+            echo "🧹 Clearing and caching config..."
             php artisan cache:clear
             php artisan config:cache
-            # php artisan queue:restart
-            # sudo systemctl restart nginx  # Restart server if needed
 
-            echo "✅Deployed successfull!"
+            echo "✅ Deployment complete!"
