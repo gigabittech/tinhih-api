@@ -67,7 +67,7 @@ class User extends Authenticatable
         return $this->hasMany(Service::class);
     }
 
-    public function scopeCurrentWorkspace()
+    public function currentWorkspace()
     {
         return $this->workspaces()->with(['services', 'teamMembers', 'appointments', 'locations', 'clients', 'invoices', 'taxes'])->where('active', 1)->first();
     }
