@@ -672,18 +672,9 @@
                                             "type": "string",
                                             "example": "Logged in successfully"
                                         },
-                                        "payload": {
-                                            "properties": {
-                                                "token": {
-                                                    "type": "string",
-                                                    "example": "your-generated-token"
-                                                },
-                                                "user": {
-                                                    "type": "object",
-                                                    "properties": {}
-                                                }
-                                            },
-                                            "type": "object"
+                                        "token": {
+                                            "type": "string",
+                                            "example": "your-generated-token"
                                         }
                                     },
                                     "type": "object"
@@ -749,7 +740,8 @@
                             "schema": {
                                 "required": [
                                     "email",
-                                    "password"
+                                    "password",
+                                    "role"
                                 ],
                                 "properties": {
                                     "email": {
@@ -760,6 +752,14 @@
                                     "password": {
                                         "type": "string",
                                         "example": "password123"
+                                    },
+                                    "role": {
+                                        "type": "string",
+                                        "enum": [
+                                            "client",
+                                            "provider"
+                                        ],
+                                        "example": "client"
                                     }
                                 },
                                 "type": "object"
@@ -787,6 +787,27 @@
                                                 "token": {
                                                     "type": "string",
                                                     "example": "your-generated-token"
+                                                },
+                                                "user": {
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        },
+                                                        "name": {
+                                                            "type": "string",
+                                                            "example": "John Doe"
+                                                        },
+                                                        "email": {
+                                                            "type": "string",
+                                                            "example": "johndoe@example.com"
+                                                        },
+                                                        "role": {
+                                                            "type": "string",
+                                                            "example": "client"
+                                                        }
+                                                    },
+                                                    "type": "object"
                                                 }
                                             },
                                             "type": "object"
@@ -821,6 +842,13 @@
                                                     "items": {
                                                         "type": "string",
                                                         "example": "The password field is required."
+                                                    }
+                                                },
+                                                "role": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "The role field is required."
                                                     }
                                                 }
                                             },
