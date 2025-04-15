@@ -48,7 +48,7 @@ class AuthController extends Controller
      *                     "user": {
      *                         "id": 1,
      *                         "name": "John Doe",
-     *                         "email": "john.doe@example.com"
+     *                         "email": "john.doe@example.com",
      *                     }
      *                 }
      *             }
@@ -105,7 +105,10 @@ class AuthController extends Controller
 
             return response()->json([
                 'message' => "Logged in successfull",
-                'payload' => ["token" => $token, 'user' => new UserResource($user)]
+                'payload' => [
+                    "token" => $token,
+                    'user' => new UserResource($user)
+                ]
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
@@ -124,9 +127,10 @@ class AuthController extends Controller
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             required={"email", "password"},
+     *             required={"email", "password", "role"},
      *             @OA\Property(property="email", type="string", format="email", example="johndoe@example.com"),
      *             @OA\Property(property="password", type="string", example="password123"),
+     *             @OA\Property(property="password", type="enum", example="provider")
      *         )
      *     ),
      *     @OA\Response(
@@ -139,9 +143,6 @@ class AuthController extends Controller
      *                 property="payload",
      *                 type="object",
      *                 @OA\Property(property="token", type="string", example="your-generated-token"),
-     *                  @OA\Property(property="password", type="array",
-     *                     @OA\Items(type="string", example="The password field is required.")
-     *                 )
      *             )
      *         ),
      *         @OA\Examples(
@@ -201,7 +202,118 @@ class AuthController extends Controller
      *     )
      * )
      */
-    public function register(RegisterRequest $request)
+   /**
+ * @OA\Post(
+ *     path="/auth/register",
+ *     summary="Register a new user",
+ *     tags={"Auth"},
+ *     description="This endpoint allows a user to register by providing their name, email, password, and other required details.",
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\JsonContent(
+ *             required={"email", "password", "role"},
+ *             @OA\Property(property="email", type="string", format="email", example="johndoe@example.com"),
+ *             @OA\Property(property="password", type="string", example="password123"),
+ *             @OA\Property(
+ *                 property="role",
+ *                 type="string",
+ *                 enum={"client", "provider"},
+ *                 example="client"
+ *             )
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="User registered successfully",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="message", type="string", example="Account created successfully"),
+ *             @OA\Property(property="success", type="boolean", example=true),
+ *             @OA\Property(
+ *                 property="payload",
+ *                 type="object",
+ *                 @OA\Property(property="token", type="string", example="your-generated-token"),
+ *                 @OA\Property(property="user", type="object",
+ *                     @OA\Property(property="id", type="integer", example=1),
+ *                     @OA\Property(property="name", type="string", example="John Doe"),
+ *                     @OA\Property(property="email", type="string", example="johndoe@example.com"),
+ *                     @OA\Property(property="role", type="string", example="client")
+ *                 )
+ *             )
+ *         ),
+ *         @OA\Examples(
+ *             example="successResponse",
+ *             summary="Example response for a successful registration",
+ *             value={
+ *                 "message": "Account created successfully",
+ *                 "success": true,
+ *                 "payload": {
+ *                     "token": "your-generated-token",
+ *                     "user": {
+ *                         "id": 1,
+ *                         "name": "John Doe",
+ *                         "email": "johndoe@example.com",
+ *                         "role": "client"
+ *                     }
+ *                 }
+ *             }
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=422,
+ *         description="Validation error",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="message", type="string", example="The email field is required."),
+ *             @OA\Property(property="errors", type="object",
+ *                 @OA\Property(property="email", type="array",
+ *                     @OA\Items(type="string", example="The email field is required.")
+ *                 ),
+ *                 @OA\Property(property="password", type="array",
+ *                     @OA\Items(type="string", example="The password field is required.")
+ *                 ),
+ *                 @OA\Property(property="role", type="array",
+ *                     @OA\Items(type="string", example="The role field is required.")
+ *                 )
+ *             )
+ *         ),
+ *         @OA\Examples(
+ *             example="validationErrorResponse",
+ *             summary="Example response for validation error",
+ *             value={
+ *                 "message": "The email field is required.",
+ *                 "errors": {
+ *                     "email": {
+ *                         "The email field is required."
+ *                     },
+ *                     "password": {
+ *                         "The password field is required."
+ *                     },
+ *                     "role": {
+ *                         "The role field is required."
+ *                     }
+ *                 }
+ *             }
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=500,
+ *         description="Internal server error",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="message", type="string", example="An unexpected error occurred."),
+ *             @OA\Property(property="success", type="boolean", example=false)
+ *         ),
+ *         @OA\Examples(
+ *             example="serverErrorResponse",
+ *             summary="Example response for internal server error",
+ *             value={
+ *                 "message": "An unexpected error occurred.",
+ *                 "success": false
+ *             }
+ *         )
+ *     )
+ * )
+ */
+
+ public function register(RegisterRequest $request)
     {
         try {
             DB::beginTransaction();

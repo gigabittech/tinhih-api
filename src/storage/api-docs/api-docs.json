@@ -740,7 +740,8 @@
                             "schema": {
                                 "required": [
                                     "email",
-                                    "password"
+                                    "password",
+                                    "role"
                                 ],
                                 "properties": {
                                     "email": {
@@ -751,6 +752,14 @@
                                     "password": {
                                         "type": "string",
                                         "example": "password123"
+                                    },
+                                    "role": {
+                                        "type": "string",
+                                        "enum": [
+                                            "client",
+                                            "provider"
+                                        ],
+                                        "example": "client"
                                     }
                                 },
                                 "type": "object"
@@ -779,12 +788,26 @@
                                                     "type": "string",
                                                     "example": "your-generated-token"
                                                 },
-                                                "password": {
-                                                    "type": "array",
-                                                    "items": {
-                                                        "type": "string",
-                                                        "example": "The password field is required."
-                                                    }
+                                                "user": {
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        },
+                                                        "name": {
+                                                            "type": "string",
+                                                            "example": "John Doe"
+                                                        },
+                                                        "email": {
+                                                            "type": "string",
+                                                            "example": "johndoe@example.com"
+                                                        },
+                                                        "role": {
+                                                            "type": "string",
+                                                            "example": "client"
+                                                        }
+                                                    },
+                                                    "type": "object"
                                                 }
                                             },
                                             "type": "object"
@@ -819,6 +842,13 @@
                                                     "items": {
                                                         "type": "string",
                                                         "example": "The password field is required."
+                                                    }
+                                                },
+                                                "role": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "The role field is required."
                                                     }
                                                 }
                                             },
@@ -6464,16 +6494,16 @@
     },
     "tags": [
         {
+            "name": "Appointments",
+            "description": "Appointments"
+        },
+        {
             "name": "Auth",
             "description": "Auth"
         },
         {
-            "name": "Auth Workspace Setup",
-            "description": "Auth Workspace Setup"
-        },
-        {
-            "name": "Appointments",
-            "description": "Appointments"
+            "name": "User",
+            "description": "User"
         },
         {
             "name": "Clients",
@@ -6492,10 +6522,6 @@
             "description": "LocationType"
         },
         {
-            "name": "Members",
-            "description": "Members"
-        },
-        {
             "name": "Profile",
             "description": "Profile"
         },
@@ -6508,12 +6534,16 @@
             "description": "Taxes"
         },
         {
-            "name": "User",
-            "description": "User"
+            "name": "Members",
+            "description": "Members"
         },
         {
             "name": "Workspaces",
             "description": "Workspaces"
+        },
+        {
+            "name": "Auth Workspace Setup",
+            "description": "Auth Workspace Setup"
         }
     ]
 }
