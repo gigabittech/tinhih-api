@@ -22,6 +22,8 @@ class RegisterRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
+
+    //  testing heres
     public function rules(): array
     {
         return [
