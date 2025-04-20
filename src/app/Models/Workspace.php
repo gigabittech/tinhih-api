@@ -62,4 +62,8 @@ class Workspace extends Model
     {
         return $this->hasMany(Tax::class);
     }
+
+    public function calendarSettings(){
+        return $this->hasOne(CalendarSetting::class);
+    }
 }
