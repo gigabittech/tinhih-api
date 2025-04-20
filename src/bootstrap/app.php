@@ -2,13 +2,17 @@
 
 use App\Http\Middleware\RoleMiddleware;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
+use function Pest\Laravel\instance;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -26,6 +30,7 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->render(function (Throwable $e, Request $request) {
+
             if ($e instanceof AuthenticationException) {
                 return response()->json([
                     'message' => 'Unauthorized',
@@ -38,11 +43,18 @@ return Application::configure(basePath: dirname(__DIR__))
                 ], 404);
             }
 
-            if ($e instanceof ValidationException) {
+            if ($e instanceOf ValidationException) {
                 return response()->json([
                     'message' => 'Validation Error',
                     'errors' => $e->errors(),
                 ], 422);
+            }
+
+            if( $e instanceOf NotFoundHttpException){
+                return response()->json([
+                    'message' => 'Not found',
+                    'error' => $e->getMessage(),
+                ], 404);
             }
 
             return response()->json([
