@@ -251,6 +251,7 @@ class WorkspaceController extends Controller
     {
         try {
             $workspace = $this->repository->create($request->all());
+            $workspace->calendarSettings()->create();
             return response()->json([
                 'message' => "Workspace create successful",
                 'workspace' => new WorkspaceResource($workspace)
@@ -414,15 +415,8 @@ class WorkspaceController extends Controller
 
     public function deleteWorkspace(int $id)
     {
-        try {
             $this->repository->delete($id);
             return response()->json(['message' => "Workspace delete successfull"], 200);
-        } catch (\Throwable $th) {
-            //throw $th;
-            return response()->json([
-                'message' => $th->getMessage(),
-            ], 500);
-        }
     }
 
     /**
