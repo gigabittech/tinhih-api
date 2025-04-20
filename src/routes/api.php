@@ -11,6 +11,7 @@ use App\Http\Controllers\v1\ServiceController;
 use App\Http\Controllers\v1\TaxController;
 use App\Http\Controllers\v1\TeamMemberController;
 use App\Http\Controllers\v1\WorkspaceController;
+use App\Http\Controllers\Workspace\CalendarSttings\CalendarSettingsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -135,6 +136,11 @@ Route::prefix('v1')->group(function () {
                 Route::patch('/{id}/mark-as-paid', [InvoiceController::class, 'markAsPaid']);
             });
             
+            Route::prefix('calendar-settings')->group(function () {
+                Route::post('', [CalendarSettingsController::class,'createCalendar']);
+                Route::get('/{id}', [CalendarSettingsController::class,'getCalendar']);
+                Route::put('/{id}', [CalendarSettingsController::class,'updateCalendar']);
+            });
             Route::post('/setup', [WorkspaceController::class, 'setupWorkspace'])->middleware('verifyWorkspaceSetup');
             
         });
