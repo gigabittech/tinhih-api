@@ -480,7 +480,7 @@ class WorkspaceController extends Controller
      *     path="/onboarding",
      *     summary="Onboarding the user",
      *     description="Then initial step after successfully create an account. This endpoint sets up a new workspace for the user along with their profile information.",
-     *     tags={"Auth Workspace Setup"},
+     *     tags={"Onboarding for Practitioner"},
      *     security={{ "bearerAuth":{} }},
      *     @OA\RequestBody(
      *         required=true,
