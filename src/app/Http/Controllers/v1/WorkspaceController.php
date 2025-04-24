@@ -478,7 +478,7 @@ class WorkspaceController extends Controller
     /**
      * @OA\Post(
      *     path="/onboarding",
-     *     summary="Setup workspace for the user",
+     *     summary="Onboarding the user",
      *     description="Then initial step after successfully create an account. This endpoint sets up a new workspace for the user along with their profile information.",
      *     tags={"Auth Workspace Setup"},
      *     security={{ "bearerAuth":{} }},
@@ -499,9 +499,9 @@ class WorkspaceController extends Controller
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Workspace setup successful",
+     *         description="Onboadring successful",
      *         @OA\JsonContent(
-     *             @OA\Property(property="message", type="string", example="Workspace setup successful"),
+     *             @OA\Property(property="message", type="string", example="Onboadring successful"),
      *             @OA\Property(property="workspace", type="object",
      *                 @OA\Property(property="id", type="integer", example=1),
      *                 @OA\Property(property="businessName", type="string", example="Tech Innovations"),
@@ -555,7 +555,7 @@ class WorkspaceController extends Controller
 
             DB::commit();
             return response()->json([
-                'message' => "Workspace setup successful",
+                'message' => "Onboadring successful",
                 'user' => new UserResource($request->user())
             ], 200);
         } catch (\Throwable $th) {
