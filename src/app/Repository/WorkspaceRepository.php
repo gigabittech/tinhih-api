@@ -30,6 +30,9 @@ class WorkspaceRepository extends BaseRepository
     public function setup($user, $data)
     {
         $workspace = $user->workspaces()->create($data);
+        $workspace->calendarSettings()->create([
+            'workspace_id' => $workspace->id
+        ]);
         return $workspace;
     }
 }

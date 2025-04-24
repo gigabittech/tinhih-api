@@ -6,6 +6,7 @@ use App\Http\Resources\Client\ClientResource;
 use App\Http\Resources\Location\LocationResource;
 use App\Http\Resources\Resources\AppointmentResource;
 use App\Http\Resources\Service\ServiceResource;
+use App\Models\CalendarSetting;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -31,6 +32,7 @@ class WorkspaceResource extends JsonResource
             "members" => TeamMemberResource::collection($this->teamMembers),
             "services" => ServiceResource::collection($this->services),
             'taxes' => TaxResource::collection($this->taxes),
+            'calendarSettings' => new CalendarSettingResource($this->calendarSettings)
         ];
     }
 }
