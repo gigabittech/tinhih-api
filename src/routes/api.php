@@ -141,7 +141,7 @@ Route::prefix('v1')->group(function () {
                 Route::get('/{id}', [CalendarSettingsController::class,'getCalendar']);
                 Route::put('/{id}', [CalendarSettingsController::class,'updateCalendar']);
             });
-            Route::post('/setup', [WorkspaceController::class, 'setupWorkspace'])->middleware('verifyWorkspaceSetup');
+            Route::post('/onboarding', [WorkspaceController::class, 'setupWorkspace'])->middleware('verifyWorkspaceSetup');
             
         });
 

@@ -477,7 +477,7 @@ class WorkspaceController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/setup",
+     *     path="/onboarding",
      *     summary="Setup workspace for the user",
      *     description="Then initial step after successfully create an account. This endpoint sets up a new workspace for the user along with their profile information.",
      *     tags={"Auth Workspace Setup"},
