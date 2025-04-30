@@ -50,6 +50,6 @@ class StoreRequest extends FormRequest
         throw new HttpResponseException(response()->json([
             'message' => "Validation error",
             "errors" => $validator->errors()
-        ]));
+        ], 422));
     }
 }
