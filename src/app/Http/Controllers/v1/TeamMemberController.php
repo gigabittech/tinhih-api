@@ -59,7 +59,7 @@ class TeamMemberController extends Controller
     public function getMembers(Request $request)
     {
         try {
-            $members = $this->repository->getUserTeamMembers($request->user()->id, $request->workspace_id);
+            $members = $this->repository->getWorkspaceTeamMembers($request->user()->currentWorkspace());
             return response()->json(['message' => "Team members retrieve successfull", 'members' => TeamMemberResource::collection($members)], 200);
         } catch (\Throwable $th) {
             //throw $th;
