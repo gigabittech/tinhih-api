@@ -85,17 +85,16 @@ class LocationController extends Controller
      * )
      */
 
-    public function getLocations()
-    {
-        return response()->json([
-            'message' => 'Locations',
-            'locations' => LocationResource::collection($this->repository->all())
-        ]);
-    }
+    // public function getLocations(Request $request)
+    // {
+    //     return response()->json([
+    //         'message' => 'Locations',
+    //         'locations' => LocationResource::collection($this->repository->getUserLocations($request->user()->id)),
+    //     ]);
+    // }
 
-    public function getUserLocations(Request $request)
+    public function getLocations(Request $request)
     {
-        dd($request->user()->id);
         return response()->json([
             'message' => 'User Locations',
             'locations' => LocationResource::collection($this->repository->getUserLocations($request->user()->id))

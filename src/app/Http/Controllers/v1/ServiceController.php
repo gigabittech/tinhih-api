@@ -118,7 +118,7 @@ class ServiceController extends Controller
 
 
 
-    public function getServicesByUser(Request $request)
+    public function gerServices(Request $request)
     {
         try {
             $services = ServiceResource::collection($this->repository->findByUser($request->user()->id));
