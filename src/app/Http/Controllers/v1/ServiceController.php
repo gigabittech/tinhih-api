@@ -57,10 +57,10 @@ class ServiceController extends Controller
      */
 
 
-    public function getServices()
+    public function getServices(Request $request)
     {
         try {
-            $services = ServiceResource::collection($this->repository->all());
+            $services = ServiceResource::collection($this->repository->getWorkspaceServices($request->user()->currentWorkspace()->id));
             return response()->json([
                 'message' => 'Services',
                 'services' => $services
@@ -118,7 +118,7 @@ class ServiceController extends Controller
 
 
 
-    public function getServicesByUser(Request $request)
+    public function gerServices(Request $request)
     {
         try {
             $services = ServiceResource::collection($this->repository->findByUser($request->user()->id));

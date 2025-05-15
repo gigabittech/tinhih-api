@@ -19,4 +19,9 @@ class ServiceRepository extends BaseRepository
     {
         return $this->model->where('user_id', $userId)->get();
     }
+
+    public function getWorkspaceServices($workspaceId)
+    {
+        return $this->model->where('workspace_id', $workspaceId)->get();
+    }
 }
