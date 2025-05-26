@@ -43,19 +43,19 @@ Route::prefix('v1')->group(function () {
         Route::get('/user', [AuthController::class, 'getUser']);
 
         // Appointment Booking Routes
-        Route::prefix('locations')->group(function () {
-            Route::get('/', function () {
-                return response()->json(['message' => 'Locations']);
-            });
-        });
-        
+        // Route::prefix('locations')->group(function () {
+        //     Route::get('/', function () {
+        //         return response()->json(['message' => 'Locations']);
+        //     });
+        // });
+
         // Appointment Booking Routes
         Route::prefix('appointment')->group(function () {
             Route::get('/', function () {
                 return response()->json(['message' => 'Appointments']);
             });
         });
-        
+
         // Providers routes
         Route::middleware('role:provider')->prefix('')->group(function () {
             Route::prefix('location_types')->group(function () {
@@ -65,7 +65,7 @@ Route::prefix('v1')->group(function () {
                 Route::put('/{id}', [LocationTypeController::class, 'updateLocationType']);
                 Route::delete('/{id}', [LocationTypeController::class, 'deleteLocationType']);
             });
-    
+
             Route::prefix('locations')->group(function () {
                 Route::get('/', [LocationController::class, 'getLocations']);
                 Route::get('/user', [LocationController::class, 'getUserLocations']);
@@ -74,7 +74,7 @@ Route::prefix('v1')->group(function () {
                 Route::put('/{id}', [LocationController::class, 'updateLocation']);
                 Route::delete('/{id}', [LocationController::class, 'deleteLocation']);
             });
-    
+
             Route::prefix('services')->group(function () {
                 Route::get('/', [ServiceController::class, 'getservices']);
                 Route::get('/user', [ServiceController::class, 'getServicesByUser']);
@@ -83,7 +83,7 @@ Route::prefix('v1')->group(function () {
                 Route::put('/{id}', [ServiceController::class, 'updateservice']);
                 Route::delete('/{id}', [ServiceController::class, 'deleteservice']);
             });
-    
+
             Route::prefix('members')->group(function () {
                 Route::get('/', [TeamMemberController::class, 'getMembers']);
                 Route::get('/{id}', [TeamMemberController::class, 'getMember']);
@@ -91,7 +91,7 @@ Route::prefix('v1')->group(function () {
                 Route::put('/{id}', [TeamMemberController::class, 'updateMember']);
                 Route::delete('/{id}', [TeamMemberController::class, 'deleteMember']);
             });
-    
+
             Route::prefix('workspaces')->group(function () {
                 Route::get('/', [WorkspaceController::class, 'getWorkspaces']);
                 Route::get('/user', [WorkspaceController::class, 'getUserWorkspaces']);
@@ -102,7 +102,7 @@ Route::prefix('v1')->group(function () {
                 Route::put('/{id}', [WorkspaceController::class, 'updateWorkspace']);
                 Route::delete('/{id}', [WorkspaceController::class, 'deleteWorkspace']);
             });
-    
+
             Route::prefix('appointments')->group(function () {
                 Route::get('/', [AppointmentController::class, 'getAppointments']);
                 Route::get('/{id}', [AppointmentController::class, 'getAppointment']);
@@ -110,7 +110,7 @@ Route::prefix('v1')->group(function () {
                 Route::put('/{id}', [AppointmentController::class, 'updateAppointment']);
                 Route::delete('/{id}', [AppointmentController::class, 'deleteAppointment']);
             });
-    
+
             Route::prefix('clients')->group(function () {
                 Route::get('/', [ClientController::class, 'getClients']);
                 Route::get('/{id}', [ClientController::class, 'getClient']);
@@ -118,7 +118,7 @@ Route::prefix('v1')->group(function () {
                 Route::put('/{id}', [ClientController::class, 'updateClient']);
                 Route::delete('/{id}', [ClientController::class, 'deleteClient']);
             });
-    
+
             Route::prefix('taxes')->group(function () {
                 Route::get('/', [TaxController::class, 'getTaxes']);
                 Route::get('/{id}', [TaxController::class, 'getTax']);
@@ -126,7 +126,7 @@ Route::prefix('v1')->group(function () {
                 Route::put('/{id}', [TaxController::class, 'updateTax']);
                 Route::delete('/{id}', [TaxController::class, 'deleteTax']);
             });
-    
+
             Route::prefix('invoices')->group(function () {
                 Route::get('/', [InvoiceController::class, 'getInvoices']);
                 Route::get('/{id}', [InvoiceController::class, 'getInvoice']);
@@ -135,17 +135,16 @@ Route::prefix('v1')->group(function () {
                 Route::delete('/{id}', [InvoiceController::class, 'deleteInvoice']);
                 Route::patch('/{id}/mark-as-paid', [InvoiceController::class, 'markAsPaid']);
             });
-            
+
             Route::prefix('calendar-settings')->group(function () {
-                Route::post('', [CalendarSettingsController::class,'createCalendar']);
-                Route::get('/{id}', [CalendarSettingsController::class,'getCalendar']);
-                Route::put('/{id}', [CalendarSettingsController::class,'updateCalendar']);
+                Route::post('', [CalendarSettingsController::class, 'createCalendar']);
+                Route::get('/{id}', [CalendarSettingsController::class, 'getCalendar']);
+                Route::put('/{id}', [CalendarSettingsController::class, 'updateCalendar']);
             });
             Route::post('/onboarding', [WorkspaceController::class, 'setupWorkspace'])->middleware('verifyWorkspaceSetup');
-            
         });
 
-        // Clients route 
+        // Clients route
         Route::middleware('role:client')->prefix('client')->group(function () {
             Route::get('/dashboard', function () {
                 return response()->json(['message' => 'Client Dashboard']);
