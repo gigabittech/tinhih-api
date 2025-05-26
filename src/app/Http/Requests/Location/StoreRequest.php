@@ -25,6 +25,7 @@ class StoreRequest extends FormRequest
     {
         $this->merge([
             'workspace_id' => $this->user()->workspaces()->where('active', true)->first()->id,
+            'user_id' => $this->user()->id,
         ]);
 
         return [
@@ -38,6 +39,7 @@ class StoreRequest extends FormRequest
             'state' => 'nullable',
             'zip_code' => 'nullable',
             'country' => 'nullable',
+            'user_id' => 'required'
         ];
     }
 
