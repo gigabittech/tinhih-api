@@ -24,6 +24,7 @@ class WorkspaceResource extends JsonResource
             "active" => $this->active,
             "businessName" => $this->businessName,
             "countryCode" => $this->countryCode,
+            "booking_url" => $this->booking_url,
             'website' => $this->website,
             "locations" => LocationResource::collection($this->locations),
             "appointments" => AppointmentResource::collection($this->appointments),
