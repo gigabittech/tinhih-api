@@ -48,6 +48,11 @@ class User extends Authenticatable
     }
 
 
+    public function locations()
+    {
+        return $this->hasMany(Location::class);
+    }
+
     public function workspaces()
     {
         return $this->hasMany(Workspace::class);
