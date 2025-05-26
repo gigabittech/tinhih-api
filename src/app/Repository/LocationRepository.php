@@ -15,7 +15,6 @@ class LocationRepository extends BaseRepository
         parent::__construct($location);
     }
 
-
     public function getUserLocations(int $userId)
     {
         return $this->model->where('user_id', $userId)->get();

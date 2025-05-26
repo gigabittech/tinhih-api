@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Traits\GenerateBookingUrl;
 use Illuminate\Database\Eloquent\Model;
 
 class Workspace extends Model
 {
+    use GenerateBookingUrl;
     protected $fillable = [
         'user_id',
         'name',
@@ -17,6 +19,7 @@ class Workspace extends Model
         'timeZone',
         'active',
         'profession',
+        'booking_url'
     ];
 
     public function user()
@@ -63,7 +66,8 @@ class Workspace extends Model
         return $this->hasMany(Tax::class);
     }
 
-    public function calendarSettings(){
+    public function calendarSettings()
+    {
         return $this->hasOne(CalendarSetting::class);
     }
 }

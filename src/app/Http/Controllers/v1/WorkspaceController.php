@@ -8,13 +8,16 @@ use App\Http\Requests\Workspace\StoreRequest;
 use App\Http\Requests\Workspace\UpdateRequest;
 use App\Http\Resources\User\UserResource;
 use App\Http\Resources\WorkspaceResource;
+use App\Models\Workspace;
 use App\Repository\WorkspaceRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use App\Traits\GenerateBookingUrl;
 
 class WorkspaceController extends Controller
 {
+    use GenerateBookingUrl;
     public function __construct(private WorkspaceRepository $repository) {}
 
     /**
@@ -415,8 +418,8 @@ class WorkspaceController extends Controller
 
     public function deleteWorkspace(int $id)
     {
-            $this->repository->delete($id);
-            return response()->json(['message' => "Workspace delete successfull"], 200);
+        $this->repository->delete($id);
+        return response()->json(['message' => "Workspace delete successfull"], 200);
     }
 
     /**
@@ -550,6 +553,9 @@ class WorkspaceController extends Controller
                 'timeZone',
                 'active',
             ]);
+
+            $workspaceData['booking_url'] = Workspace::generateBookingUrl($workspaceData['businessName']);
+
 
             $workspace = $this->repository->setup($request->user(), $workspaceData);
 
