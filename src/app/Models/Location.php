@@ -17,6 +17,7 @@ class Location extends Model
         'state',
         'zip_code',
         'country',
+        'user_id'
     ];
 
     public function workspace()
