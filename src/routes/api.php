@@ -171,7 +171,7 @@ Route::prefix('v1')->group(function () {
 
     Route::prefix('booking')->group(function () {
         Route::get('{workspace}/{provider}', [BookingApiController::class, 'show']);
-        Route::get('{provider}/slots', [BookingApiController::class, 'getAvailableSlots']);
+        // Route::get('{provider}/slots', [BookingApiController::class, 'getAvailableSlots']);
         Route::post('/confirm', [BookingApiController::class, 'confirmBooking']);
     });
 

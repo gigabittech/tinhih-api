@@ -81,4 +81,8 @@ class User extends Authenticatable
     {
         $this->workspaces()->where('active', 1)->update(['active' => 0]);
     }
+
+    public function appointments(){
+        return $this->hasMany(Appointment::class);
+    }
 }
