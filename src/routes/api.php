@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\v1\AppointmentController;
 use App\Http\Controllers\v1\AuthController;
+use App\Http\Controllers\v1\BookingApiController;
 use App\Http\Controllers\v1\ClientController;
 use App\Http\Controllers\v1\InvoiceController;
 use App\Http\Controllers\v1\LocationController;
@@ -167,4 +168,11 @@ Route::prefix('v1')->group(function () {
 
         Route::put('/profile/settings', [ProfileController::class, 'updateProfile']);
     });
+
+    Route::prefix('booking')->group(function () {
+        Route::get('{workspace}/{provider}', [BookingApiController::class, 'show']);
+        Route::get('{provider}/slots', [BookingApiController::class, 'getAvailableSlots']);
+        Route::post('/confirm', [BookingApiController::class, 'confirmBooking']);
+    });
+
 });
