@@ -9,7 +9,7 @@ trait GenerateBookingUrl
     protected static function bootGenerateBookingUrl()
     {
         static::creating(function ($model) {
-            $model->booking_url = static::generateBookingUrl($model->businessName);
+                $model->booking_url = static::generateBookingUrl($model->businessName);
         });
     }
 

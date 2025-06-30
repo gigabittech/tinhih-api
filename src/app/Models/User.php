@@ -21,7 +21,7 @@ class User extends Authenticatable
     protected $fillable = [
         'email',
         'password',
-        'role'
+        'role',
     ];
 
     /**
@@ -80,5 +80,9 @@ class User extends Authenticatable
     public function scopeNutralWorkspaces()
     {
         $this->workspaces()->where('active', 1)->update(['active' => 0]);
+    }
+
+    public function appointments(){
+        return $this->hasMany(Appointment::class);
     }
 }

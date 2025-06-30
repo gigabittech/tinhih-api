@@ -17,7 +17,9 @@
     "paths": {
         "/appointments": {
             "get": {
-                "tags": ["Appointments"],
+                "tags": [
+                    "Appointments"
+                ],
                 "summary": "Get all appointments",
                 "description": "Retrieves a list of appointments.",
                 "operationId": "f0565debba72068ea83898b118805261",
@@ -142,7 +144,9 @@
                 ]
             },
             "post": {
-                "tags": ["Appointments"],
+                "tags": [
+                    "Appointments"
+                ],
                 "summary": "Create a new appointment",
                 "description": "Creates a new appointment with associated locations, services, and attendees.",
                 "operationId": "a6f077bb32d04d14048e0a71e74517f9",
@@ -286,7 +290,9 @@
         },
         "/appointments/:id": {
             "get": {
-                "tags": ["Appointments"],
+                "tags": [
+                    "Appointments"
+                ],
                 "summary": "Get a single appointment",
                 "description": "Retrieve details of a single appointment.",
                 "operationId": "284212452426d266e7b9c31c36ca1584",
@@ -406,7 +412,9 @@
                 ]
             },
             "put": {
-                "tags": ["Appointments"],
+                "tags": [
+                    "Appointments"
+                ],
                 "summary": "Update an existing appointment",
                 "description": "Updates an existing appointment with new details.",
                 "operationId": "49795a05997b6afca36affd4b77e5189",
@@ -560,7 +568,9 @@
                 ]
             },
             "delete": {
-                "tags": ["Appointments"],
+                "tags": [
+                    "Appointments"
+                ],
                 "summary": "Delete an appointment",
                 "description": "Deletes an existing appointment by ID.",
                 "operationId": "6e0b1ccbc71d2bd4b7410f2d10ca5e0a",
@@ -619,7 +629,9 @@
         },
         "/auth/login": {
             "post": {
-                "tags": ["Auth"],
+                "tags": [
+                    "Auth"
+                ],
                 "summary": "Login user",
                 "description": "This endpoint allows a user to log in using their email and password. A valid token is returned upon successful authentication.",
                 "operationId": "a475896307c82f1b04475bc5f05fff0c",
@@ -628,7 +640,10 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": ["email", "password"],
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
                                 "properties": {
                                     "email": {
                                         "type": "string",
@@ -712,7 +727,9 @@
         },
         "/auth/register": {
             "post": {
-                "tags": ["Auth"],
+                "tags": [
+                    "Auth"
+                ],
                 "summary": "Register a new user",
                 "description": "This endpoint allows a user to register by providing their name, email, password, and other required details.",
                 "operationId": "2cf6c054e3d2d4500ca4a5fa8d0020d6",
@@ -721,7 +738,11 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": ["email", "password", "role"],
+                                "required": [
+                                    "email",
+                                    "password",
+                                    "role"
+                                ],
                                 "properties": {
                                     "email": {
                                         "type": "string",
@@ -734,7 +755,10 @@
                                     },
                                     "role": {
                                         "type": "string",
-                                        "enum": ["client", "provider"],
+                                        "enum": [
+                                            "client",
+                                            "provider"
+                                        ],
                                         "example": "client"
                                     }
                                 },
@@ -861,7 +885,9 @@
         },
         "/auth/logout": {
             "post": {
-                "tags": ["Auth"],
+                "tags": [
+                    "Auth"
+                ],
                 "summary": "Logout user",
                 "description": "This endpoint allows an authenticated user to log out by revoking their issued tokens.",
                 "operationId": "dbcac977aef7cd05b27beadbb3825f81",
@@ -936,7 +962,9 @@
         },
         "/user": {
             "get": {
-                "tags": ["User"],
+                "tags": [
+                    "User"
+                ],
                 "summary": "Get User Details",
                 "description": "Fetches details of the currently authenticated user.",
                 "operationId": "7da9b06af8bb315a164c93c6d5c7e379",
@@ -997,9 +1025,308 @@
                 ]
             }
         },
+        "/booking/{workspaceId}/{userId}": {
+            "get": {
+                "tags": [
+                    "Booking Api"
+                ],
+                "summary": "Get a user in a specific workspace along with services and locations",
+                "description": "Returns user details only if the user is part of the workspace, including related services and locations.",
+                "operationId": "getUserInWorkspace",
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "description": "ID of the workspace",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "ID of the user",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "John Doe"
+                                        },
+                                        "workspaces": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 10
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Design Team"
+                                                    },
+                                                    "services": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "integer",
+                                                                    "example": 101
+                                                                },
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "example": "Web Development"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    },
+                                                    "locations": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "integer",
+                                                                    "example": 201
+                                                                },
+                                                                "address": {
+                                                                    "type": "string",
+                                                                    "example": "Dhaka, Bangladesh"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Workspace or user not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Workspace not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/booking/confirm": {
+            "post": {
+                "tags": [
+                    "Booking Api"
+                ],
+                "summary": "Confirm a public booking",
+                "description": "Creates a client, user, and appointment under a workspace.",
+                "operationId": "confirmBooking",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "workspace_id",
+                                    "date",
+                                    "time",
+                                    "first_name",
+                                    "last_name",
+                                    "email",
+                                    "phone",
+                                    "services",
+                                    "locations"
+                                ],
+                                "properties": {
+                                    "workspace_id": {
+                                        "type": "integer",
+                                        "example": 64
+                                    },
+                                    "date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2025-07-01"
+                                    },
+                                    "time": {
+                                        "type": "string",
+                                        "format": "HH:MM",
+                                        "example": "14:00"
+                                    },
+                                    "first_name": {
+                                        "type": "string",
+                                        "example": "John"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "example": "Doe"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "john@example.com"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": "01700000000"
+                                    },
+                                    "services": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer",
+                                            "example": 1
+                                        }
+                                    },
+                                    "locations": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer",
+                                            "example": 3
+                                        }
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Optional note"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Booking confirmed successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Appointment successfully booked"
+                                        },
+                                        "appointment": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 101
+                                                },
+                                                "workspace_id": {
+                                                    "type": "integer",
+                                                    "example": 64
+                                                },
+                                                "date": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2025-07-01"
+                                                },
+                                                "time": {
+                                                    "type": "string",
+                                                    "format": "HH:MM",
+                                                    "example": "14:00"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Optional appointment note"
+                                                },
+                                                "services": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Consultation"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "locations": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 3
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Dhaka Clinic"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "attendees": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 201
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "John Doe"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
         "/clients": {
             "get": {
-                "tags": ["Clients"],
+                "tags": [
+                    "Clients"
+                ],
                 "summary": "Get all clients",
                 "description": "Retrieves a list of clients within a workspace.",
                 "operationId": "31f7f055be09f1d6787aed27c2eb5574",
@@ -1123,7 +1450,9 @@
         },
         "/clients/:id": {
             "get": {
-                "tags": ["Clients"],
+                "tags": [
+                    "Clients"
+                ],
                 "summary": "Get a single client",
                 "description": "Retrieve details of a specific client by ID.",
                 "operationId": "d5e9c8b2a8bd0e6e8da41e0e9fc3392c",
@@ -1258,7 +1587,9 @@
                 ]
             },
             "delete": {
-                "tags": ["Clients"],
+                "tags": [
+                    "Clients"
+                ],
                 "summary": "Delete a client",
                 "description": "Deletes a client based on the given ID.",
                 "operationId": "ab11a96c241b44029217345439257140",
@@ -1307,7 +1638,9 @@
         },
         "/api/clients": {
             "post": {
-                "tags": ["Clients"],
+                "tags": [
+                    "Clients"
+                ],
                 "summary": "Create a new client",
                 "operationId": "ecc4b68974eb2bd195c301931c6570e8",
                 "requestBody": {
@@ -1479,7 +1812,9 @@
         },
         "/api/clients/:id": {
             "put": {
-                "tags": ["Clients"],
+                "tags": [
+                    "Clients"
+                ],
                 "summary": "Update an existing client",
                 "operationId": "cb9ca1c432083655ccf77cd3428effbd",
                 "parameters": [
@@ -1663,7 +1998,9 @@
         },
         "/invoices": {
             "get": {
-                "tags": ["Invoices"],
+                "tags": [
+                    "Invoices"
+                ],
                 "summary": "Get all invoices for the current workspace",
                 "description": "Fetches all invoices associated with the currently authenticated user's active workspace.",
                 "operationId": "943fbaa21983610425073591218540ad",
@@ -1817,7 +2154,9 @@
                 ]
             },
             "post": {
-                "tags": ["Invoices"],
+                "tags": [
+                    "Invoices"
+                ],
                 "summary": "Create a new invoice",
                 "description": "Creates a new invoice with services, calculates the subtotal and payable amount including taxes.",
                 "operationId": "2656340a449abf1eb4419a53f8b13a80",
@@ -2056,7 +2395,9 @@
         },
         "/invoices/:id": {
             "get": {
-                "tags": ["Invoices"],
+                "tags": [
+                    "Invoices"
+                ],
                 "summary": "Get a specific invoice by ID",
                 "description": "Retrieves a single invoice by ID, scoped to the current user's workspace. Includes a tax summary if available.",
                 "operationId": "301924d15ca30a460c87c4207bb53b84",
@@ -2219,7 +2560,9 @@
                 ]
             },
             "put": {
-                "tags": ["Invoices"],
+                "tags": [
+                    "Invoices"
+                ],
                 "summary": "Update an existing invoice",
                 "description": "Updates an existing invoice with new service details and recalculates the subtotal and payable amount.",
                 "operationId": "8a45b2b8bb8823296e3c0eac90e9e32a",
@@ -2239,7 +2582,9 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": ["services"],
+                                "required": [
+                                    "services"
+                                ],
                                 "properties": {
                                     "services": {
                                         "type": "array",
@@ -2429,7 +2774,9 @@
                 ]
             },
             "delete": {
-                "tags": ["Invoices"],
+                "tags": [
+                    "Invoices"
+                ],
                 "summary": "Delete an invoice",
                 "description": "Deletes the specified invoice by its ID. If the invoice doesn't exist, a 404 response will be returned.",
                 "operationId": "178560fa52d2ba184f7743c7470c19e4",
@@ -2504,7 +2851,9 @@
         },
         "/invoices/:id/mark-as-paid": {
             "patch": {
-                "tags": ["Invoices"],
+                "tags": [
+                    "Invoices"
+                ],
                 "summary": "Mark an invoice as paid",
                 "description": "Marks the specified invoice as paid by updating its `is_paid` field. If the invoice doesn't exist, a 404 response will be returned.",
                 "operationId": "4a1788c8bdb11d902e009427c3ce5c03",
@@ -2679,7 +3028,9 @@
         },
         "/locations": {
             "get": {
-                "tags": ["Locations"],
+                "tags": [
+                    "Locations"
+                ],
                 "summary": "Get all Locations",
                 "description": "Retrieve all available locations with pagination.",
                 "operationId": "3aecde97536a52d78b76c873e420dd9e",
@@ -2842,7 +3193,9 @@
                 ]
             },
             "post": {
-                "tags": ["Locations"],
+                "tags": [
+                    "Locations"
+                ],
                 "summary": "Create a new Location",
                 "description": "Create a new location entry.",
                 "operationId": "38424e3122068bc6be61d4fe7dd7e663",
@@ -2851,7 +3204,9 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": ["display_name"],
+                                "required": [
+                                    "display_name"
+                                ],
                                 "properties": {
                                     "id": {
                                         "type": "integer",
@@ -2923,7 +3278,9 @@
         },
         "/locations/:id": {
             "get": {
-                "tags": ["Locations"],
+                "tags": [
+                    "Locations"
+                ],
                 "summary": "Get a specific Location",
                 "description": "Retrieve details of a specific location by ID.",
                 "operationId": "0bcdedcc00afbad6e7360cf7b3dabe82",
@@ -3008,7 +3365,9 @@
                 ]
             },
             "put": {
-                "tags": ["Locations"],
+                "tags": [
+                    "Locations"
+                ],
                 "summary": "Update an existing Location",
                 "description": "Update details of a specific location.",
                 "operationId": "2d72d857db2b926eaffc22341f8bb0fc",
@@ -3099,7 +3458,9 @@
                 ]
             },
             "delete": {
-                "tags": ["Locations"],
+                "tags": [
+                    "Locations"
+                ],
                 "summary": "Delete a Location",
                 "description": "Remove a location from the system.",
                 "operationId": "112ad6da41afcb2864fa9b0485227f14",
@@ -3133,7 +3494,9 @@
         },
         "/location_types": {
             "get": {
-                "tags": ["LocationType"],
+                "tags": [
+                    "LocationType"
+                ],
                 "summary": "Get all location types",
                 "description": "This endpoint allows the user to retrieve all location types.",
                 "operationId": "23992e0b3404b931441bbcb698a22c29",
@@ -3173,7 +3536,9 @@
                 ]
             },
             "post": {
-                "tags": ["LocationType"],
+                "tags": [
+                    "LocationType"
+                ],
                 "summary": "Create a new location type",
                 "description": "This endpoint allows the user to create a new location type.",
                 "operationId": "0d2d54db2d5fc6fbe0a739e02e171f4a",
@@ -3182,7 +3547,9 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": ["name"],
+                                "required": [
+                                    "name"
+                                ],
                                 "properties": {
                                     "name": {
                                         "type": "string",
@@ -3294,7 +3661,9 @@
         },
         "/location_types/:id": {
             "get": {
-                "tags": ["LocationType"],
+                "tags": [
+                    "LocationType"
+                ],
                 "summary": "Get a specific location type",
                 "description": "This endpoint allows the user to retrieve details of a specific location type.",
                 "operationId": "4f8476a59efe7d96ad4d411bbf957692",
@@ -3394,7 +3763,9 @@
                 ]
             },
             "put": {
-                "tags": ["LocationType"],
+                "tags": [
+                    "LocationType"
+                ],
                 "summary": "Update an existing location type",
                 "description": "This endpoint allows the user to update the details of a specific location type.",
                 "operationId": "e20e958529c931badc9483992078b224",
@@ -3414,7 +3785,9 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": ["name"],
+                                "required": [
+                                    "name"
+                                ],
                                 "properties": {
                                     "name": {
                                         "type": "string",
@@ -3524,7 +3897,9 @@
                 ]
             },
             "delete": {
-                "tags": ["LocationType"],
+                "tags": [
+                    "LocationType"
+                ],
                 "summary": "Delete a location type",
                 "description": "This endpoint allows the user to delete a specific location type.",
                 "operationId": "874e959ad8d29fb4b1ba9e2dda3a1b76",
@@ -3618,7 +3993,9 @@
         },
         "/profile/settings": {
             "put": {
-                "tags": ["Profile"],
+                "tags": [
+                    "Profile"
+                ],
                 "summary": "Update authenticated user's profile",
                 "description": "Updates the profile of the currently authenticated user.",
                 "operationId": "updateProfile",
@@ -3627,7 +4004,10 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": ["first_name", "last_name"],
+                                "required": [
+                                    "first_name",
+                                    "last_name"
+                                ],
                                 "properties": {
                                     "first_name": {
                                         "type": "string",
@@ -3710,7 +4090,9 @@
         },
         "/services": {
             "get": {
-                "tags": ["Services"],
+                "tags": [
+                    "Services"
+                ],
                 "summary": "Get all Services",
                 "description": "Retrieve all available services.",
                 "operationId": "d1f83e139e8991b86b4e2ea6ea7fe024",
@@ -3777,14 +4159,22 @@
                                                 "items": {
                                                     "type": "integer"
                                                 },
-                                                "example": [1, 2, 3]
+                                                "example": [
+                                                    1,
+                                                    2,
+                                                    3
+                                                ]
                                             },
                                             "locations": {
                                                 "type": "array",
                                                 "items": {
                                                     "type": "integer"
                                                 },
-                                                "example": [1, 2, 3]
+                                                "example": [
+                                                    1,
+                                                    2,
+                                                    3
+                                                ]
                                             }
                                         },
                                         "type": "object"
@@ -3821,7 +4211,9 @@
                 ]
             },
             "post": {
-                "tags": ["Services"],
+                "tags": [
+                    "Services"
+                ],
                 "summary": "Create a new Service",
                 "description": "Create a new service entry in the system.",
                 "operationId": "88e2de8201a9a367b7866fa439ffabbd",
@@ -3885,14 +4277,22 @@
                                         "items": {
                                             "type": "integer"
                                         },
-                                        "example": [1, 2, 3]
+                                        "example": [
+                                            1,
+                                            2,
+                                            3
+                                        ]
                                     },
                                     "locations": {
                                         "type": "array",
                                         "items": {
                                             "type": "integer"
                                         },
-                                        "example": [1, 2, 3]
+                                        "example": [
+                                            1,
+                                            2,
+                                            3
+                                        ]
                                     }
                                 },
                                 "type": "object"
@@ -3923,10 +4323,12 @@
         },
         "/services/user": {
             "get": {
-                "tags": ["Services"],
+                "tags": [
+                    "Services"
+                ],
                 "summary": "Get all user Services",
                 "description": "Retrieve all available services.",
-                "operationId": "fc5aa5f3366df12aa196de0fe8ecabcd",
+                "operationId": "9709c6dfc998d9c26ca2a2d4dd89647b",
                 "responses": {
                     "200": {
                         "description": "Successfully retrieved services",
@@ -3990,14 +4392,22 @@
                                                 "items": {
                                                     "type": "integer"
                                                 },
-                                                "example": [1, 2, 3]
+                                                "example": [
+                                                    1,
+                                                    2,
+                                                    3
+                                                ]
                                             },
                                             "locations": {
                                                 "type": "array",
                                                 "items": {
                                                     "type": "integer"
                                                 },
-                                                "example": [1, 2, 3]
+                                                "example": [
+                                                    1,
+                                                    2,
+                                                    3
+                                                ]
                                             }
                                         },
                                         "type": "object"
@@ -4036,7 +4446,9 @@
         },
         "/services/:id": {
             "get": {
-                "tags": ["Services"],
+                "tags": [
+                    "Services"
+                ],
                 "summary": "Get a specific Service",
                 "description": "Retrieve details of a single service.",
                 "operationId": "9618f01b842892a49d931bd533b0cb94",
@@ -4112,14 +4524,22 @@
                                             "items": {
                                                 "type": "integer"
                                             },
-                                            "example": [1, 2, 3]
+                                            "example": [
+                                                1,
+                                                2,
+                                                3
+                                            ]
                                         },
                                         "locations": {
                                             "type": "array",
                                             "items": {
                                                 "type": "integer"
                                             },
-                                            "example": [1, 2, 3]
+                                            "example": [
+                                                1,
+                                                2,
+                                                3
+                                            ]
                                         }
                                     },
                                     "type": "object"
@@ -4155,7 +4575,9 @@
                 ]
             },
             "put": {
-                "tags": ["Services"],
+                "tags": [
+                    "Services"
+                ],
                 "summary": "Update an existing Service",
                 "description": "Update details of a specific service.",
                 "operationId": "4675352bdf5073b6f0fc6af30c775072",
@@ -4225,14 +4647,22 @@
                                         "items": {
                                             "type": "integer"
                                         },
-                                        "example": [1, 2, 3]
+                                        "example": [
+                                            1,
+                                            2,
+                                            3
+                                        ]
                                     },
                                     "locations": {
                                         "type": "array",
                                         "items": {
                                             "type": "integer"
                                         },
-                                        "example": [1, 2, 3]
+                                        "example": [
+                                            1,
+                                            2,
+                                            3
+                                        ]
                                     }
                                 },
                                 "type": "object"
@@ -4264,7 +4694,9 @@
                 ]
             },
             "delete": {
-                "tags": ["Services"],
+                "tags": [
+                    "Services"
+                ],
                 "summary": "Delete a Service",
                 "description": "Remove a service from the system.",
                 "operationId": "a63a8a407d5292fa508f7474782e42ee",
@@ -4301,7 +4733,9 @@
         },
         "/taxes": {
             "get": {
-                "tags": ["Taxes"],
+                "tags": [
+                    "Taxes"
+                ],
                 "summary": "Get all taxes",
                 "operationId": "002d1be375b2747d1c532d2347eeb75a",
                 "responses": {
@@ -4354,7 +4788,9 @@
                 ]
             },
             "post": {
-                "tags": ["Taxes"],
+                "tags": [
+                    "Taxes"
+                ],
                 "summary": "Create a new tax",
                 "operationId": "93738d203af29a3d569b94ce71557072",
                 "requestBody": {
@@ -4362,7 +4798,10 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": ["name", "percentage"],
+                                "required": [
+                                    "name",
+                                    "percentage"
+                                ],
                                 "properties": {
                                     "name": {
                                         "type": "string",
@@ -4432,7 +4871,9 @@
         },
         "/taxes/:id": {
             "get": {
-                "tags": ["Taxes"],
+                "tags": [
+                    "Taxes"
+                ],
                 "summary": "Get a specific tax by ID",
                 "operationId": "9b4e4c82a06f40a5fbf86729b5fb7aee",
                 "parameters": [
@@ -4492,7 +4933,9 @@
                 ]
             },
             "put": {
-                "tags": ["Taxes"],
+                "tags": [
+                    "Taxes"
+                ],
                 "summary": "Update an existing tax",
                 "operationId": "2c6bcf275549f9b6267f9ba20b35c836",
                 "parameters": [
@@ -4581,7 +5024,9 @@
                 ]
             },
             "delete": {
-                "tags": ["Taxes"],
+                "tags": [
+                    "Taxes"
+                ],
                 "summary": "Delete a tax",
                 "operationId": "72babcc179a40508033e1a7307d0a304",
                 "parameters": [
@@ -4621,7 +5066,9 @@
         },
         "/members": {
             "get": {
-                "tags": ["Members"],
+                "tags": [
+                    "Members"
+                ],
                 "summary": "Get all members",
                 "description": "Retrieve a list of members.",
                 "operationId": "caedee48b73ca3dfa32f42e38d96fd70",
@@ -4714,7 +5161,9 @@
                 ]
             },
             "post": {
-                "tags": ["Members"],
+                "tags": [
+                    "Members"
+                ],
                 "summary": "Create a new member",
                 "description": "Creates a new team member and associates services.",
                 "operationId": "4cf2bb18ffb53f073d934b4f3eea4fd0",
@@ -4867,7 +5316,9 @@
         },
         "/members/:id": {
             "get": {
-                "tags": ["Members"],
+                "tags": [
+                    "Members"
+                ],
                 "summary": "Get a member",
                 "description": "Retrieve a  member.",
                 "operationId": "35f6f9117b5194a677f6072910c35c3d",
@@ -4957,7 +5408,9 @@
                 ]
             },
             "put": {
-                "tags": ["Members"],
+                "tags": [
+                    "Members"
+                ],
                 "summary": "Update a member",
                 "description": "Updates an existing team member.",
                 "operationId": "02852a8a3a2a6758a798fc76a5fbbd57",
@@ -5120,7 +5573,9 @@
                 ]
             },
             "delete": {
-                "tags": ["Members"],
+                "tags": [
+                    "Members"
+                ],
                 "summary": "Delete a member",
                 "description": "Deletes a specific team member.",
                 "operationId": "24087607d54a7140211440b5921cca2e",
@@ -5179,7 +5634,9 @@
         },
         "/workspaces": {
             "get": {
-                "tags": ["Workspaces"],
+                "tags": [
+                    "Workspaces"
+                ],
                 "summary": "Get all workspaces",
                 "description": "Retrieve a list of workspaces.",
                 "operationId": "91a40c4819d86e80ec0af8513e606acd",
@@ -5298,7 +5755,9 @@
                 ]
             },
             "post": {
-                "tags": ["Workspaces"],
+                "tags": [
+                    "Workspaces"
+                ],
                 "summary": "Create a workspace",
                 "operationId": "169fc29db8157a8f656168d75bfd2548",
                 "requestBody": {
@@ -5435,7 +5894,9 @@
         },
         "/workspaces/user": {
             "get": {
-                "tags": ["Workspaces"],
+                "tags": [
+                    "Workspaces"
+                ],
                 "summary": "Get all workspaces",
                 "description": "Retrieve a list of workspaces.",
                 "operationId": "ccf9e1f2a42752b45522bb77c6d90642",
@@ -5556,7 +6017,9 @@
         },
         "/workspaces/{id}": {
             "get": {
-                "tags": ["Workspaces"],
+                "tags": [
+                    "Workspaces"
+                ],
                 "summary": "Get a workspace by ID",
                 "description": "Retrieve details of a single workspace by its ID.",
                 "operationId": "354c1c049bcd318a9d2af0afee9e5aa1",
@@ -5672,7 +6135,9 @@
         },
         "/workspaces/:id": {
             "put": {
-                "tags": ["Workspaces"],
+                "tags": [
+                    "Workspaces"
+                ],
                 "summary": "Update an existing workspace",
                 "description": "Update a workspace",
                 "operationId": "254b9937143b9b976de4c632e8b95c85",
@@ -5691,7 +6156,10 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": ["businessName", "countryCode"],
+                                "required": [
+                                    "businessName",
+                                    "countryCode"
+                                ],
                                 "properties": {
                                     "businessName": {
                                         "type": "string",
@@ -5760,7 +6228,9 @@
                 ]
             },
             "delete": {
-                "tags": ["Workspaces"],
+                "tags": [
+                    "Workspaces"
+                ],
                 "summary": "Delete a workspace",
                 "description": "Remove a workspace by ID.",
                 "operationId": "67a880dd872e5ff2623ac5bc7552be1e",
@@ -5818,7 +6288,9 @@
         },
         "/workspaces/settings": {
             "put": {
-                "tags": ["Workspaces"],
+                "tags": [
+                    "Workspaces"
+                ],
                 "summary": "Workspace Settings",
                 "description": "Update a workspace",
                 "operationId": "4f67f275c592ea0dcc7526617fd3b35a",
@@ -5827,7 +6299,10 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": ["businessName", "countryCode"],
+                                "required": [
+                                    "businessName",
+                                    "countryCode"
+                                ],
                                 "properties": {
                                     "businessName": {
                                         "type": "string",
@@ -5952,7 +6427,9 @@
         },
         "/workspaces/toggle": {
             "post": {
-                "tags": ["Workspaces"],
+                "tags": [
+                    "Workspaces"
+                ],
                 "summary": "Toggle workspace status",
                 "description": "Toggle a workspace (Activate/Deactivate)",
                 "operationId": "2d3e155ad66d6e4b49bb0681326288c7",
@@ -5961,7 +6438,9 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": ["id"],
+                                "required": [
+                                    "id"
+                                ],
                                 "properties": {
                                     "id": {
                                         "description": "ID of the workspace to toggle",
@@ -6075,7 +6554,9 @@
         },
         "/onboarding": {
             "post": {
-                "tags": ["Onboarding for Practitioner"],
+                "tags": [
+                    "Onboarding for Practitioner"
+                ],
                 "summary": "Onboarding the user",
                 "description": "Then initial step after successfully create an account. This endpoint sets up a new workspace for the user along with their profile information.",
                 "operationId": "2942fa5525a59cc03472a3ef57e8fb98",
@@ -6310,16 +6791,20 @@
     },
     "tags": [
         {
+            "name": "Appointments",
+            "description": "Appointments"
+        },
+        {
             "name": "Auth",
             "description": "Auth"
         },
         {
-            "name": "Onboarding for Practitioner",
-            "description": "Onboarding for Practitioner"
+            "name": "User",
+            "description": "User"
         },
         {
-            "name": "Appointments",
-            "description": "Appointments"
+            "name": "Booking Api",
+            "description": "Booking Api"
         },
         {
             "name": "Clients",
@@ -6358,8 +6843,8 @@
             "description": "Workspaces"
         },
         {
-            "name": "User",
-            "description": "User"
+            "name": "Onboarding for Practitioner",
+            "description": "Onboarding for Practitioner"
         }
     ]
 }

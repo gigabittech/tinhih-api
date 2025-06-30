@@ -15,6 +15,6 @@ Route::get('v1/documentation', function () {
     return view('swagger.index');  // Your Swagger UI view
 })->name('api-docs');
 
-Route::get('/api/docs', function () {
+Route::get('v1/api/docs', function () {
     return response()->json(json_decode(file_get_contents(storage_path('api-docs/api-docs.json'))));
-});
+})->name('api.docs');
